@@ -16,8 +16,18 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "components/*": ["components/*"],
+      "src/*": ["src/*"],
+      "lib/*": ["lib/*"],
+      "interfaces/*": ["interfaces/*"],
+      "codepens/*": ["markdown/codepens/*"],
+      "packages/*": ["markdown/packages/*"],
+      "projects/*": ["markdown/projects/*"]
+    }
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "exclude": ["node_modules", ".next"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js"]
 }
