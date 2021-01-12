@@ -19,7 +19,6 @@ export default function Header({ setIsBored }: HeaderProps) {
                 className="header-logo--img"
                 src="/images/logo/full-logo.svg"
                 alt=""
-                width="250"
               />
             </a>
           </Link>

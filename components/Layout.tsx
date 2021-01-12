@@ -1,8 +1,10 @@
 import { createContext, ReactNode, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Header from 'components/Header'
-import Sidebar from 'components/Sidebar'
 import Footer from 'components/Footer'
+
+const Sidebar = dynamic(() => import('components/Sidebar'))
 
 type Props = {
   children?: ReactNode

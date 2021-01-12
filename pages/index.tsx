@@ -1,12 +1,10 @@
 import { useContext } from 'react'
 import dynamic from 'next/dynamic'
-
 import { BoredContext } from 'components/Layout'
-import ProjectTabs from 'components/Portfolio'
 
+const ProjectTabs = dynamic(() => import('components/Portfolio'))
 const LanguageCells = dynamic(() => import('components/Languages'))
 const Bio = dynamic(() => import('components/Bio'))
-
 const Snake = dynamic(() => import('@ulises-codes/bite-me'), { ssr: false })
 
 const IndexPage = () => {
@@ -50,7 +48,6 @@ const IndexPage = () => {
       <div className="checkerboard-divider--div" />
       <h2 className="section-title--h2">Some Info</h2>
       <Bio />
-
       <h2 className="section-title--h2">Some Stuff I've Made</h2>
       <ProjectTabs />
     </div>

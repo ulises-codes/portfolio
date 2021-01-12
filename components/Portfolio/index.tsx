@@ -33,27 +33,25 @@ export default function ProjectTabs() {
       </div>
       <div className="portfolio-content-wrapper--div">
         <AnimatePresence key="portfolio-presence" exitBeforeEnter>
-          <div>
-            {TabContent.map((Tab, i) =>
-              currentTab === i ? (
-                <motion.div
-                  key={projects[i]}
-                  initial={{
-                    opacity: 0,
-                    filter: 'grayscale(100%)',
-                  }}
-                  animate={{ opacity: 1, filter: 'grayscale(0)' }}
-                  exit={{
-                    opacity: 0,
-                    filter: 'grayscale(100%)',
-                  }}>
-                  <Tab />
-                </motion.div>
-              ) : null
-            )}
-            <div className="checkerboard-divider--div" />
-          </div>
+          {TabContent.map((Tab, i) =>
+            currentTab === i ? (
+              <motion.div
+                key={projects[i]}
+                initial={{
+                  opacity: 0,
+                  filter: 'grayscale(100%)',
+                }}
+                animate={{ opacity: 1, filter: 'grayscale(0)' }}
+                exit={{
+                  opacity: 0,
+                  filter: 'grayscale(100%)',
+                }}>
+                <Tab />
+              </motion.div>
+            ) : null
+          )}
         </AnimatePresence>
+        <div className="checkerboard-divider--div" />
       </div>
     </div>
   )
