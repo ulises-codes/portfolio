@@ -117,6 +117,10 @@ button:not(:disabled) {
   color: var(--yellow);
 }
 
+cite {
+  font-style: normal;
+}
+
 p {
   line-height: 1.5;
 }
@@ -142,10 +146,14 @@ p {
   height: 100%;
 }
 
+.header-logo--img {
+  background-color: var(--yellow);
+}
+
 .sidebar-wrapper--div {
   position: fixed;
   left: calc((100vw - var(--page-width)) / 2 - 48px);
-  top: calc(100vh / 2 - 125px);
+  top: calc(100vh / 2 - 250px);
 }
 
 .social-icons-wrapper--div {
@@ -191,8 +199,8 @@ p {
 .hyperlink {
   color: var(--black);
   background-color: var(--yellow);
-  font-family: monospace;
-  font-size: 1.25em;
+  font-family: inherit;
+  /* font-size: 1.25em; */
   display: inline-block;
 }
 
@@ -423,7 +431,7 @@ p {
 .packages--div {
   margin-bottom: var(--margin);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--margin);
 }
 
@@ -432,7 +440,7 @@ p {
   --paint-color: var(--white);
   --stroke-weight: 0;
   background: paint(angled-corners);
-  padding: 14px;
+  padding: 12px;
   color: var(--black);
 }
 
@@ -463,12 +471,18 @@ p {
   opacity: 0.9;
 }
 
+.codepens--div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 49%));
+  gap: 1%;
+}
+
 .codepen-wrapper--div {
   --fill-color: var(--yellow);
   --paint-color: var(--yellow);
   --stroke-weight: 16;
   --codepen-padding: 17px;
-  margin-bottom: var(--margin);
+
   background: paint(angled-corners);
   padding: var(--codepen-padding);
   height: calc(375px + (var(--codepen-padding) * 2));
@@ -523,4 +537,38 @@ p {
   max-width: var(--page-width);
   padding: 0 var(--padding);
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-inner--div > small {
+  max-width: 450px;
+  text-align: center;
+}
+
+.footer-inner--small {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: var(--margin);
+}
+
+.footer-inner--small > span {
+  margin-right: 4px;
+}
+
+.footer-social-links--div {
+  width: 100px;
+  display: none;
+  justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .sidebar-wrapper--div {
+    display: none;
+  }
+
+  .footer-social-links--div {
+    display: flex;
+  }
 }

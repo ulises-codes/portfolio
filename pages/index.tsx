@@ -16,14 +16,16 @@ const IndexPage = () => {
     <div className="page-root">
       <div className="home-page-top--div">
         <div className="site-greeting--div">
-          <h1 className="site-heading--h1">
-            <span>GREETINGS.</span>
-            <br />
-            <span>I AM ULISES.</span>
-          </h1>
-          <h2 className="section-title--h2">
-            I make stuff for the web with code.
-          </h2>
+          <hgroup>
+            <h1 className="site-heading--h1">
+              <span>GREETINGS.</span>
+              <br />
+              <span>I AM ULISES.</span>
+            </h1>
+            <h2 className="section-title--h2">
+              I make stuff for the web with code.
+            </h2>
+          </hgroup>
         </div>
         {!isBored ? (
           <LanguageCells />
@@ -51,7 +53,6 @@ const IndexPage = () => {
 
       <h2 className="section-title--h2">Some Stuff I've Made</h2>
       <ProjectTabs />
-      <div className="checkerboard-divider--div" />
     </div>
   )
 }

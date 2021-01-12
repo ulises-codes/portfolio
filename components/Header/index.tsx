@@ -15,7 +15,12 @@ export default function Header({ setIsBored }: HeaderProps) {
         <nav>
           <Link href="/">
             <a className="header-logo--a">
-              <img src="/images/logo/full-logo.svg" alt="" width="100" />
+              <img
+                className="header-logo--img"
+                src="/images/logo/full-logo.svg"
+                alt=""
+                width="250"
+              />
             </a>
           </Link>
           <button className="bored--btn" onClick={() => setIsBored(!isBored)}>

@@ -10,7 +10,6 @@ export default function Codepens() {
       <Head key="codepens">
         <script src={CODEPEN_SRC} async />
       </Head>
-
       <div className="codepens--div">
         {codepenList.map(codepenProps => (
           <Codepen key={codepenProps.slug} {...codepenProps} />

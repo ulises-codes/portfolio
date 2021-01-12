@@ -19,7 +19,6 @@ export default function Codepen({ description, slug, title }: CodepenProps) {
         data-tab-color="#f1dd6d"
         data-tab-link-color="#171717"
         data-active-link-color="#24748f"
-        // data-custom-css-url="http://localhost:3000/codepen.css"
         data-pen-title={title}>
         <span>
           See the Pen

@@ -59,7 +59,7 @@ export default function Layout({ children }: Props) {
         />
         <link
           rel="shortcut icon"
-          href="/images/logo/logo-symbol.svg"
+          href="/images/logo/favicon.svg"
           type="image/x-icon"
         />
         <link
