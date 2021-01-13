@@ -10,7 +10,6 @@ export default async function registerWorklets() {
     ]
 
     WORKLETS.forEach(worklet => {
-      console.log('WORKLET: ', worklet)
       CSS.paintWorklet.addModule(`/worklets/${worklet}.js`)
     })
   }
