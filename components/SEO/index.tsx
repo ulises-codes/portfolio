@@ -17,7 +17,7 @@ export default function SEO() {
       />
       <meta
         property="og:image"
-        content="https://res.cloudinary.com/da3fgujdy/image/upload/c_fill,h_630,q_100,w_1200/v1610482183/ulises.codes/portfolio-screenshot_uz1fon.png"
+        content="https://res.cloudinary.com/da3fgujdy/image/upload/c_fill,g_north_west,h_630,q_100,w_1200/v1610482183/ulises.codes/portfolio-screenshot_uz1fon.png"
       />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -33,7 +33,7 @@ export default function SEO() {
       />
       <meta
         name="twitter:image"
-        content="https://res.cloudinary.com/da3fgujdy/image/upload/c_fill,h_630,q_100,w_1200/v1610482183/ulises.codes/portfolio-screenshot_uz1fon.png"
+        content="https://res.cloudinary.com/da3fgujdy/image/upload/c_fill,g_north_west,h_630,q_100,w_1200/v1610482183/ulises.codes/portfolio-screenshot_uz1fon.png"
       />
       <meta
         name="twitter:image:alt"
