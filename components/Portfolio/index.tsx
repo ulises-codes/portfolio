@@ -1,12 +1,16 @@
 import { useState } from 'react'
-import { m as motion, AnimatePresence } from 'framer-motion'
+import dynamic from 'next/dynamic'
+
+import { MotionDiv } from 'components/MyMotion'
 import Packages from 'components/Packages'
 
 import Ellipse from 'util/Ellipse'
-import dynamic from 'next/dynamic'
 import Projects from 'components/Projects'
 
 const Codepens = dynamic(() => import('components/Codepens'))
+const AnimatePresence = dynamic<any>(() =>
+  import('framer-motion').then(mod => mod.AnimatePresence)
+)
 
 const projects = ['Packages', 'Codepens', 'Projects']
 
@@ -35,7 +39,7 @@ export default function ProjectTabs() {
         <AnimatePresence key="portfolio-presence" exitBeforeEnter>
           {TabContent.map((Tab, i) =>
             currentTab === i ? (
-              <motion.div
+              <MotionDiv
                 key={projects[i]}
                 initial={{
                   opacity: 0,
@@ -47,7 +51,7 @@ export default function ProjectTabs() {
                   filter: 'grayscale(100%)',
                 }}>
                 <Tab />
-              </motion.div>
+              </MotionDiv>
             ) : null
           )}
         </AnimatePresence>

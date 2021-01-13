@@ -2,7 +2,8 @@ export default function TLDR() {
   return (
     <div>
       <p>
-        My name is Ulises Himely. My name is pronounced the same as{' '}
+        My name is Ulises Himely. Species: human. My name is pronounced the same
+        as{' '}
         <a
           className="hyperlink"
           href="https://en.wikipedia.org/wiki/Ulysses_S._Grant"

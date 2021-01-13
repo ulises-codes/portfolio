@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import type { AppProps } from 'next/app'
-import Layout from 'components/Layout'
-import 'components/styles/global.css'
 import { MotionFeature } from 'framer-motion'
 import dynamic from 'next/dynamic'
+import type { AppProps } from 'next/app'
+import type { MotionConfigProps } from 'framer-motion/types/motion/context/MotionConfigContext'
+import 'components/styles/global.css'
 
-const MotionConfig = dynamic<any>(() =>
+const Layout = dynamic(() => import('components/Layout'))
+const MotionConfig = dynamic<MotionConfigProps>(() =>
   import('framer-motion').then(mod => mod.MotionConfig)
 )
 

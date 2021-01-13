@@ -1,8 +1,16 @@
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
+
 import Ellipse from '../../util/Ellipse'
-import { m as motion, AnimatePresence } from 'framer-motion'
-import TLDR from './TLDR'
-import More from './More'
+
+import { MotionDiv } from 'components/MyMotion'
+
+const AnimatePresence = dynamic<any>(() =>
+  import('framer-motion').then(mod => mod.AnimatePresence)
+)
+
+const TLDR = dynamic(() => import('./TLDR'))
+const More = dynamic(() => import('./More'))
 
 const BIO_SECTIONS = [
   {
@@ -35,22 +43,22 @@ export default function HomeSection() {
         ))}
       </div>
       <AnimatePresence initial={false} exitBeforeEnter>
-        <motion.div className="bio-section-wrapper--div" layout>
+        <MotionDiv className="bio-section-wrapper--div" layout>
           {BIO_SECTIONS.map(
             (section, i) =>
               currentView === i && (
-                <motion.div
+                <MotionDiv
                   key={`bio-section--${section.title}`}
                   className="bio-section--div"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}>
                   <section.component />
-                </motion.div>
+                </MotionDiv>
               )
           )}
           <div className="checkerboard-divider--div" />
-        </motion.div>
+        </MotionDiv>
       </AnimatePresence>
     </div>
   )

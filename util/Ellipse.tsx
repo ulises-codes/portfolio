@@ -1,9 +1,9 @@
-import { m as motion } from 'framer-motion'
+import { MotionPath } from 'components/MyMotion'
 
 export default function Ellipse({ view }: { view: number }) {
   return (
     <svg className="bio-btn-outline--svg" viewBox="0 -9 1272 796.9">
-      <motion.path
+      <MotionPath
         key={`bio-btn-outline--${view}`}
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}

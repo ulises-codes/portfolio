@@ -1,5 +1,7 @@
-import { m as motion, Variants } from 'framer-motion'
-import { ReactNode } from 'react'
+import { MotionPath } from 'components/MyMotion'
+
+import type { Variants } from 'framer-motion'
+import type { ReactNode } from 'react'
 
 type CellProps = {
   children: ReactNode
@@ -14,41 +16,22 @@ const pathVariants: Variants = {
   draw: index => ({
     pathLength: 1,
     transition: {
-      delay: index * 0.15,
-      duration: 0.35,
-    },
-  }),
-}
-
-const SVGVariants: Variants = {
-  initial: {
-    fillOpacity: 0,
-  },
-  draw: index => ({
-    fillOpacity: 1,
-    transition: {
-      delay: index * 0.2,
-      duration: 0.75,
-      type: 'tween',
+      delay: index * 0.05,
+      duration: 0.1,
     },
   }),
 }
 
 export default function Cell({ children, index, fill }: CellProps) {
   return (
-    <motion.svg
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-4 -2 304.2 270.8"
       width="100"
       height="85"
-      initial="initial"
-      variants={SVGVariants}
-      animate="draw"
       fill={fill}
-      stroke="black"
-      custom={index}
-    >
-      <motion.path
+      stroke="black">
+      <MotionPath
         strokeLinecap="round"
         stroke="#fff8e2"
         strokeWidth="4"
@@ -59,6 +42,6 @@ export default function Cell({ children, index, fill }: CellProps) {
         custom={index}
       />
       {children}
-    </motion.svg>
+    </svg>
   )
 }

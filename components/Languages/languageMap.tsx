@@ -8,7 +8,7 @@ import GQLLogo from 'public/images/language-logos/hexagon/gql.svg'
 
 import { Languages } from 'interfaces/languages'
 
-type LanguageMapProps = {
+export type LanguageMapProps = {
   fill: string
   name: Languages
   Logo: () => JSX.Element

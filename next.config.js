@@ -11,4 +11,8 @@ module.exports = {
     loader: 'cloudinary',
     path: ['https://res.cloudinary.com/da3fgujdy'],
   },
+  i18n: {
+    locales: ['en-US'],
+    defaultLocale: 'en-US',
+  },
 }

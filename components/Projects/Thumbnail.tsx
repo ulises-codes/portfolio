@@ -1,5 +1,9 @@
 import Image from 'next/image'
-import { m as motion, useAnimation } from 'framer-motion'
+
+import { useAnimation } from 'framer-motion'
+
+import { MotionDiv } from 'components/MyMotion'
+
 import { ProjectProps } from './projectList'
 import languageMap from 'components/Languages/languageMap'
 
@@ -31,11 +35,11 @@ export default function Thumbnail({
   }
 
   return (
-    <motion.div
+    <MotionDiv
       className="thumbnail-root--div"
       animate={controls}
       whileHover="hover">
-      <motion.div
+      <MotionDiv
         className="thumbnail-details--div"
         initial="hidden"
         variants={detailsVariants}>
@@ -54,14 +58,16 @@ export default function Thumbnail({
                 key={`${name}-language-badge-${language.name}`}
                 className="language-logo-badge--img"
                 src={`/images/language-logos/${language.filename}.svg`}
+                height="24"
+                width="24"
               />
             ))}
         </div>
         {description && (
           <span className="thumbnail-description--span">{description}</span>
         )}
-      </motion.div>
-      <motion.div
+      </MotionDiv>
+      <MotionDiv
         className="thumbnail-image-wrapper--div"
         initial="initial"
         variants={imgVariants}>
@@ -71,7 +77,7 @@ export default function Thumbnail({
           height="178"
           objectFit="contain"
         />
-      </motion.div>
-    </motion.div>
+      </MotionDiv>
+    </MotionDiv>
   )
 }

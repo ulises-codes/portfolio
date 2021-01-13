@@ -20,6 +20,9 @@ export default function Package({
                 src={`/images/language-logos/${filename}.svg`}
                 alt={`${name} logo`}
                 className="language-logo-badge--img"
+                width="24"
+                height="24"
+                loading="lazy"
               />
             ))}
         </div>

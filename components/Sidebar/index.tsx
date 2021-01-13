@@ -1,4 +1,6 @@
-import SocialIcons from 'components/SocialIcons'
+import dynamic from 'next/dynamic'
+
+const SocialIcons = dynamic(() => import('components/SocialIcons'))
 
 export default function Sidebar() {
   return (

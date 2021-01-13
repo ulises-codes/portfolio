@@ -1,4 +1,4 @@
-import { CodepenProps } from './codepenList'
+import type { CodepenProps } from './codepenList'
 
 export default function Codepen({ description, slug, title }: CodepenProps) {
   return (
