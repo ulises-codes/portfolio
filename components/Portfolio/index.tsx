@@ -21,6 +21,7 @@ export default function ProjectTabs() {
 
   return (
     <div className="portfolio-wrapper--div">
+      <h2 className="section-title--h2">Some Stuff I've Made</h2>
       <div className="portfolio-tabs-btns-wrapper--div">
         {projects.map((name, i) => (
           <div key={name} className="portfolio-tabs-btn--div">

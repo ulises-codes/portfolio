@@ -28,6 +28,7 @@ export default function HomeSection() {
 
   return (
     <div className="home-page-section--div">
+      <h2 className="section-title--h2">Some Info</h2>
       <div className="bio-btns-wrapper--div">
         {BIO_SECTIONS.map((section, i) => (
           <div
