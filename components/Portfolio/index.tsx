@@ -12,6 +12,13 @@ const AnimatePresence = dynamic<any>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)
 )
 
+const Divider = dynamic(() => import('util/houdini/Divider'), {
+  ssr: false,
+  loading: () => <div className="checkerboard-divider--div" />,
+})
+
+const Underline = dynamic(() => import('util/houdini/Underline'))
+
 const projects = ['Packages', 'Codepens', 'Projects']
 
 const TabContent = [Packages, Codepens, Projects]
@@ -21,7 +28,9 @@ export default function ProjectTabs() {
 
   return (
     <div className="portfolio-wrapper--div">
-      <h2 className="section-title--h2">Some Stuff I've Made</h2>
+      <Underline>
+        <h3 className="section-title--h2">Some Stuff I've Made</h3>
+      </Underline>
       <div className="portfolio-tabs-btns-wrapper--div">
         {projects.map((name, i) => (
           <div key={name} className="portfolio-tabs-btn--div">
@@ -56,7 +65,7 @@ export default function ProjectTabs() {
             ) : null
           )}
         </AnimatePresence>
-        <div className="checkerboard-divider--div" />
+        <Divider />
       </div>
     </div>
   )

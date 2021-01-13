@@ -4,6 +4,12 @@ import { BoredContext } from 'components/Layout'
 
 const LanguageCells = dynamic(() => import('components/Languages'))
 const Snake = dynamic(() => import('@ulises-codes/bite-me'), { ssr: false })
+const Divider = dynamic(() => import('util/houdini/Divider'), {
+  ssr: false,
+  loading: () => <div className="checkerboard-divider--div" />,
+})
+
+const Underline = dynamic(() => import('util/houdini/Underline'))
 
 export default function HomeTop() {
   const isBored = useContext(BoredContext)
@@ -18,9 +24,11 @@ export default function HomeTop() {
               <br />
               <span>I AM ULISES.</span>
             </h1>
-            <h2 className="section-title--h2">
-              I make stuff for the web with code.
-            </h2>
+            <Underline>
+              <h2 className="section-title--h2">
+                I make stuff for the web with code.
+              </h2>
+            </Underline>
           </hgroup>
         </div>
         {!isBored ? (
@@ -43,7 +51,7 @@ export default function HomeTop() {
           </div>
         )}
       </div>
-      <div className="checkerboard-divider--div" />
+      <Divider />
     </div>
   )
 }

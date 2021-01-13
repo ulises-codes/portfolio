@@ -13,7 +13,10 @@
   }
 
   if (typeof window === 'undefined') return
-  if ('paintWorklet' in CSS) return register()
+
+  if ('paintWorklet' in CSS) {
+    return register()
+  }
 
   await import(
     'https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js'

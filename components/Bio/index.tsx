@@ -12,6 +12,13 @@ const AnimatePresence = dynamic<any>(() =>
 const TLDR = dynamic(() => import('./TLDR'))
 const More = dynamic(() => import('./More'))
 
+const Divider = dynamic(() => import('util/houdini/Divider'), {
+  ssr: false,
+  loading: () => <div className="checkerboard-divider--div" />,
+})
+
+const Underline = dynamic(() => import('util/houdini/Underline'))
+
 const BIO_SECTIONS = [
   {
     title: 'TL;DR',
@@ -28,7 +35,9 @@ export default function HomeSection() {
 
   return (
     <div className="home-page-section--div">
-      <h2 className="section-title--h2">Some Info</h2>
+      <Underline>
+        <h3 className="section-title--h2">Some Info</h3>
+      </Underline>
       <div className="bio-btns-wrapper--div">
         {BIO_SECTIONS.map((section, i) => (
           <div
@@ -58,7 +67,7 @@ export default function HomeSection() {
                 </MotionDiv>
               )
           )}
-          <div className="checkerboard-divider--div" />
+          <Divider />
         </MotionDiv>
       </AnimatePresence>
     </div>
