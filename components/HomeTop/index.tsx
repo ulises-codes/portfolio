@@ -9,7 +9,12 @@ const Divider = dynamic(() => import('util/houdini/Divider'), {
   loading: () => <div className="checkerboard-divider--div" />,
 })
 
-const Underline = dynamic(() => import('util/houdini/Underline'))
+const Underline = dynamic(() => import('util/houdini/Underline'), {
+  ssr: false,
+  loading: () => (
+    <h2 className="section-title--h2">I make stuff for the web with code.</h2>
+  ),
+})
 
 export default function HomeTop() {
   const isBored = useContext(BoredContext)

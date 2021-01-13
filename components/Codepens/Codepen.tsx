@@ -1,8 +1,13 @@
+import dynamic from 'next/dynamic'
 import type { CodepenProps } from './codepenList'
+
+const AngledCorners = dynamic(() => import('util/houdini/AngledCorners'), {
+  ssr: false,
+})
 
 export default function Codepen({ description, slug, title }: CodepenProps) {
   return (
-    <div className="codepen-wrapper--div">
+    <AngledCorners className="codepen-wrapper--div">
       <div
         className="codepen"
         data-class="codepen--iframe"
@@ -29,6 +34,6 @@ export default function Codepen({ description, slug, title }: CodepenProps) {
           <a href="https://codepen.io">CodePen</a>.
         </span>
       </div>
-    </div>
+    </AngledCorners>
   )
 }

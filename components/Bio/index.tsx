@@ -17,7 +17,10 @@ const Divider = dynamic(() => import('util/houdini/Divider'), {
   loading: () => <div className="checkerboard-divider--div" />,
 })
 
-const Underline = dynamic(() => import('util/houdini/Underline'))
+const Underline = dynamic(() => import('util/houdini/Underline'), {
+  ssr: false,
+  loading: () => <h3 className="section-title--h2">Some Info</h3>,
+})
 
 const BIO_SECTIONS = [
   {

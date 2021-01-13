@@ -1,5 +1,8 @@
 import languageMap from 'components/Languages/languageMap'
+import dynamic from 'next/dynamic'
 import { PackageProps } from './packageList'
+
+const AngledCorners = dynamic(() => import('util/houdini/AngledCorners'))
 
 export default function Package({
   description,
@@ -8,7 +11,7 @@ export default function Package({
   repo,
 }: PackageProps) {
   return (
-    <div className="package-wrapper--div">
+    <AngledCorners className="package-wrapper--div">
       <div className="package-inner--div">
         <h4>{title}</h4>
         <div className="language-logo-badges--div">
@@ -37,6 +40,6 @@ export default function Package({
           </a>
         </div>
       </div>
-    </div>
+    </AngledCorners>
   )
 }
