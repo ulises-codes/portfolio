@@ -1,4 +1,4 @@
-class SuperUnderline {
+class ExtraUnderline {
   static get inputProperties() {
     return [
       '--extra-underlineNumber',
@@ -31,5 +31,4 @@ class SuperUnderline {
   }
 }
 
-registerPaint('extra-superUnderline', SuperUnderline)
-
+registerPaint('extra-underline', ExtraUnderline)

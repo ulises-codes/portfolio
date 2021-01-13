@@ -5,8 +5,8 @@ export default async function registerWorklets() {
     const WORKLETS = [
       'angled-corners',
       'checkerboard',
-      'underline',
       'curved-line',
+      'extra-underline',
     ]
 
     WORKLETS.forEach(worklet => {

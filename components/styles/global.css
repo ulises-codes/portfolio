@@ -159,10 +159,6 @@ p {
 }
 
 .social-icons-wrapper--div {
-  --fill-color: var(--white);
-  --paint-color: var(--white);
-  --stroke-weight: 0;
-  /* background: paint(angled-corners); */
   padding: 4px 0;
 }
 
@@ -192,7 +188,7 @@ p {
   --extra-underlineColor: var(--yellow);
   --extra-underlineWidth: 1;
   --extra-underlineSpread: 8;
-  background: paint(extra-superUnderline);
+  background: paint(extra-underline);
   width: max-content;
 }
 
