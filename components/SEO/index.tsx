@@ -40,7 +40,7 @@ export default function SEO() {
       <meta property="og:type" content="website" />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@ulisescodes" />
+      <meta name="twitter:site" content="@uliseshimely" />
       <meta name="twitter:title" content="Ulises Himely | Web Developer" />
       <meta
         name="twitter:description"
