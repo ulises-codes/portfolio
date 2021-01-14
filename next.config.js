@@ -1,4 +1,6 @@
-module.exports = {
+const withPWA = require('next-pwa')
+
+module.exports = withPWA({
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -15,4 +17,7 @@ module.exports = {
     locales: ['en-US'],
     defaultLocale: 'en-US',
   },
-}
+  pwa: {
+    dest: 'public',
+  },
+})

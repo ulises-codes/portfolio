@@ -5,11 +5,26 @@ export default function SEO() {
         name="description"
         content="Ulises Himely is a Web Developer, specializing in React, Typescript, GraphQL, and other technologies. He is also an avid human being. There is no proof that aliens are living among us in disguise."
       />
-
       <meta
         name="keywords"
         content="portfolio, javascript, react, developer, typescript"
       />
+      <meta name="application-name" content="Ulises Himely" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="apple-mobile-web-app-title" content="Ulises Himely" />
+      <meta
+        name="description"
+        content="Ulises Himely is a Web Developer, specializing in React, Typescript, GraphQL, and other technologies. He is also an avid human being. There is no proof that aliens are living among us in disguise."
+      />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="msapplication-TileColor" content="#f1dd6d" />
+      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="theme-color" content="#24748f" />
+
+      <link rel="manifest" href="/manifest.webmanifest" />
+
       <meta property="og:title" content="Ulises Himely | Web Developer" />
       <meta
         property="og:description"
