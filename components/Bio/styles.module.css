@@ -1,0 +1,28 @@
+@value variables: '../styles/variables.css';
+@value margin from variables;
+
+.bio-section--div {
+  margin-bottom: margin;
+}
+
+.bio-section--div > p {
+  max-width: 525px;
+  padding: 0;
+  width: 100%;
+}
+
+.bio-btns-wrapper--div {
+  display: flex;
+  width: 175px;
+  height: 45px;
+  justify-content: space-between;
+}
+
+.bio-btn-wrapper--div {
+  width: 70px;
+  position: relative;
+}
+
+.bio-btn--btn {
+  width: 100%;
+}

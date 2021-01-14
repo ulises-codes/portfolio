@@ -1,0 +1,24 @@
+@value variables: 'styles/variables.css';
+@value page-width from variables;
+
+.sidebar-wrapper--div {
+  position: fixed;
+  left: calc((100vw - page-width) / 2 - 48px);
+  top: calc(100vh / 2 - 250px);
+}
+
+.social-icons-wrapper--div {
+  padding: 4px 0;
+}
+
+.social-icons-inner--div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 144px;
+  padding: 4px 0;
+}
+
+.social-icons-inner--div > a {
+  height: 24px;
+}

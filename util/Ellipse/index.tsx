@@ -1,10 +1,10 @@
 import { MotionPath } from 'components/MyMotion'
+import styles from './styles.module.css'
 
-export default function Ellipse({ view }: { view: number }) {
+export default function Ellipse() {
   return (
-    <svg className="bio-btn-outline--svg" viewBox="0 -9 1272 796.9">
+    <svg className={styles['btn-outline--svg']} viewBox="0 -9 1272 796.9">
       <MotionPath
-        key={`bio-btn-outline--${view}`}
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         exit={{ pathLength: 0 }}

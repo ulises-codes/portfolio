@@ -1,5 +1,7 @@
 import dynamic from 'next/dynamic'
 
+import styles from './styles.module.css'
+
 const SocialIcons = dynamic(() => import('components/SocialIcons'))
 const CurvedLine = dynamic(() => import('util/houdini/CurvedLineVert'), {
   ssr: false,
@@ -8,10 +10,10 @@ const CurvedLine = dynamic(() => import('util/houdini/CurvedLineVert'), {
 
 export default function Sidebar() {
   return (
-    <div className="sidebar-wrapper--div">
+    <div className={styles['sidebar-wrapper--div']}>
       <CurvedLine />
-      <div className="social-icons-wrapper--div">
-        <div className="social-icons-inner--div">
+      <div className={styles['social-icons-wrapper--div']}>
+        <div className={styles['social-icons-inner--div']}>
           <SocialIcons />
         </div>
       </div>

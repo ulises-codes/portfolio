@@ -20,6 +20,7 @@
     "baseUrl": ".",
     "paths": {
       "components/*": ["components/*"],
+      "styles/*": ["components/styles/*"],
       "src/*": ["src/*"],
       "lib/*": ["lib/*"],
       "interfaces/*": ["interfaces/*"],

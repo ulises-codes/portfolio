@@ -1,0 +1,13 @@
+@value header-height: 100px;
+@value blue: #24748f;
+@value light-blue: #2bacb3;
+@value yellow: #f1dd6d;
+@value yellow-rgba: rgba(241, 221, 109, 0.99);
+@value white: #fff8e2;
+@value berry-red: #f26463;
+@value purple: #bf43a1;
+@value black: #171717;
+
+@value page-width: 82vw;
+@value margin: 16px;
+@value padding: 16px;

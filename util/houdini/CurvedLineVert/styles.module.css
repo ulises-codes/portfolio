@@ -1,0 +1,16 @@
+@value variables: 'styles/variables.css';
+@value white from variables;
+
+.curved-line-vertical {
+  --curved-lineColor: white;
+  --curved-lineSpread: 50;
+  --curved-lineWidth: 2;
+  --curved-lineHeight: 20;
+  background: paint(curved-line);
+  height: 150px;
+  width: 20px;
+}
+
+.curved-line-vertical:last-child {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,22 @@
+@value variables: 'styles/variables.css';
+@value margin from variables;
+
+.portfolio-wrapper--div {
+  min-height: 325px;
+}
+
+.portfolio-tabs-btns-wrapper--div {
+  display: flex;
+  width: 100%;
+  max-width: 425px;
+  height: 45px;
+  justify-content: space-between;
+}
+
+.portfolio-tabs-btn--div {
+  position: relative;
+}
+
+.portfolio-content-wrapper--div {
+  margin-top: margin;
+}

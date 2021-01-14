@@ -1,8 +1,9 @@
-import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import codepenList from './codepenList'
 
-const Codepen = dynamic(() => import('./Codepen'))
+import styles from './styles.module.css'
+
+import Codepen from './Codepen'
 
 export default function Codepens() {
   return (
@@ -10,7 +11,7 @@ export default function Codepens() {
       <Head key="codepens">
         <script src="https://cpwebassets.codepen.io/assets/embed/ei.js" async />
       </Head>
-      <div className="codepens--div">
+      <div className={styles['codepens--div']}>
         {codepenList.map(codepenProps => (
           <Codepen key={codepenProps.slug} {...codepenProps} />
         ))}

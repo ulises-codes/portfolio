@@ -2,6 +2,8 @@ import { useContext } from 'react'
 import dynamic from 'next/dynamic'
 import { BoredContext } from 'components/Layout'
 
+import styles from './styles.module.css'
+
 const LanguageCells = dynamic(() => import('components/Languages'))
 const Snake = dynamic(() => import('@ulises-codes/bite-me'), { ssr: false })
 const Divider = dynamic(() => import('util/houdini/Divider'), {
@@ -21,10 +23,10 @@ export default function HomeTop() {
 
   return (
     <div>
-      <div className="home-page-top--div">
-        <div className="site-greeting--div">
+      <div className={styles['home-page-top--div']}>
+        <div className={styles['site-greeting--div']}>
           <hgroup>
-            <h1 className="site-heading--h1">
+            <h1>
               <span>GREETINGS.</span>
               <br />
               <span>I AM ULISES.</span>
@@ -39,7 +41,7 @@ export default function HomeTop() {
         {!isBored ? (
           <LanguageCells />
         ) : (
-          <div className="snake-wrapper--div">
+          <div className={styles['snake-wrapper--div']}>
             <Snake
               height={300}
               width={300}

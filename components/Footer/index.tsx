@@ -1,12 +1,14 @@
 import dynamic from 'next/dynamic'
 
+import styles from './styles.module.css'
+
 const SocialIcons = dynamic(() => import('components/SocialIcons'))
 
 export default function Footer() {
   return (
     <footer>
-      <div className="footer-inner--div">
-        <small className="footer-inner--small">
+      <div className={styles['footer-inner--div']}>
+        <small className={styles['footer-inner--small']}>
           <span>Designed and Coded by Ulises Himely.</span>
           <a
             className="hyperlink"
@@ -29,7 +31,7 @@ export default function Footer() {
           </cite>{' '}
           created in Ableton Live by me.
         </small>
-        <div className="footer-social-links--div">
+        <div className={styles['footer-social-links--div']}>
           <SocialIcons />
         </div>
       </div>

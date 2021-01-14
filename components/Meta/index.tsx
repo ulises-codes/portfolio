@@ -26,7 +26,6 @@ export default function Meta() {
       <link rel="alternate icon" href="/images/logo/favicon.png" />
       <link rel="mask-icon" href="/images/logo/mask-icon.svg" color="#f1dd6d" />
       <link rel="apple-touch-icon" href="/images/logo/icon@192x.png" />
-
       <link
         href="/fonts/bungee-shade.woff2"
         rel="preload"
@@ -40,6 +39,7 @@ export default function Meta() {
         as="font"
         type="font/woff2"
         crossOrigin="anonymous"
+        onLoad={'this.onload=null' as any}
       />
       <link
         href="/fonts/open-sans.woff2"
@@ -54,7 +54,9 @@ export default function Meta() {
         href="https://use.typekit.net/llx7qor.css"
         as="font"
         crossOrigin="anonymous"
-        onLoad={"this.onload=null;this.rel='stylesheet'" as any}
+        onLoad={
+          "this.onload=null;this.rel='stylesheet';this.as='style';this.type='text/css'" as any
+        }
       />
     </Head>
   )

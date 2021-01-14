@@ -7,6 +7,8 @@ import { MotionDiv } from 'components/MyMotion'
 import { ProjectProps } from './projectList'
 import languageMap from 'components/Languages/languageMap'
 
+import styles from './styles.module.css'
+
 export default function Thumbnail({
   name,
   description,
@@ -36,11 +38,11 @@ export default function Thumbnail({
 
   return (
     <MotionDiv
-      className="thumbnail-root--div"
+      className={styles['thumbnail-root--div']}
       animate={controls}
       whileHover="hover">
       <MotionDiv
-        className="thumbnail-details--div"
+        className={styles['thumbnail-details--div']}
         initial="hidden"
         variants={detailsVariants}>
         <a
@@ -50,7 +52,7 @@ export default function Thumbnail({
           rel="noopener noreferrer">
           {name}
         </a>
-        <div className="thumbnail-details-languages--div">
+        <div className={styles['thumbnail-details-languages--div']}>
           {languageMap
             .filter(({ name }) => languages.includes(name))
             .map(language => (
@@ -64,11 +66,13 @@ export default function Thumbnail({
             ))}
         </div>
         {description && (
-          <span className="thumbnail-description--span">{description}</span>
+          <span className={styles['thumbnail-description--span']}>
+            {description}
+          </span>
         )}
       </MotionDiv>
       <MotionDiv
-        className="thumbnail-image-wrapper--div"
+        className={styles['thumbnail-image-wrapper--div']}
         initial="initial"
         variants={imgVariants}>
         <Image

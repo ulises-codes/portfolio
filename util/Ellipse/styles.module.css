@@ -1,0 +1,14 @@
+@value variables: 'styles/variables.css';
+@value yellow from variables;
+
+.btn-outline--svg {
+  position: absolute;
+  width: 115px;
+  fill: none;
+  stroke: var(--yellow);
+  stroke-width: 15px;
+  z-index: -1;
+  top: -21px;
+  left: -20px;
+  stroke-linecap: round;
+}

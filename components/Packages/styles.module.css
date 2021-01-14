@@ -1,0 +1,37 @@
+@value variables: 'styles/variables.css';
+@value blue, black, margin, white from variables;
+
+.packages--div {
+  margin-bottom: margin;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: margin;
+}
+
+.package-wrapper--div {
+  --fill-color: white;
+  --paint-color: white;
+  --stroke-weight: 0;
+  background: paint(angled-corners);
+  padding: 12px;
+  color: black;
+}
+
+.package-inner--div {
+  padding: 8px 14px;
+  border: 6px solid blue;
+}
+
+.package-link--div {
+  width: 100%;
+  text-align: right;
+}
+
+.language-logo-badges--div {
+  display: flex;
+}
+
+.package-description--p {
+  font-size: 0.9em;
+  opacity: 0.9;
+}

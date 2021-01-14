@@ -1,6 +1,10 @@
-import { Dispatch, SetStateAction, useContext } from 'react'
+import { useContext } from 'react'
 import { BoredContext } from 'components/Layout'
 import Link from 'next/link'
+
+import styles from './styles.module.css'
+
+import type { Dispatch, SetStateAction } from 'react'
 
 type HeaderProps = {
   setIsBored: Dispatch<SetStateAction<boolean>>
@@ -11,12 +15,12 @@ export default function Header({ setIsBored }: HeaderProps) {
 
   return (
     <header>
-      <div className="header-inner--div">
+      <div className={styles['header-inner--div']}>
         <nav>
           <Link href="/">
-            <a className="header-logo--a">
+            <a>
               <img
-                className="header-logo--img"
+                className={styles['header-logo--img']}
                 src="/images/logo/full-logo.svg"
                 alt="Logo"
                 height="46"
@@ -24,7 +28,7 @@ export default function Header({ setIsBored }: HeaderProps) {
               />
             </a>
           </Link>
-          <button className="bored--btn" onClick={() => setIsBored(!isBored)}>
+          <button onClick={() => setIsBored(!isBored)}>
             {!isBored ? "I'm Bored" : 'Mischief Managed'}
           </button>
         </nav>

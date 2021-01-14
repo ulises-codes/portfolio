@@ -1,11 +1,12 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import type { ReactNode } from 'react'
 
-const Header = dynamic(() => import('components/Header'))
-const Footer = dynamic(() => import('components/Footer'))
-const SEO = dynamic(() => import('components/SEO'))
-const Meta = dynamic(() => import('components/Meta'))
+import Header from 'components/Header'
+import Footer from 'components/Footer'
+import SEO from 'components/SEO'
+import Meta from 'components/Meta'
 
 const Sidebar = dynamic(() => import('components/Sidebar'))
 
