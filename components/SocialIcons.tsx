@@ -1,6 +1,7 @@
 import GithubLogo from 'public/images/icons/github-pixelated.svg'
 import LinkedInLogo from 'public/images/icons/linkedin-pixelated.svg'
 import EmailIcon from 'public/images/icons/email-pixelated.svg'
+import TwitterIcon from 'public/images/icons/twitter-pixelated.svg'
 
 export default function SocialIcons() {
   return (
@@ -20,6 +21,14 @@ export default function SocialIcons() {
         className="social-icon--a"
         aria-label="Click to visit my LinkedIn profile">
         <LinkedInLogo width="24" height="24" />
+      </a>
+      <a
+        href="https://twitter.com/UlisesHimely"
+        target="_blank"
+        rel="noreferrer noopener"
+        className="social-icon--a"
+        aria-label="Click to visit my Twitter profile">
+        <TwitterIcon width="24" height="24" />
       </a>
       <a
         href="mailto:hi@ulises.codes"
