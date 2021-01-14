@@ -22,3 +22,9 @@
 .social-icons-inner--div > a {
   height: 24px;
 }
+
+@media (max-width: 600px) {
+  .sidebar-wrapper--div {
+    display: none;
+  }
+}
