@@ -8,7 +8,7 @@ import Projects from 'components/Projects'
 
 import Ellipse from 'util/Ellipse'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 const AnimatePresence = dynamic<any>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)

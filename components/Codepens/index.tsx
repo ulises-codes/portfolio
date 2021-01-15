@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import codepenList from './codepenList'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 import Codepen from './Codepen'
 

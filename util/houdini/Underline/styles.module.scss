@@ -1,9 +1,8 @@
-@value variables: 'styles/variables.css';
-@value yellow from variables;
+@use 'styles/variables';
 
 .underline--div {
   --extra-underlineNumber: 3;
-  --extra-underlineColor: yellow;
+  --extra-underlineColor: #{variables.$yellow};
   --extra-underlineWidth: 1;
   --extra-underlineSpread: 8;
   background: paint(extra-underline);

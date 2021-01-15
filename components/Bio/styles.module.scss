@@ -1,8 +1,7 @@
-@value variables: '../styles/variables.css';
-@value margin from variables;
+@use 'styles/variables';
 
 .bio-section--div {
-  margin-bottom: margin;
+  margin-bottom: variables.$margin;
 }
 
 .bio-section--div > p {

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import type { AppProps } from 'next/app'
 import type { MotionConfigProps } from 'framer-motion/types/motion/context/MotionConfigContext'
 
-import 'components/styles/global.css'
+import 'components/styles/global.scss'
 
 const Layout = dynamic(() => import('components/Layout'))
 const MotionConfig = dynamic<MotionConfigProps>(() =>

@@ -1,7 +1,7 @@
 import Package from './Package'
 import packageList from './packageList'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 export default function Packages() {
   return (

@@ -1,25 +1,24 @@
-@value variables: 'styles/variables.css';
-@value blue, black, margin, white from variables;
+@use 'styles/variables';
 
 .packages--div {
-  margin-bottom: margin;
+  margin-bottom: variables.$margin;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: margin;
+  gap: variables.$margin;
 }
 
 .package-wrapper--div {
-  --fill-color: white;
-  --paint-color: white;
+  --fill-color: #{variables.$white};
+  --paint-color: #{variables.$white};
   --stroke-weight: 0;
   background: paint(angled-corners);
   padding: 12px;
-  color: black;
+  color: variables.$black;
 }
 
 .package-inner--div {
   padding: 8px 14px;
-  border: 6px solid blue;
+  border: 6px solid variables.$blue;
 }
 
 .package-link--div {

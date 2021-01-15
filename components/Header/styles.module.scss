@@ -1,15 +1,14 @@
-@value variables: 'styles/variables.css';
-@value padding, page-width, yellow from variables;
+@use 'styles/variables';
 
 .header-inner--div {
-  padding: padding;
-  max-width: page-width;
+  padding: variables.$padding;
+  max-width: variables.$page-width;
   margin: auto;
   height: 100%;
 }
 
 .header-logo--img {
-  background-color: yellow;
+  background-color: variables.$yellow;
   width: 250px;
 }
 

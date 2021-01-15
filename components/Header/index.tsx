@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { BoredContext } from 'components/Layout'
 import Link from 'next/link'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 import type { Dispatch, SetStateAction } from 'react'
 

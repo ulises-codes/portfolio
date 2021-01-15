@@ -1,5 +1,4 @@
-@value variables: 'styles/variables.css';
-@value white from variables;
+@use 'styles/variables';
 
 .projects-wrapper--div {
   width: 100%;
@@ -33,7 +32,7 @@
 
 .thumbnail-description--span {
   font-size: 0.7em;
-  color: white;
+  color: variables.$white;
   font-weight: bold;
 }
 

@@ -7,7 +7,7 @@ import { MotionDiv } from 'components/MyMotion'
 import { ProjectProps } from './projectList'
 import languageMap from 'components/Languages/languageMap'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 export default function Thumbnail({
   name,

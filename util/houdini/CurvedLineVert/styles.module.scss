@@ -1,8 +1,7 @@
-@value variables: 'styles/variables.css';
-@value white from variables;
+@use 'styles/variables';
 
 .curved-line-vertical {
-  --curved-lineColor: white;
+  --curved-lineColor: #{variables.$white};
   --curved-lineSpread: 50;
   --curved-lineWidth: 2;
   --curved-lineHeight: 20;

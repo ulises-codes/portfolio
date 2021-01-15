@@ -1,3 +1,5 @@
+@use 'styles/variables';
+
 @font-face {
   font-family: 'Bungee Shade';
   font-style: normal;
@@ -32,48 +34,35 @@ html {
 }
 
 :root {
-  --header-height: 100px;
-  --blue: #24748f;
-  --light-blue: #2bacb3;
-  --yellow: #f1dd6d;
-  --yellow-rgba: rgba(241, 221, 109, 0.99);
-  --white: #fff8e2;
-  --berry-red: #f26463;
-  --purple: #bf43a1;
-  --black: #171717;
   --checkerboard-spacing: 7;
   --checkerboard-size: 16;
   --corner-radius: 30 30 30 30 30;
-  --page-width: 82vw;
-  --margin: 16px;
-  --padding: 16px;
-  --border-radius: 16px;
 }
 
 ::selection {
-  background-color: var(--yellow-rgba);
-  color: var(--black);
+  background-color: variables.$yellow-rgba;
+  color: variables.$black;
   font-weight: bold;
 }
 
 body {
   margin: 0;
-  color: var(--white);
-  background-color: var(--blue);
+  color: variables.$white;
+  background-color: variables.$blue;
   font-family: 'Open Sans', sans-serif;
 }
 
 main {
-  top: var(--header-height);
+  top: variables.$header-height;
   left: 0;
-  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100vh - variables.$header-height);
   width: 100vw;
 }
 
 header {
-  height: var(--header-height);
+  height: variables.$header-height;
   width: 100%;
-  margin-bottom: var(--margin);
+  margin-bottom: variables.$margin;
 }
 
 nav {
@@ -95,14 +84,14 @@ h1 {
 }
 
 h1 > span {
-  background-color: var(--yellow);
-  color: var(--black);
+  background-color: variables.$yellow;
+  color: variables.$black;
   display: inline;
 }
 
 h1 > span::selection {
-  background-color: var(--white);
-  color: var(--blue);
+  background-color: variables.$white;
+  color: variables.$blue;
 }
 
 h2,
@@ -127,7 +116,7 @@ button {
 }
 
 button:not(:disabled) {
-  color: var(--white);
+  color: variables.$white;
 }
 
 cite {
@@ -139,8 +128,8 @@ p {
 }
 
 .page-root {
-  max-width: var(--page-width);
-  padding: 0 var(--padding);
+  max-width: variables.$page-width;
+  padding: 0 variables.$padding;
   min-width: 336px;
   margin: auto;
   overflow: hidden;
@@ -154,21 +143,21 @@ p {
 }
 
 .hyperlink {
-  color: var(--black);
-  background-color: var(--yellow);
+  color: variables.$black;
+  background-color: variables.$yellow;
   font-family: inherit;
   display: inline-block;
 }
 
 .hyperlink::before {
   content: '<a>';
-  background-color: var(--yellow);
+  background-color: variables.$yellow;
   font-size: 1;
   display: inline-block;
 }
 
 .hyperlink::after {
-  background-color: var(--yellow);
+  background-color: variables.$yellow;
   content: '</a>';
   font-size: 1;
   display: inline-block;

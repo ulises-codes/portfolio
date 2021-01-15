@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 const SocialIcons = dynamic(() => import('components/SocialIcons'))
 const CurvedLine = dynamic(() => import('util/houdini/CurvedLineVert'), {

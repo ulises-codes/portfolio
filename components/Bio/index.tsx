@@ -7,7 +7,7 @@ import { MotionDiv } from 'components/MyMotion'
 import TLDR from './TLDR'
 import More from './More'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 const AnimatePresence = dynamic<any>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)

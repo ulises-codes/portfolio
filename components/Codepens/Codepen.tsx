@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import type { CodepenProps } from './codepenList'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 const AngledCorners = dynamic(() => import('util/houdini/AnglesCorners'), {
   ssr: false,

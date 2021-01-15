@@ -1,9 +1,8 @@
-@value variables: 'styles/variables.css';
-@value padding, page-width, margin from variables;
+@use 'styles/variables';
 
 .footer-inner--div {
-  max-width: page-width;
-  padding: 0 padding;
+  max-width: variables.$page-width;
+  padding: 0 variables.$padding;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -13,13 +12,13 @@
 
 .footer-inner--div > small {
   max-width: 450px;
-  margin-bottom: margin;
+  margin-bottom: variables.$margin;
 }
 
 .footer-inner--small {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: margin;
+  margin-bottom: variables.$margin;
   justify-content: space-evenly;
 }
 

@@ -1,5 +1,4 @@
-@value variables: 'styles/variables.css';
-@value margin from variables;
+@use 'styles/variables';
 
 .portfolio-wrapper--div {
   min-height: 325px;
@@ -18,5 +17,5 @@
 }
 
 .portfolio-content-wrapper--div {
-  margin-top: margin;
+  margin-top: variables.$margin;
 }

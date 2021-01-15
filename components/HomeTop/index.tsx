@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import dynamic from 'next/dynamic'
 import { BoredContext } from 'components/Layout'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 const LanguageCells = dynamic(() => import('components/Languages'))
 const Snake = dynamic(() => import('@ulises-codes/bite-me'), { ssr: false })

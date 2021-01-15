@@ -1,5 +1,5 @@
 import { MotionPath } from 'components/MyMotion'
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 export default function Ellipse() {
   return (
