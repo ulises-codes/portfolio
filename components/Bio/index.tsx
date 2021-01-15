@@ -15,7 +15,7 @@ const AnimatePresence = dynamic<any>(() =>
 
 const Divider = dynamic(() => import('util/houdini/Divider'), {
   ssr: false,
-  loading: () => <div className="checkerboard-divider--div" />,
+  loading: () => <div className="divider-placeholder--div" />,
 })
 
 const Underline = dynamic(() => import('util/houdini/Underline'), {

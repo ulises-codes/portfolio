@@ -5,7 +5,7 @@ import styles from './styles.module.css'
 const SocialIcons = dynamic(() => import('components/SocialIcons'))
 const CurvedLine = dynamic(() => import('util/houdini/CurvedLineVert'), {
   ssr: false,
-  loading: () => <div className="curved-line-vertical" />,
+  loading: () => <div className="curved-line-placeholder--div" />,
 })
 
 export default function Sidebar() {
