@@ -9,8 +9,9 @@ import Projects from 'components/Projects'
 import Ellipse from 'util/Ellipse'
 
 import styles from './styles.module.scss'
+import type { AnimatePresenceProps } from 'framer-motion'
 
-const AnimatePresence = dynamic<any>(() =>
+const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)
 )
 
@@ -44,7 +45,9 @@ export default function Portfolio() {
               onClick={() => setCurrentTab(i)}>
               {name}
             </button>
-            <AnimatePresence>{currentTab === i && <Ellipse />}</AnimatePresence>
+            <AnimatePresence initial={false}>
+              {currentTab === i && <Ellipse />}
+            </AnimatePresence>
           </div>
         ))}
       </div>

@@ -5,6 +5,7 @@ export default function Ellipse() {
   return (
     <svg className={styles['btn-outline--svg']} viewBox="0 -9 1272 796.9">
       <MotionPath
+        layoutId="ellipse"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         exit={{ pathLength: 0 }}

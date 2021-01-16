@@ -1,0 +1,50 @@
+@use 'styles/variables';
+
+.skill-btns-wrapper--div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.skill-btn--div {
+  position: relative;
+  display: flex;
+  width: 80px;
+  justify-content: center;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.skills-list--ul {
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, max-content));
+  text-align: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+}
+
+.list-item {
+  font-size: 0.9em;
+  list-style-type: none;
+  height: max-content;
+  width: 100%;
+  border-radius: 16px;
+  padding: 8px 14px;
+}
+
+.list-item:nth-child(4n + 1) {
+  border: 2px solid variables.$purple;
+}
+
+.list-item:nth-child(4n + 2) {
+  border: 2px solid variables.$yellow;
+}
+
+.list-item:nth-child(4n + 3) {
+  border: 2px solid variables.$light-blue;
+}
+
+.list-item:nth-child(4n + 4) {
+  border: 2px solid variables.$berry-red;
+}

@@ -80,13 +80,13 @@ footer {
 h1 {
   font-family: 'Bungee Shade', Arial, sans-serif;
   font-size: 2.5em;
-  min-height: 97px;
 }
 
 h1 > span {
   background-color: variables.$yellow;
   color: variables.$black;
   display: inline;
+  height: 40px;
 }
 
 h1 > span::selection {

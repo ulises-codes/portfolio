@@ -6,10 +6,11 @@ import { MotionDiv } from 'components/MyMotion'
 
 import TLDR from './TLDR'
 import More from './More'
+import type { AnimatePresenceProps } from 'framer-motion'
 
 import styles from './styles.module.scss'
 
-const AnimatePresence = dynamic<any>(() =>
+const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)
 )
 
@@ -52,7 +53,7 @@ export default function HomeSection() {
               onClick={() => setCurrentView(i)}>
               {section.title}
             </button>
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
               {currentView === i && <Ellipse />}
             </AnimatePresence>
           </div>
