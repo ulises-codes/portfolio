@@ -16,7 +16,7 @@ const Divider = dynamic(() => import('util/houdini/Divider'), {
 
 const Underline = dynamic(() => import('util/houdini/Underline'), {
   ssr: false,
-  loading: () => <h3 className="section-title--h2">Some Stuff I've Made</h3>,
+  loading: () => <h3 className="section-title--h2">Skills</h3>,
 })
 
 const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
