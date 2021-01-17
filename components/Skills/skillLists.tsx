@@ -7,6 +7,7 @@ const BACKEND_SKILLS = [
   'Next JS',
   'GatsbyJS',
   'Git',
+  'Headless CMS',
 ]
 
 const FRONTEND_SKILLS = ['JavaScript', 'HTML', 'CSS', 'React', 'Typescript']
@@ -29,6 +30,7 @@ const PERSONAL_SKILLS = [
   'Passionate Musician',
   'Fluent in English and Spanish',
   'Definitely not a Cylon',
+  'History Nerd',
 ]
 
 export const SECTIONS = [
