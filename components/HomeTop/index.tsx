@@ -5,7 +5,13 @@ import { BoredContext } from 'components/Layout'
 import styles from './styles.module.scss'
 
 const LanguageCells = dynamic(() => import('components/Languages'))
-const Snake = dynamic(() => import('@ulises-codes/bite-me'), { ssr: false })
+
+const SnakeGame = dynamic(() => import('@ulises-codes/bite-me/offscreen'), {
+  ssr: false,
+})
+
+// import { SnakeGame } from '@ulises-codes/bite-me/dist'
+
 const Divider = dynamic(() => import('util/houdini/Divider'), {
   ssr: false,
   loading: () => <div className="divider-placeholder--div" />,
@@ -42,15 +48,17 @@ export default function HomeTop() {
           <LanguageCells />
         ) : (
           <div className={styles['snake-wrapper--div']}>
-            <Snake
-              height={300}
-              width={300}
+            <SnakeGame
               style={{ backgroundColor: '#24748F' }}
-              foodImage="/snakeAssets/food.png"
+              food={{ src: '/snakeAssets/food.png' }}
               audioSrc="/snakeAssets/echo.mp3"
               dingSrc="/snakeAssets/ding.mp3"
               gameOverSrc="/snakeAssets/game-over.mp3"
-              text={{ color: '#F1DD6D' }}
+              text={{
+                color: '#2a2a2a',
+                subtitleColor: '#fafafa',
+                titleColor: '#F1DD6D',
+              }}
               snakeStyle={{
                 color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
               }}
