@@ -20,7 +20,7 @@ export default function Meta() {
       />
       <link
         rel="shortcut icon"
-        href="/images/logo/favicon.svg"
+        href="/images/logo/icon@192x.png"
         type="image/x-icon"
       />
       <link rel="alternate icon" href="/images/logo/favicon.png" />

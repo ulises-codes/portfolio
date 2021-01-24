@@ -1,11 +1,21 @@
+const WorkerPlugin = require('worker-plugin')
 const withPWA = require('next-pwa')
 
 module.exports = withPWA({
-  webpack(config) {
+  poweredByHeader: false,
+  webpack(config, { buildId, dev, isServer, defaultLoaders, webpack }) {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     })
+
+    if (!isServer) {
+      config.plugins.push(
+        new WorkerPlugin({
+          globalObject: 'self',
+        })
+      )
+    }
 
     return config
   },

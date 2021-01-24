@@ -61,7 +61,7 @@ export default function SEO() {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             url: 'https://www.ulises.codes',
-            logo: 'https://www.ulises.codes/images/logo/google-search.svg',
+            logo: 'https://www.ulises.codes/images/logo/icon@192x.png',
           }),
         }}
       />

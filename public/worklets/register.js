@@ -1,6 +1,4 @@
-export default async function registerWorklets() {
-  if (typeof window === 'undefined') return
-
+export default (async function registerWorklets() {
   const register = () => {
     const WORKLETS = [
       'angled-corners',
@@ -24,4 +22,4 @@ export default async function registerWorklets() {
   )
 
   return register()
-}
+})()

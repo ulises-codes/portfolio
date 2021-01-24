@@ -5,7 +5,15 @@ import { BoredContext } from 'components/Layout'
 import styles from './styles.module.scss'
 
 const LanguageCells = dynamic(() => import('components/Languages'))
-const Snake = dynamic(() => import('@ulises-codes/bite-me'), { ssr: false })
+
+const SnakeGame = dynamic(() => import('@ulises-codes/bite-me/snake'), {
+  ssr: false,
+})
+
+const OffscreenGame = dynamic(() => import('@ulises-codes/bite-me/offscreen'), {
+  ssr: false,
+})
+
 const Divider = dynamic(() => import('util/houdini/Divider'), {
   ssr: false,
   loading: () => <div className="divider-placeholder--div" />,
@@ -20,6 +28,22 @@ const Underline = dynamic(() => import('util/houdini/Underline'), {
 
 export default function HomeTop() {
   const isBored = useContext(BoredContext)
+
+  const gameProps = {
+    style: { backgroundColor: '#24748F' },
+    food: { src: '/snakeAssets/food.png' },
+    audioSrc: '/snakeAssets/echo.mp3',
+    dingSrc: '/snakeAssets/ding.mp3',
+    gameOverSrc: '/snakeAssets/game-over.mp3',
+    text: {
+      color: '#2a2a2a',
+      subtitleColor: '#fafafa',
+      titleColor: '#F1DD6D',
+    },
+    snakeStyle: {
+      color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
+    },
+  }
 
   return (
     <div>
@@ -38,25 +62,19 @@ export default function HomeTop() {
             </Underline>
           </hgroup>
         </div>
-        {!isBored ? (
-          <LanguageCells />
-        ) : (
-          <div className={styles['snake-wrapper--div']}>
-            <Snake
-              height={300}
-              width={300}
-              style={{ backgroundColor: '#24748F' }}
-              foodImage="/snakeAssets/food.png"
-              audioSrc="/snakeAssets/echo.mp3"
-              dingSrc="/snakeAssets/ding.mp3"
-              gameOverSrc="/snakeAssets/game-over.mp3"
-              text={{ color: '#F1DD6D' }}
-              snakeStyle={{
-                color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
-              }}
-            />
-          </div>
-        )}
+        <div className={styles['top-right--div']}>
+          {!isBored ? (
+            <LanguageCells />
+          ) : (
+            <div className={styles['snake-wrapper--div']}>
+              {'OffscreenCanvas' in window ? (
+                <OffscreenGame {...gameProps} />
+              ) : (
+                <SnakeGame {...gameProps} />
+              )}
+            </div>
+          )}
+        </div>
       </div>
       <Divider />
     </div>

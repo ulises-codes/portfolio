@@ -7,6 +7,7 @@ import type { MotionConfigProps } from 'framer-motion/types/motion/context/Motio
 import 'components/styles/global.scss'
 
 const Layout = dynamic(() => import('components/Layout'))
+
 const MotionConfig = dynamic<MotionConfigProps>(() =>
   import('framer-motion').then(mod => mod.MotionConfig)
 )
@@ -15,7 +16,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [features, setFeatures] = useState<MotionFeature[]>([])
 
   useEffect(() => {
-    import('public/worklets/register').then(mod => mod.default())
+    import('public/worklets/register').then(mod => mod.default)
 
     import('util/motion-features').then(async mod =>
       setFeatures(await mod.default())

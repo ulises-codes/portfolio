@@ -36,3 +36,6 @@ yarn-error.log*
 # service worker
 *sw.js
 *workbox*
+
+
+*.tgz
