@@ -21,6 +21,12 @@ $snake-game-border: 3px;
   min-height: 312px;
 }
 
+.top-right--div {
+  height: 300px;
+  display: flex;
+  align-items: center;
+}
+
 .site-greeting--div {
   flex-grow: 1;
 }
