@@ -1,18 +1,11 @@
-import { useContext } from 'react'
+import { ComponentType, useContext, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { BoredContext } from 'components/Layout'
 
 import styles from './styles.module.scss'
+import { GameProps } from '@ulises-codes/bite-me/dist/bite-me'
 
 const LanguageCells = dynamic(() => import('components/Languages'))
-
-const SnakeGame = dynamic(() => import('@ulises-codes/bite-me/snake'), {
-  ssr: false,
-})
-
-const OffscreenGame = dynamic(() => import('@ulises-codes/bite-me/offscreen'), {
-  ssr: false,
-})
 
 const Divider = dynamic(() => import('util/houdini/Divider'), {
   ssr: false,
@@ -29,21 +22,17 @@ const Underline = dynamic(() => import('util/houdini/Underline'), {
 export default function HomeTop() {
   const isBored = useContext(BoredContext)
 
-  const gameProps = {
-    style: { backgroundColor: '#24748F' },
-    food: { src: '/snakeAssets/food.png' },
-    audioSrc: '/snakeAssets/echo.mp3',
-    dingSrc: '/snakeAssets/ding.mp3',
-    gameOverSrc: '/snakeAssets/game-over.mp3',
-    text: {
-      color: '#2a2a2a',
-      subtitleColor: '#fafafa',
-      titleColor: '#F1DD6D',
-    },
-    snakeStyle: {
-      color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
-    },
-  }
+  const [SnakeGame, setSnakeGame] = useState<ComponentType<GameProps>>()
+
+  useEffect(() => {
+    if (isBored && !SnakeGame) {
+      if ('OffscreenCanvas' in window) {
+        setSnakeGame(dynamic(() => import('@ulises-codes/bite-me/offscreen')))
+      } else {
+        setSnakeGame(dynamic(() => import('@ulises-codes/bite-me/snake')))
+      }
+    }
+  }, [isBored])
 
   return (
     <div>
@@ -67,10 +56,22 @@ export default function HomeTop() {
             <LanguageCells />
           ) : (
             <div className={styles['snake-wrapper--div']}>
-              {'OffscreenCanvas' in window ? (
-                <OffscreenGame {...gameProps} />
-              ) : (
-                <SnakeGame {...gameProps} />
+              {SnakeGame && (
+                <SnakeGame
+                  style={{ backgroundColor: '#24748F' }}
+                  food={{ src: '/snakeAssets/food.png' }}
+                  audioSrc="/snakeAssets/echo.mp3"
+                  dingSrc="/snakeAssets/ding.mp3"
+                  gameOverSrc="/snakeAssets/game-over.mp3"
+                  text={{
+                    color: '#2a2a2a',
+                    subtitleColor: '#fafafa',
+                    titleColor: '#F1DD6D',
+                  }}
+                  snakeStyle={{
+                    color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
+                  }}
+                />
               )}
             </div>
           )}
