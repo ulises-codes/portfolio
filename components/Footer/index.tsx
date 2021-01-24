@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 
 import styles from './styles.module.scss'
 
@@ -7,6 +8,17 @@ const SocialIcons = dynamic(() => import('components/SocialIcons'))
 export default function Footer() {
   return (
     <footer>
+      <Head key="footer-tags">
+        <link
+          rel="preload"
+          href="https://use.typekit.net/llx7qor.css"
+          as="font"
+          crossOrigin="anonymous"
+          onLoad={
+            "this.onload=null;this.rel='stylesheet';this.as='style';this.type='text/css'" as any
+          }
+        />
+      </Head>
       <div className={styles['footer-inner--div']}>
         <small className={styles['footer-inner--small']}>
           <span>Designed and Coded by Ulises Himely.</span>

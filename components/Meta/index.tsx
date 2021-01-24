@@ -49,11 +49,6 @@ export default function Meta() {
         crossOrigin="anonymous"
         onLoad={"this.onload=null;this.rel='stylesheet'" as any}
       />
-      <link
-        rel="stylesheet"
-        href="https://use.typekit.net/llx7qor.css"
-        as="font"
-      />
     </Head>
   )
 }
