@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import dynamic from 'next/dynamic'
 
 import { MotionDiv } from 'components/MyMotion'
 import Packages from 'components/Packages'
@@ -9,21 +8,11 @@ import Projects from 'components/Projects'
 import Ellipse from 'util/Ellipse'
 
 import styles from './styles.module.scss'
-import type { AnimatePresenceProps } from 'framer-motion'
 
-const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
-  import('framer-motion').then(mod => mod.AnimatePresence)
-)
+import { AnimatePresence } from 'framer-motion'
 
-const Divider = dynamic(() => import('util/houdini/Divider'), {
-  ssr: false,
-  loading: () => <div className="divider-placeholder--div" />,
-})
-
-const Underline = dynamic(() => import('util/houdini/Underline'), {
-  ssr: false,
-  loading: () => <h3 className="section-title--h2">Some Stuff I've Made</h3>,
-})
+import Divider from 'util/houdini/Divider'
+import Underline from 'util/houdini/Underline'
 
 const projects = ['Packages', 'Codepens', 'Projects']
 

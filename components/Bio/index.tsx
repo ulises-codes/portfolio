@@ -14,15 +14,8 @@ const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)
 )
 
-const Divider = dynamic(() => import('util/houdini/Divider'), {
-  ssr: false,
-  loading: () => <div className="divider-placeholder--div" />,
-})
-
-const Underline = dynamic(() => import('util/houdini/Underline'), {
-  ssr: false,
-  loading: () => <h3 className="section-title--h2">Some Info</h3>,
-})
+import Divider from 'util/houdini/Divider'
+import Underline from 'util/houdini/Underline'
 
 const BIO_SECTIONS = [
   {
@@ -54,7 +47,9 @@ export default function HomeSection() {
               {section.title}
             </button>
             <AnimatePresence initial={false}>
-              {currentView === i && <Ellipse />}
+              {currentView === i && (
+                <Ellipse key={`bio-ellipse--${currentView}`} />
+              )}
             </AnimatePresence>
           </div>
         ))}

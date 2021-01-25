@@ -16,7 +16,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [features, setFeatures] = useState<MotionFeature[]>([])
 
   useEffect(() => {
-    import('public/worklets/register').then(mod => mod.default)
+    if (typeof window !== 'undefined') {
+      import('public/worklets/register').then(mod => mod.default)
+    }
 
     import('util/motion-features').then(async mod =>
       setFeatures(await mod.default())

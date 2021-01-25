@@ -7,9 +7,6 @@ class angledCorners {
       '--fill-color',
     ]
   }
-  static get inputArguments() {
-    return ['<custom-ident>']
-  }
   paint(ctx, geom, properties, args) {
     let radii = properties
       .get('--corner-radius')

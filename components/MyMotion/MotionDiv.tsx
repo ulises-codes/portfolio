@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
-import type { HTMLAttributes } from 'react'
 
-import type { MotionProps, m } from 'framer-motion'
+import type { m, HTMLMotionProps } from 'framer-motion'
 
-const MotionDiv = ({
-  children,
-  ...props
-}: MotionProps & HTMLAttributes<HTMLDivElement>) => {
+const MotionDiv = ({ children, ...props }: HTMLMotionProps<'div'>) => {
   const [motion, setMotion] = useState<typeof m>()
 
   useEffect(() => {
-    import('framer-motion').then(mod => setMotion(mod.m))
+    let isMounted = true
+
+    import('framer-motion').then(mod => isMounted && setMotion(mod.m))
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   if (!motion)
@@ -19,6 +21,7 @@ const MotionDiv = ({
         <div style={{ opacity: 0 }}>{children}</div>
       </div>
     )
+
   return <motion.div {...props}>{children}</motion.div>
 }
 

@@ -3,7 +3,7 @@ import type { CodepenProps } from './codepenList'
 
 import styles from './styles.module.scss'
 
-const AngledCorners = dynamic(() => import('util/houdini/AnglesCorners'), {
+const AngledCorners = dynamic(() => import('util/houdini/AngledCorners'), {
   ssr: false,
 })
 

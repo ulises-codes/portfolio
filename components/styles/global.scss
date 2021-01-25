@@ -157,6 +157,15 @@ p {
   transform: rotate(180deg);
 }
 
+.package-wrapper--div {
+  --fill-color: #{variables.$white};
+  --paint-color: #{variables.$white};
+  --stroke-weight: 0;
+  background: paint(angled-corners);
+  padding: 12px;
+  color: variables.$black;
+}
+
 .page-root {
   max-width: variables.$page-width;
   padding: 0 variables.$padding;

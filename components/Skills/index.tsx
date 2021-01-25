@@ -9,15 +9,8 @@ import { SECTIONS } from './skillLists'
 import styles from './styles.module.scss'
 import type { AnimatePresenceProps } from 'framer-motion'
 
-const Divider = dynamic(() => import('util/houdini/Divider'), {
-  ssr: false,
-  loading: () => <div className="divider-placeholder--div" />,
-})
-
-const Underline = dynamic(() => import('util/houdini/Underline'), {
-  ssr: false,
-  loading: () => <h3 className="section-title--h2">Skills</h3>,
-})
+import Divider from 'util/houdini/Divider'
+import Underline from 'util/houdini/Underline'
 
 const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)

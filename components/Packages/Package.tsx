@@ -1,10 +1,10 @@
 import languageMap from 'components/Languages/languageMap'
-import dynamic from 'next/dynamic'
+
 import { PackageProps } from './packageList'
 
 import styles from './styles.module.scss'
 
-const AngledCorners = dynamic(() => import('util/houdini/AnglesCorners'))
+import AngledCorners from 'util/houdini/AngledCorners'
 
 export default function Package({
   description,
@@ -13,7 +13,7 @@ export default function Package({
   repo,
 }: PackageProps) {
   return (
-    <AngledCorners className={styles['package-wrapper--div']}>
+    <AngledCorners className="package-wrapper--div">
       <div className={styles['package-inner--div']}>
         <h4>{title}</h4>
         <div className={styles['language-logo-badges--div']}>

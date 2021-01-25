@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import type { m, SVGMotionProps } from 'framer-motion'
 
-export default function MotionDiv({
+export default function MotionPath({
   ...props
 }: SVGMotionProps<SVGPathElement>) {
   const [motion, setMotion] = useState<typeof m>()

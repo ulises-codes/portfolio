@@ -7,15 +7,6 @@
   gap: variables.$margin;
 }
 
-.package-wrapper--div {
-  --fill-color: #{variables.$white};
-  --paint-color: #{variables.$white};
-  --stroke-weight: 0;
-  background: paint(angled-corners);
-  padding: 12px;
-  color: variables.$black;
-}
-
 .package-inner--div {
   padding: 8px 14px;
   border: 6px solid variables.$blue;

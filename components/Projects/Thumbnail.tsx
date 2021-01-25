@@ -32,7 +32,7 @@ export default function Thumbnail({
       filter: 'blur(0px) grayscale(0%) brightness(1)',
     },
     hover: {
-      filter: 'blur(5px) grayscale(90%) brightness(0.65)',
+      filter: 'blur(5px)  grayscale(90%) brightness(0.65)',
     },
   }
 
@@ -74,6 +74,7 @@ export default function Thumbnail({
       <MotionDiv
         className={styles['thumbnail-image-wrapper--div']}
         initial="initial"
+        transition={{ type: 'tween' }}
         variants={imgVariants}>
         <Image
           src={`ulises.codes/project-thumbnails/${imgSrc}`}

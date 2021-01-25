@@ -1,10 +1,10 @@
 export default (async function registerWorklets() {
   const register = () => {
     const WORKLETS = [
-      'angled-corners',
       'checkerboard',
       'curved-line',
       'extra-underline',
+      'angled-corners',
     ]
 
     WORKLETS.forEach(worklet => {
