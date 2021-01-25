@@ -127,6 +127,36 @@ p {
   line-height: 1.5;
 }
 
+.checkerboard-divider--div {
+  background: paint(checkerboard);
+  height: 62px;
+  width: 100%;
+  margin: 32px auto;
+}
+
+.underline--div {
+  --extra-underlineNumber: 3;
+  --extra-underlineColor: #{variables.$yellow};
+  --extra-underlineWidth: 1;
+  --extra-underlineSpread: 8;
+  background: paint(extra-underline);
+  width: max-content;
+}
+
+.curved-line-vertical {
+  --curved-lineColor: #{variables.$white};
+  --curved-lineSpread: 50;
+  --curved-lineWidth: 2;
+  --curved-lineHeight: 20;
+  background: paint(curved-line);
+  height: 150px;
+  width: 20px;
+}
+
+.curved-line-vertical:last-child {
+  transform: rotate(180deg);
+}
+
 .page-root {
   max-width: variables.$page-width;
   padding: 0 variables.$padding;
