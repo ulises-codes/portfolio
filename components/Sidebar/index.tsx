@@ -1,12 +1,8 @@
-import dynamic from 'next/dynamic'
-
 import styles from './styles.module.scss'
 
-const SocialIcons = dynamic(() => import('components/SocialIcons'))
-const CurvedLine = dynamic(() => import('util/houdini/CurvedLineVert'), {
-  ssr: false,
-  loading: () => <div className="curved-line-placeholder--div" />,
-})
+import SocialIcons from 'components/SocialIcons'
+
+import CurvedLine from 'util/houdini/CurvedLineVert'
 
 export default function Sidebar() {
   return (

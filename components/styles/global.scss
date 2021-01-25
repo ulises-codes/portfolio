@@ -166,6 +166,17 @@ p {
   color: variables.$black;
 }
 
+.codepen-wrapper--div {
+  background: paint(angled-corners);
+  --fill-color: #{variables.$yellow};
+  --paint-color: #{variables.$yellow};
+  --stroke-weight: 16;
+
+  $codepen-padding: 17px;
+  padding: $codepen-padding;
+  height: 375px + $codepen-padding * 2;
+}
+
 .page-root {
   max-width: variables.$page-width;
   padding: 0 variables.$padding;
@@ -200,17 +211,6 @@ p {
   content: '</a>';
   font-size: 1;
   display: inline-block;
-}
-
-.divider-placeholder--div {
-  height: 62px;
-  width: 100%;
-  margin: 32px auto;
-}
-
-.curved-line-placeholder--div {
-  height: 150px;
-  width: 20px;
 }
 
 .language-logo-badge--img {

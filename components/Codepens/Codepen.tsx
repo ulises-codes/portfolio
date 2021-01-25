@@ -1,15 +1,10 @@
-import dynamic from 'next/dynamic'
 import type { CodepenProps } from './codepenList'
 
-import styles from './styles.module.scss'
-
-const AngledCorners = dynamic(() => import('util/houdini/AngledCorners'), {
-  ssr: false,
-})
+import AngledCorners from 'util/houdini/AngledCorners'
 
 export default function Codepen({ description, slug, title }: CodepenProps) {
   return (
-    <AngledCorners className={styles['codepen-wrapper--div']}>
+    <AngledCorners className="codepen-wrapper--div">
       <div
         className="codepen"
         data-height="375"
