@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
 import Header from 'components/Header'
-import SEO from 'components/SEO'
 import Meta from 'components/Meta'
 
 const Footer = dynamic(() => import('components/Footer'))
@@ -51,7 +50,6 @@ export default function Layout({ children }: Props) {
     <div>
       <Head key="layout head">
         <title>Ulises Himely | Developer and Human Being</title>
-        <SEO />
       </Head>
       <Meta />
       <BoredContext.Provider value={isBored}>

@@ -23,10 +23,10 @@ module.exports = withPWA({
     loader: 'cloudinary',
     path: ['https://res.cloudinary.com/da3fgujdy'],
   },
-  i18n: {
-    locales: ['en-US'],
-    defaultLocale: 'en-US',
-  },
+  // i18n: {
+  //   locales: ['en-US'],
+  //   defaultLocale: 'en-US',
+  // },
   pwa: {
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',

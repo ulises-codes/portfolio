@@ -19,14 +19,6 @@ export default function Meta() {
         type="text/javascript"
       />
       <link
-        rel="shortcut icon"
-        href="/images/logo/icon@192x.png"
-        type="image/x-icon"
-      />
-      <link rel="alternate icon" href="/images/logo/favicon.png" />
-      <link rel="mask-icon" href="/images/logo/mask-icon.svg" color="#f1dd6d" />
-      <link rel="apple-touch-icon" href="/images/logo/icon@192x.png" />
-      <link
         href="/fonts/bungee-shade.woff2"
         rel="preload"
         as="font"
