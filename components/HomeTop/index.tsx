@@ -1,37 +1,43 @@
-import { ComponentType, useContext, useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
+import { useContext, useEffect, useState } from 'react'
+
 import { BoredContext } from 'components/Layout'
 
 import styles from './styles.module.scss'
-import { GameProps } from '@ulises-codes/bite-me/dist/bite-me'
+import type { GameProps } from '@ulises-codes/bite-me/dist/bite-me'
 
-const LanguageCells = dynamic(() => import('components/Languages'))
-
-const Divider = dynamic(() => import('util/houdini/Divider'), {
-  ssr: false,
-  loading: () => <div className="divider-placeholder--div" />,
-})
-
-const Underline = dynamic(() => import('util/houdini/Underline'), {
-  ssr: false,
-  loading: () => (
-    <h2 className="section-title--h2">I make stuff for the web with code.</h2>
-  ),
-})
+import LanguageCells from 'components/Languages'
+import Divider from 'util/houdini/Divider'
+import Underline from 'util/houdini/Underline'
 
 export default function HomeTop() {
   const isBored = useContext(BoredContext)
 
-  const [SnakeGame, setSnakeGame] = useState<ComponentType<GameProps>>()
+  const [SnakeGame, setSnakeGame] = useState<
+    (props: GameProps) => JSX.Element
+  >()
 
   useEffect(() => {
-    if (isBored && !SnakeGame) {
-      if ('OffscreenCanvas' in window) {
-        setSnakeGame(dynamic(() => import('@ulises-codes/bite-me/offscreen')))
-      } else {
-        setSnakeGame(dynamic(() => import('@ulises-codes/bite-me/snake')))
+    async function importGame() {
+      if (isBored && !SnakeGame) {
+        if ('OffscreenCanvas' in window) {
+          const game = await import('@ulises-codes/bite-me/offscreen').then(
+            mod => mod.default
+          )
+          setSnakeGame(
+            (() => game as unknown) as (props: GameProps) => JSX.Element
+          )
+        } else {
+          const game = await import('@ulises-codes/bite-me/snake').then(
+            mod => mod.default
+          )
+          setSnakeGame(
+            (() => game as unknown) as (props: GameProps) => JSX.Element
+          )
+        }
       }
     }
+
+    importGame()
   }, [isBored])
 
   return (
