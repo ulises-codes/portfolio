@@ -55,7 +55,6 @@ body {
 main {
   top: variables.$header-height;
   left: 0;
-  min-height: calc(100vh - variables.$header-height);
   width: 100vw;
 }
 
