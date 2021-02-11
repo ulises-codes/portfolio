@@ -16,11 +16,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width, shrink-to-fit=no"
-          />
           <link
             rel="shortcut icon"
             href="/images/logo/icon@192x.png"
