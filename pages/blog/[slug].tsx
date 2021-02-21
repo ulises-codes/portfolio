@@ -1,39 +1,13 @@
-import BlogPost from 'components/BlogPost'
-import { ThemeContext } from 'components/Layout'
-import SEO from 'util/SEO'
-
-import type { BlogPostProps } from 'interfaces/blog'
+import dynamic from 'next/dynamic'
 
 import type { GetStaticProps } from 'next'
-import { useContext } from 'react'
+import type { BlogPostProps } from 'interfaces/blog'
+
+const BlogPost = dynamic(() => import('components/BlogPost'))
 
 export default function Post({ source, meta }: BlogPostProps) {
-  const { currentTheme } = useContext(ThemeContext)
-
   return (
     <>
-      <SEO title={meta.title}>
-        {currentTheme?.titleFont && (
-          <link
-            href={`https://fonts.googleapis.com/css2?family=${currentTheme.titleFont}&display=block&text=${meta.title}`}
-            rel="preload"
-            as="style"
-            type="text/css"
-            crossOrigin="anonymous"
-            onLoad={"this.rel='stylesheet';this.onload=null" as any}
-          />
-        )}
-        {currentTheme?.subtitleFont && (
-          <link
-            href={`https://fonts.googleapis.com/css2?family=${currentTheme.subtitleFont}&display=swap`}
-            rel="preload"
-            as="style"
-            type="text/css"
-            crossOrigin="anonymous"
-            onLoad={"this.rel='stylesheet';this.onload=null" as any}
-          />
-        )}
-      </SEO>
       <div className="page-root">
         <BlogPost source={source} meta={meta} />
       </div>
