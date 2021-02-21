@@ -1,7 +1,7 @@
 import projectList from './projectList'
 import Thumbnail from './Thumbnail'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 export default function Projects() {
   return (

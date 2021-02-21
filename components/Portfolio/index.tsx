@@ -7,7 +7,7 @@ import Projects from 'components/Projects'
 
 import Ellipse from 'util/Ellipse'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 import { AnimatePresence } from 'framer-motion'
 
@@ -24,24 +24,27 @@ export default function Portfolio() {
   return (
     <div className={styles['portfolio-wrapper--div']}>
       <Underline>
-        <h3 className="section-title--h2">Some Stuff I've Made</h3>
+        <h3 className="subtitle">Some Stuff I've Made</h3>
       </Underline>
       <div className={styles['portfolio-tabs-btns-wrapper--div']}>
         {projects.map((name, i) => (
           <div key={name} className={styles['portfolio-tabs-btn--div']}>
             <button
-              className={styles['portfolio-tabs--btn']}
+              className={currentTab === i ? 'active-tab' : 'button'}
               onClick={() => setCurrentTab(i)}>
               {name}
             </button>
-            <AnimatePresence initial={false}>
+            <AnimatePresence initial={false} key="portfolio-ellipse">
               {currentTab === i && <Ellipse />}
             </AnimatePresence>
           </div>
         ))}
       </div>
       <div className={styles['portfolio-content-wrapper--div']}>
-        <AnimatePresence key="portfolio-presence" exitBeforeEnter>
+        <AnimatePresence
+          key="portfolio-presence"
+          initial={false}
+          exitBeforeEnter>
           {TabContent.map((Tab, i) =>
             currentTab === i ? (
               <MotionDiv
@@ -60,7 +63,6 @@ export default function Portfolio() {
             ) : null
           )}
         </AnimatePresence>
-        <Divider />
       </div>
     </div>
   )

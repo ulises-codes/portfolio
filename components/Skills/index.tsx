@@ -32,19 +32,22 @@ export default function Skills() {
   return (
     <div>
       <Underline>
-        <h3>Skills</h3>
+        <h3 className="subtitle">Skills</h3>
       </Underline>
       <div className={styles['skill-btns-wrapper--div']}>
         {SECTIONS.map(({ title }, i) => (
           <div key={`skill-btn-${title}`} className={styles['skill-btn--div']}>
-            <button onClick={() => setCurrentView(i)}>{title}</button>
-            <AnimatePresence initial={false}>
+            <button
+              className={currentView === i ? 'active-tab' : 'button'}
+              onClick={() => setCurrentView(i)}>
+              {title}
+            </button>
+            <AnimatePresence initial={false} key="skills-ellipse">
               {currentView === i && <Ellipse key={`skills-ellipse-${title}`} />}
             </AnimatePresence>
           </div>
         ))}
       </div>
-
       <div>
         <AnimatePresence initial={false} key="skill-section" exitBeforeEnter>
           {SECTIONS.map(

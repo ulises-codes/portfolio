@@ -1,0 +1,39 @@
+.post {
+  --fill-color: var(--surface);
+  --paint-color: var(--primary);
+  --stroke-weight: 4;
+  color: var(--text-on-surface);
+  max-width: 650px;
+  margin: 0 auto var(--margin) auto;
+  padding: 8px;
+}
+
+.inner {
+  padding: var(--padding);
+  display: flex;
+  gap: var(--margin);
+  border: 8px solid var(--background);
+  border-radius: 16px;
+}
+
+.date {
+  flex: 1 0 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: var(--padding); */
+}
+
+.monthDate {
+  font-size: 1.25em;
+}
+
+.titleWrapper > a > h2 {
+  margin: 0;
+  font-family: var(--subtitle-font);
+}
+
+.hr {
+  margin-top: 0;
+}

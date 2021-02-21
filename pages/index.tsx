@@ -1,14 +1,19 @@
 import dynamic from 'next/dynamic'
 
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import type { MutableRefObject } from 'react'
+
+import SEO from 'components/SEO'
+
+import Head from 'next/head'
+import { ThemeContext } from 'components/Layout'
 
 const Portfolio = dynamic(() => import('components/Portfolio'))
 const Bio = dynamic(() => import('components/Bio'))
 const HomeTop = dynamic(() => import('components/HomeTop'))
 const Skills = dynamic(() => import('components/Skills'))
 
-const IndexPage = () => {
+function IndexSections() {
   const [visibleSections, setVisibleSections] = useState<string[]>([])
 
   const bioRef = useRef() as MutableRefObject<HTMLDivElement>
@@ -43,25 +48,54 @@ const IndexPage = () => {
       }
     }
 
-    return () => {
-      observer.disconnect()
-    }
+    return () => observer.disconnect()
   }, [visibleSections])
 
   return (
     <div className="page-root">
       <HomeTop />
-      <div id="Bio" style={{ minHeight: '350px' }} ref={bioRef}>
+      <div id="Bio" style={{ minHeight: '300px' }} ref={bioRef}>
         {visibleSections.includes('Bio') && <Bio />}
       </div>
-      <div id="Skills" style={{ minHeight: '350px' }} ref={skillsRef}>
+      <div id="Skills" style={{ minHeight: '300px' }} ref={skillsRef}>
         {visibleSections.includes('Skills') && <Skills />}
       </div>
-      <div id="Portfolio" style={{ minHeight: '350px' }} ref={portfolioRef}>
+      <div id="Portfolio" style={{ minHeight: '300px' }} ref={portfolioRef}>
         {visibleSections.includes('Portfolio') && <Portfolio />}
       </div>
     </div>
   )
 }
 
-export default IndexPage
+export default function IndexPage() {
+  const { currentTheme } = useContext(ThemeContext)
+
+  return (
+    <>
+      <Head key="home-tags">
+        {/* <SEO /> */}
+        {currentTheme?.titleFont && (
+          <link
+            href={`https://fonts.googleapis.com/css2?family=${currentTheme.titleFont}&display=block&text=Greetings.IamUlises.`}
+            rel="preload"
+            as="style"
+            type="text/css"
+            crossOrigin="anonymous"
+            onLoad={"this.rel='stylesheet';this.onload=null" as any}
+          />
+        )}
+        {currentTheme?.subtitleFont && (
+          <link
+            href={`https://fonts.googleapis.com/css2?family=${currentTheme.subtitleFont}&display=swap&text=Imawebdlvopr.S'cnfkisuthTL;DRMFBCPgj`}
+            rel="preload"
+            as="style"
+            type="text/css"
+            crossOrigin="anonymous"
+            onLoad={"this.rel='stylesheet';this.onload=null" as any}
+          />
+        )}
+      </Head>
+      <IndexSections />
+    </>
+  )
+}

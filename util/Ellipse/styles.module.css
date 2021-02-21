@@ -1,12 +1,9 @@
-@use 'styles/variables';
-
-.btn-outline--svg {
+.btnOutline {
   position: absolute;
   width: 115px;
   fill: none;
-  stroke: variables.$yellow;
+  stroke: var(--ellipse-color);
   stroke-width: 15px;
-  z-index: -1;
   top: -21px;
   left: -20px;
   stroke-linecap: round;

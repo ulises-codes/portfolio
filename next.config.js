@@ -1,21 +1,15 @@
-const WorkerPlugin = require('worker-plugin')
 const withPWA = require('next-pwa')
 
-module.exports = withPWA({
+const nextConfig = {
   poweredByHeader: false,
+  future: {
+    webpack5: true,
+  },
   webpack(config, { buildId, dev, isServer, defaultLoaders, webpack }) {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     })
-
-    if (!isServer) {
-      config.plugins.push(
-        new WorkerPlugin({
-          globalObject: 'self',
-        })
-      )
-    }
 
     return config
   },
@@ -23,12 +17,12 @@ module.exports = withPWA({
     loader: 'cloudinary',
     path: ['https://res.cloudinary.com/da3fgujdy'],
   },
-  // i18n: {
-  //   locales: ['en-US'],
-  //   defaultLocale: 'en-US',
-  // },
+}
+
+module.exports = withPWA({
   pwa: {
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',
   },
+  ...nextConfig,
 })

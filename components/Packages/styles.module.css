@@ -1,15 +1,21 @@
-@use 'styles/variables';
-
-.packages--div {
-  margin-bottom: variables.$margin;
+.packages {
+  margin-bottom: var(--margin);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: variables.$margin;
+  gap: var(--margin);
+}
+
+.packageWrapper {
+  --fill-color: var(--surface);
+  --paint-color: var(--surface);
+  --stroke-weight: 0;
+  padding: 12px;
+  color: var(--text-on-surface);
 }
 
 .package-inner--div {
   padding: 8px 14px;
-  border: 6px solid variables.$blue;
+  border: 6px solid var(--background);
 }
 
 .package-link--div {

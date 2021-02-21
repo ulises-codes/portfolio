@@ -2,7 +2,7 @@ import languageMap from 'components/Languages/languageMap'
 
 import { PackageProps } from './packageList'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 import AngledCorners from 'util/houdini/AngledCorners'
 
@@ -13,7 +13,8 @@ export default function Package({
   repo,
 }: PackageProps) {
   return (
-    <AngledCorners className="package-wrapper--div">
+    <AngledCorners
+      className={[styles.packageWrapper, 'package-wrapper'].join(' ')}>
       <div className={styles['package-inner--div']}>
         <h4>{title}</h4>
         <div className={styles['language-logo-badges--div']}>

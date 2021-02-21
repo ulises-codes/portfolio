@@ -3,10 +3,10 @@ $blue: #24748f;
 $light-blue: #2bacb3;
 $yellow: #f1dd6d;
 $yellow-rgba: rgba(241, 221, 109, 0.99);
-$white: #fff8e2;
+$white: var(--white);
 $berry-red: #f26463;
 $purple: #bf43a1;
-$black: #171717;
+$black: var(--black);
 
 $page-width: 82vw;
 $margin: 16px;

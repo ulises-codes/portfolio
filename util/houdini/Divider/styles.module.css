@@ -1,0 +1,8 @@
+.checkerboardDivider {
+  --checkerboard-spacing: 7;
+  --checkerboard-size: 16;
+  width: 100%;
+  margin: 32px auto;
+  filter: var(--checkerboard-filter);
+  animation: var(--checkerboard-animation);
+}

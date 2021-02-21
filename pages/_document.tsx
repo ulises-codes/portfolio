@@ -16,6 +16,29 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            rel="preconnect"
+            href="https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js"
+          />
+          <link
+            rel="preload"
+            href="/worklets/register.js"
+            as="script"
+            type="text/javascript"
+          />
+          <link
+            rel="preload"
+            href="https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js"
+            as="script"
+            type="text/javascript"
+          />
+          <link
+            rel="preload"
+            href="/getTheme.js"
+            as="script"
+            type="application/javascript"
+          />
           <link
             rel="shortcut icon"
             href="/images/logo/icon@192x.png"
@@ -96,7 +119,7 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body>
+        <body className="theme-default">
           <Main />
           <NextScript />
         </body>

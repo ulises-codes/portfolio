@@ -1,4 +1,4 @@
-export default (async function registerWorklets() {
+;(async function registerWorklets() {
   const register = () => {
     const WORKLETS = [
       'checkerboard',
@@ -17,7 +17,6 @@ export default (async function registerWorklets() {
   }
 
   await import(
-    /* webpackIgnore: true */
     'https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js'
   )
 

@@ -16,7 +16,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es6",
+    "target": "esnext",
     "baseUrl": ".",
     "paths": {
       "components/*": ["components/*"],

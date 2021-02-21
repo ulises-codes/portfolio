@@ -3,15 +3,18 @@
 .skill-btns-wrapper--div {
   display: flex;
   flex-wrap: wrap;
+  gap: var(--margin);
 }
 
 .skill-btn--div {
   position: relative;
-  display: flex;
-  width: 80px;
-  justify-content: center;
-  margin-right: 16px;
-  margin-bottom: 16px;
+  margin-bottom: var(--margin);
+  text-align: center;
+  min-width: 80px;
+
+  button {
+    width: 100%;
+  }
 }
 
 .skills-list--ul {

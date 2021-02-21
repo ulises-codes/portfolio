@@ -3,7 +3,12 @@ import { useContext, useEffect, useState } from 'react'
 import { BoredContext } from 'components/Layout'
 
 import styles from './styles.module.scss'
-import type { GameProps } from '@ulises-codes/bite-me/dist/bite-me'
+import type {
+  GameProps,
+  OffscreenGameProps,
+} from '@ulises-codes/bite-me/dist/types'
+
+import dynamic from 'next/dynamic'
 
 import LanguageCells from 'components/Languages'
 import Divider from 'util/houdini/Divider'
@@ -12,27 +17,23 @@ import Underline from 'util/houdini/Underline'
 export default function HomeTop() {
   const isBored = useContext(BoredContext)
 
-  const [SnakeGame, setSnakeGame] = useState<
-    (props: GameProps) => JSX.Element
-  >()
+  const [SnakeGame, setSnakeGame] = useState<any>()
 
   useEffect(() => {
     async function importGame() {
       if (isBored && !SnakeGame) {
         if ('OffscreenCanvas' in window) {
-          const game = await import('@ulises-codes/bite-me/offscreen').then(
-            mod => mod.default
+          const Game = dynamic<OffscreenGameProps>(
+            () => import('@ulises-codes/bite-me/offscreen')
           )
-          setSnakeGame(
-            (() => game as unknown) as (props: GameProps) => JSX.Element
-          )
+
+          setSnakeGame(() => Game)
         } else {
-          const game = await import('@ulises-codes/bite-me/snake').then(
-            mod => mod.default
+          const Game = dynamic<GameProps>(
+            () => import('@ulises-codes/bite-me/snake')
           )
-          setSnakeGame(
-            (() => game as unknown) as (props: GameProps) => JSX.Element
-          )
+
+          setSnakeGame(() => Game)
         }
       }
     }
@@ -46,40 +47,41 @@ export default function HomeTop() {
         <div className={styles['site-greeting--div']}>
           <hgroup>
             <h1>
-              <span>GREETINGS.</span>
+              <span>Greetings.</span>
               <br />
-              <span>I AM ULISES.</span>
+              <span>I am Ulises.</span>
             </h1>
             <Underline>
-              <h2 className="section-title--h2">
-                I make stuff for the web with code.
-              </h2>
+              <h2 className="subtitle">I'm a web developer.</h2>
             </Underline>
           </hgroup>
         </div>
         <div className={styles['top-right--div']}>
-          {!isBored ? (
-            <LanguageCells />
-          ) : (
+          {isBored && SnakeGame ? (
             <div className={styles['snake-wrapper--div']}>
-              {SnakeGame && (
-                <SnakeGame
-                  style={{ backgroundColor: '#24748F' }}
-                  food={{ src: '/snakeAssets/food.png' }}
-                  audioSrc="/snakeAssets/echo.mp3"
-                  dingSrc="/snakeAssets/ding.mp3"
-                  gameOverSrc="/snakeAssets/game-over.mp3"
-                  text={{
-                    color: '#2a2a2a',
-                    subtitleColor: '#fafafa',
-                    titleColor: '#F1DD6D',
-                  }}
-                  snakeStyle={{
-                    color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
-                  }}
-                />
-              )}
+              <SnakeGame
+                style={{
+                  backgroundColor: getComputedStyle(
+                    document.querySelector('body') as HTMLBodyElement
+                  ).getPropertyValue('--game-background'),
+                }}
+                food={{ src: '/snakeAssets/food.png' }}
+                audioSrc="/snakeAssets/echo.mp3"
+                dingSrc="/snakeAssets/ding.mp3"
+                gameOverSrc="/snakeAssets/game-over.mp3"
+                text={{
+                  color: '#2a2a2a',
+                  subtitleColor: '#fafafa',
+                  titleColor: '#F1DD6D',
+                }}
+                snakeStyle={{
+                  color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
+                }}
+                publicPath="/snakeAssets/worker.js"
+              />
             </div>
+          ) : (
+            <LanguageCells />
           )}
         </div>
       </div>

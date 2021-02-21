@@ -1,0 +1,36 @@
+.menuWrapper {
+  position: relative;
+  outline: none;
+}
+
+.menu {
+  list-style: none;
+  position: absolute;
+  background-color: var(--surface);
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+  width: 125px;
+  overflow: hidden;
+  text-align-last: left;
+  z-index: 9999999;
+  box-shadow: 0px 6px 8px 8px rgb(0 0 0 / 15%);
+
+  li {
+    padding: var(--padding);
+    cursor: pointer;
+    color: var(--text-on-surface);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  li.active {
+    color: var(--selection-background);
+    background-color: var(--selection-text);
+  }
+
+  li:not(.active):hover {
+    background-color: var(--selection-background);
+    color: var(--selection-text);
+  }
+}

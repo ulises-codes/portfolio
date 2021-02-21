@@ -1,52 +1,82 @@
 import dynamic from 'next/dynamic'
-import Head from 'next/head'
 
-import styles from './styles.module.scss'
+import { useEffect, useRef, useState } from 'react'
+import type { MutableRefObject } from 'react'
+import styles from './styles.module.css'
 
 const SocialIcons = dynamic(() => import('components/SocialIcons'))
 
-export default function Footer() {
+function FooterContent() {
   return (
-    <footer>
-      <Head key="footer-tags">
-        <link
-          rel="preload"
-          href="https://use.typekit.net/llx7qor.css"
-          as="font"
-          crossOrigin="anonymous"
-          onLoad={
-            "this.onload=null;this.rel='stylesheet';this.as='style';this.type='text/css'" as any
-          }
-        />
-      </Head>
-      <div className={styles['footer-inner--div']}>
-        <small className={styles['footer-inner--small']}>
-          <span>Designed and Coded by Ulises Himely.</span>
-          <a
-            className="hyperlink"
-            href="https://github.com/ulises-codes/portfolio"
-            target="_blank"
-            rel="noreferrer noopener">
-            Go to Repo
-          </a>
-        </small>
-        <small>
-          The soundtrack to Bite Me is a polyphonic version of{' '}
-          <cite>
-            <a
-              className="hyperlink"
-              href="https://music.apple.com/us/album/eco-echo/1450301682?i=1450301683"
-              target="_blank"
-              rel="noreferrer noopener">
-              Echo by Elevation Worship
-            </a>
-          </cite>{' '}
-          created in Ableton Live by me.
-        </small>
-        <div className={styles['footer-social-links--div']}>
+    <footer className={styles.footer}>
+      <hr />
+      <small>
+        <span>Designed and Coded by Ulises Himely.</span>{' '}
+        <a
+          href="https://github.com/ulises-codes/portfolio"
+          target="_blank"
+          rel="noreferrer noopener">
+          Go to Repo
+        </a>
+      </small>
+      <div className={styles.social}>
+        <hr />
+        <div className={styles.socialIcons}>
           <SocialIcons />
         </div>
       </div>
+      <hr />
+      <small>
+        The soundtrack to Bite Me is a polyphonic version of{' '}
+        <cite>
+          <a
+            href="https://music.apple.com/us/album/eco-echo/1450301682?i=1450301683"
+            target="_blank"
+            rel="noreferrer noopener">
+            Echo by Elevation Worship
+          </a>
+        </cite>{' '}
+        created in Ableton Live by me.
+      </small>
     </footer>
+  )
+}
+
+export default function Footer() {
+  const [showFooter, setShowFooter] = useState(false)
+
+  const footerRef = useRef() as MutableRefObject<HTMLDivElement>
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries, ob) => {
+        for (let entry of entries) {
+          if (
+            entry.target.id === styles.Footer &&
+            entry.isIntersecting &&
+            !showFooter
+          ) {
+            setShowFooter(true)
+            ob.unobserve(entry.target)
+          }
+        }
+      },
+      {
+        root: undefined,
+      }
+    )
+
+    if (!showFooter) observer.observe(footerRef.current)
+
+    return () => observer.disconnect()
+  }, [showFooter])
+
+  return (
+    <>
+      <div className={styles.footerAdjust} />
+      <div id={styles.Footer} ref={footerRef}>
+        {showFooter && <FooterContent />}
+      </div>
+    </>
   )
 }

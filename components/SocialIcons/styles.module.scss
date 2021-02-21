@@ -1,0 +1,16 @@
+.socialIcon {
+  path {
+    fill: var(--icon-fill);
+    stroke: var(--icon-stroke);
+    stroke-width: var(--icon-stroke-width);
+    transition: all 250ms ease-in;
+  }
+
+  &:hover {
+    path {
+      fill: var(--primary);
+      stroke: var(--primary);
+      transition: all 250ms ease-in;
+    }
+  }
+}

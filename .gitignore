@@ -36,6 +36,7 @@ yarn-error.log*
 # service worker
 *sw.js
 *workbox*
+sw.js.map
 
 
 *.tgz

@@ -1,9 +1,7 @@
-@use 'styles/variables';
-
 .sidebar-wrapper--div {
   position: fixed;
-  left: Calc((100vw - #{variables.$page-width}) / 2 - 48px);
-  top: Calc(100vh / 2 - 250px);
+  left: calc((100vw - var(--page-width)) / 2 - 48px);
+  top: calc(100vh / 2 - 250px);
 }
 
 .social-icons-wrapper--div {

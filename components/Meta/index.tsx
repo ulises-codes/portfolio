@@ -8,38 +8,23 @@ export default function Meta() {
         name="viewport"
         content="initial-scale=1.0, width=device-width, shrink-to-fit=no"
       />
+      <script src="/worklets/register.js" async defer />
+      <script src="/getTheme.js"></script>
       <link
-        rel="preconnect"
-        href="https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js"
-      />
-      <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
         rel="preload"
-        href="https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js"
-        as="script"
-        type="text/javascript"
-      />
-      <link
-        href="/fonts/bungee-shade.woff2"
-        rel="preload"
-        as="font"
-        type="font/woff2"
+        as="style"
+        type="text/css"
         crossOrigin="anonymous"
+        onLoad={"this.rel='stylesheet';this.onload=null" as any}
       />
       <link
-        href="/fonts/indie-flower.woff2"
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap&text=DesigndaCobyUlHm.GtRpThurckBMvfEWAL"
         rel="preload"
-        as="font"
-        type="font/woff2"
+        as="style"
+        type="text/css"
         crossOrigin="anonymous"
-        onLoad={'this.onload=null' as any}
-      />
-      <link
-        href="/fonts/open-sans.woff2"
-        rel="preload"
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous"
-        onLoad={"this.onload=null;this.rel='stylesheet'" as any}
+        onLoad={"this.rel='stylesheet';this.onload=null" as any}
       />
     </Head>
   )

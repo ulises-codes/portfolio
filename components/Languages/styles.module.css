@@ -16,3 +16,7 @@
 .cells-wrapper-inner--div > svg:last-child {
   transform: translate(100px, 0);
 }
+
+.hexPath {
+  stroke: var(--hex-stroke-color);
+}

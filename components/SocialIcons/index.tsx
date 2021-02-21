@@ -1,7 +1,9 @@
-import GithubLogo from 'public/images/icons/github-pixelated.svg'
-import LinkedInLogo from 'public/images/icons/linkedin-pixelated.svg'
-import EmailIcon from 'public/images/icons/email-pixelated.svg'
-import TwitterIcon from 'public/images/icons/twitter-pixelated.svg'
+import GithubLogo from 'public/images/social/github.svg'
+import LinkedInLogo from 'public/images/social/linkedin.svg'
+import EmailIcon from 'public/images/social/email.svg'
+import TwitterIcon from 'public/images/social/twitter.svg'
+
+import styles from './styles.module.scss'
 
 export default function SocialIcons() {
   return (
@@ -10,7 +12,7 @@ export default function SocialIcons() {
         href="https://github.com/ulises-codes"
         target="_blank"
         rel="noreferrer noopener"
-        className="social-icon--a"
+        className={[styles.socialIcon, 'not-hyperlink'].join(' ')}
         aria-label="Click to visit my GitHub profile">
         <GithubLogo width="24" height="24" />
       </a>
@@ -18,7 +20,7 @@ export default function SocialIcons() {
         href="https://www.linkedin.com/in/ulises-h-9abb00124/"
         target="_blank"
         rel="noreferrer noopener"
-        className="social-icon--a"
+        className={[styles.socialIcon, 'not-hyperlink'].join(' ')}
         aria-label="Click to visit my LinkedIn profile">
         <LinkedInLogo width="24" height="24" />
       </a>
@@ -26,7 +28,7 @@ export default function SocialIcons() {
         href="https://twitter.com/UlisesHimely"
         target="_blank"
         rel="noreferrer noopener"
-        className="social-icon--a"
+        className={[styles.socialIcon, 'not-hyperlink'].join(' ')}
         aria-label="Click to visit my Twitter profile">
         <TwitterIcon width="24" height="24" />
       </a>
@@ -34,7 +36,7 @@ export default function SocialIcons() {
         href="mailto:hi@ulises.codes"
         target="_blank"
         rel="noreferrer noopener"
-        className="social-icon--a"
+        className={[styles.socialIcon, 'not-hyperlink'].join(' ')}
         aria-label="Click to send me an email">
         <EmailIcon width="24" height="24" />
       </a>

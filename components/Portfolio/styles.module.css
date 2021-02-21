@@ -1,5 +1,3 @@
-@use 'styles/variables';
-
 .portfolio-wrapper--div {
   min-height: 325px;
 }
@@ -14,8 +12,13 @@
 
 .portfolio-tabs-btn--div {
   position: relative;
+  min-width: 80px;
+}
+
+.portfolio-tabs-btn--div > button {
+  width: 100%;
 }
 
 .portfolio-content-wrapper--div {
-  margin-top: variables.$margin;
+  margin-top: var(--margin);
 }

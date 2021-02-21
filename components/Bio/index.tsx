@@ -8,7 +8,7 @@ import TLDR from './TLDR'
 import More from './More'
 import type { AnimatePresenceProps } from 'framer-motion'
 
-import styles from './styles.module.scss'
+import styles from './styles.module.css'
 
 const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)
@@ -34,7 +34,7 @@ export default function HomeSection() {
   return (
     <div className={styles['bio-section--div']}>
       <Underline>
-        <h3 className="section-title--h2">Some Info</h3>
+        <h3 className="subtitle">Some Info</h3>
       </Underline>
       <div className={styles['bio-btns-wrapper--div']}>
         {BIO_SECTIONS.map((section, i) => (
@@ -42,14 +42,12 @@ export default function HomeSection() {
             key={`bio-btn-${section.title}`}
             className={styles['bio-btn-wrapper--div']}>
             <button
-              className={styles['bio-btn--btn']}
+              className={currentView === i ? 'active-tab' : 'button'}
               onClick={() => setCurrentView(i)}>
               {section.title}
             </button>
-            <AnimatePresence initial={false}>
-              {currentView === i && (
-                <Ellipse key={`bio-ellipse--${currentView}`} />
-              )}
+            <AnimatePresence initial={false} key="bio-ellipse">
+              {currentView === i && <Ellipse />}
             </AnimatePresence>
           </div>
         ))}
