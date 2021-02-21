@@ -1,18 +1,15 @@
 {
-    "cSpell.words": [
-        "jonatan",
-        "jonatanvelazquez",
-        "tldr"
-    ],
-    "cSpell.ignoreWords": [
-        "bksv",
-        "btns",
-        "ecommerce",
-        "ekuagn",
-        "guru",
-        "merch",
-        "svgr",
-        "w",
-        "webpack"
-    ]
+  "cSpell.words": ["jonatan", "jonatanvelazquez", "tldr"],
+  "cSpell.ignoreWords": [
+    "bksv",
+    "btns",
+    "deduped",
+    "ecommerce",
+    "ekuagn",
+    "guru",
+    "merch",
+    "rehype",
+    "svgr",
+    "webpack"
+  ]
 }
