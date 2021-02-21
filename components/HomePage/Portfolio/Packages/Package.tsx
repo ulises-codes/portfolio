@@ -1,4 +1,4 @@
-import languageMap from 'components/Languages/languageMap'
+import languageMap from 'components/HomePage/Languages/languageMap'
 
 import { PackageProps } from './packageList'
 

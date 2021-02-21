@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { MotionDiv } from 'components/MyMotion'
+import { MotionDiv } from 'util/MyMotion'
 import Ellipse from 'util/Ellipse'
 import dynamic from 'next/dynamic'
 

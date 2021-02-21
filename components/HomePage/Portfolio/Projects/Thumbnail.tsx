@@ -2,10 +2,10 @@ import Image from 'next/image'
 
 import { useAnimation } from 'framer-motion'
 
-import { MotionDiv } from 'components/MyMotion'
+import { MotionDiv } from 'util/MyMotion'
 
 import { ProjectProps } from './projectList'
-import languageMap from 'components/Languages/languageMap'
+import languageMap from 'components/HomePage/Languages/languageMap'
 
 import styles from './styles.module.css'
 

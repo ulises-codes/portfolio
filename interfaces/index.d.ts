@@ -1,14 +1,8 @@
-declare module '*.svg'
-declare module '*.png'
-declare module '*.mp3'
+/// <reference path="./blog.d.ts" />
+/// <reference path="./modules.d.ts" />
 
-declare interface BlogPost {
-  data: {
-    title: string
-    publishDate: string
-    editedDate?: string
-    author: string
-    excerpt: string
+export declare global {
+  interface Window {
+    __CPEmbed: () => void
   }
-  slug: string
 }

@@ -8,7 +8,7 @@ export default function MotionPath(props: SVGMotionProps<SVGPathElement>) {
   useEffect(() => {
     let isMounted = true
 
-    import('framer-motion').then(mod => setMotion(mod.m))
+    import('framer-motion').then(mod => isMounted && setMotion(mod.m))
 
     return () => {
       isMounted = false

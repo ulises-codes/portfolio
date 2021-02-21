@@ -1,10 +1,13 @@
 import BlogPost from 'components/BlogPost'
 import { ThemeContext } from 'components/Layout'
-import SEO from 'components/SEO'
+import SEO from 'util/SEO'
+
+import type { BlogPostProps } from 'interfaces/blog'
+
 import type { GetStaticProps } from 'next'
 import { useContext } from 'react'
 
-export default function Post({ source, meta }) {
+export default function Post({ source, meta }: BlogPostProps) {
   const { currentTheme } = useContext(ThemeContext)
 
   return (
@@ -57,5 +60,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths = async () => {
   const { getAllPostSlugs } = await import('lib/getPosts')
 
-  return { paths: getAllPostSlugs(), fallback: true }
+  return { paths: getAllPostSlugs(), fallback: false }
 }

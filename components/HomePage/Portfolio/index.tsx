@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { MotionDiv } from 'components/MyMotion'
-import Packages from 'components/Packages'
-import Codepens from 'components/Codepens'
-import Projects from 'components/Projects'
+import { MotionDiv } from 'util/MyMotion'
+import Packages from './Packages'
+import Codepens from './Codepens'
+import Projects from './Projects'
 
 import Ellipse from 'util/Ellipse'
 
@@ -11,7 +11,6 @@ import styles from './styles.module.css'
 
 import { AnimatePresence } from 'framer-motion'
 
-import Divider from 'util/houdini/Divider'
 import Underline from 'util/houdini/Underline'
 
 const projects = ['Packages', 'Codepens', 'Projects']

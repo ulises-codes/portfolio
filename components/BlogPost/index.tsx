@@ -1,10 +1,11 @@
+import type { BlogPostProps } from 'interfaces/blog'
 import hydrate from 'next-mdx-remote/hydrate'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import styles from './styles.module.scss'
 
-export default function BlogPost({ source, meta }) {
+export default function BlogPost({ source, meta }: BlogPostProps) {
   const content = hydrate(source)
 
   return (

@@ -1,5 +1,7 @@
 import Blog from 'components/Blog'
 import { ThemeContext } from 'components/Layout'
+import type { BlogPostInfo } from 'interfaces/blog'
+
 import type { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useContext } from 'react'
@@ -8,7 +10,7 @@ export default function BlogPage({
   posts,
   dedupedTitles,
 }: {
-  posts: BlogPost[]
+  posts: BlogPostInfo[]
   dedupedTitles: string
 }) {
   const { currentTheme } = useContext(ThemeContext)

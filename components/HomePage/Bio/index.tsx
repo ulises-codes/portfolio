@@ -2,7 +2,7 @@ import { useState } from 'react'
 import dynamic from 'next/dynamic'
 
 import Ellipse from 'util/Ellipse'
-import { MotionDiv } from 'components/MyMotion'
+import { MotionDiv } from 'util/MyMotion'
 
 import TLDR from './TLDR'
 import More from './More'

@@ -1,7 +1,8 @@
+import type { BlogPostInfo } from 'interfaces/blog'
 import Link from 'next/link'
 import styles from './styles.module.css'
 
-export default function Blog({ posts }: { posts: BlogPost[] }) {
+export default function Blog({ posts }: { posts: BlogPostInfo[] }) {
   return (
     <div>
       {posts.map(({ slug, data }) => (

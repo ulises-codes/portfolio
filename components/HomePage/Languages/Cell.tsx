@@ -1,4 +1,4 @@
-import { MotionPath } from 'components/MyMotion'
+import { MotionPath } from 'util/MyMotion'
 import styles from './styles.module.css'
 
 import type { Variants } from 'framer-motion'

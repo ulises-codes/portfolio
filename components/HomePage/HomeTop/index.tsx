@@ -10,7 +10,7 @@ import type {
 
 import dynamic from 'next/dynamic'
 
-import LanguageCells from 'components/Languages'
+import LanguageCells from 'components/HomePage/Languages'
 import Divider from 'util/houdini/Divider'
 import Underline from 'util/houdini/Underline'
 

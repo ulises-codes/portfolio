@@ -2,12 +2,12 @@ import { createContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 
 import dynamic from 'next/dynamic'
-import Header from 'components/Header'
-import Meta from 'components/Meta'
+import Header from './Header'
+import Meta from 'util/Meta'
 import themeList from 'lib/themeList'
 
-const Footer = dynamic(() => import('components/Footer'))
-const Sidebar = dynamic(() => import('components/Sidebar'))
+const Footer = dynamic(() => import('./Footer'))
+const Sidebar = dynamic(() => import('./Sidebar'))
 
 type Props = {
   children?: ReactNode

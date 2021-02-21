@@ -8,7 +8,7 @@ import renderToString from 'next-mdx-remote/render-to-string'
 
 const postsDirectory = join(process.cwd(), 'blog')
 
-export async function markdownToHtml(markdown) {
+export async function markdownToHtml(markdown: string) {
   return renderToString(markdown, {
     mdxOptions: {
       remarkPlugins: [externalLinksPlugin],
