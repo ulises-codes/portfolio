@@ -1,34 +1,18 @@
 import type { BlogPostInfo } from 'interfaces/blog'
-import { ThemeContext } from 'components/Layout'
 
 import Link from 'next/link'
-import { useContext } from 'react'
 import styles from './styles.module.css'
 import SEO from 'util/SEO'
 
 export default function Blog({
   posts,
-  dedupedTitles,
 }: {
   posts: BlogPostInfo[]
   dedupedTitles: string
 }) {
-  const { currentTheme } = useContext(ThemeContext)
-
   return (
     <>
-      <SEO title="Blog">
-        {currentTheme?.subtitleFont && (
-          <link
-            href={`https://fonts.googleapis.com/css2?family=${currentTheme.subtitleFont}&display=block&text=${dedupedTitles}`}
-            rel="preload"
-            as="style"
-            type="text/css"
-            crossOrigin="anonymous"
-            onLoad={"this.rel='stylesheet';this.onload=null" as any}
-          />
-        )}
-      </SEO>
+      <SEO title="Blog" />
       <div>
         {posts.map(({ slug, data }) => (
           <div key={slug} className={[styles.post, 'blog-listing'].join(' ')}>

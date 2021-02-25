@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import Header from './Header'
 import Meta from 'util/Meta'
 import themeList from 'lib/themeList'
+import Head from 'next/head'
 
 const Footer = dynamic(() => import('./Footer'))
 const Sidebar = dynamic(() => import('./Sidebar'))
@@ -13,26 +14,12 @@ type Props = {
   children?: ReactNode
 }
 
-type ThemeProps = {
-  name: string
-  displayName?: string
-  titleFont: string
-  subtitleFont: string
-}
-type ThemeContextProps = {
-  currentTheme?: ThemeProps
-  setCurrentTheme?: (theme: ThemeProps) => void
-}
-
 export const BoredContext = createContext(false)
-export const ThemeContext = createContext<ThemeContextProps>({})
 
 export default function Layout({ children }: Props) {
   const [isBored, setIsBored] = useState(false)
   const [currentTheme, setCurrentTheme] = useState<ThemeProps>({
     name: 'default',
-    titleFont: '',
-    subtitleFont: '',
   })
 
   useEffect(() => {
@@ -78,21 +65,43 @@ export default function Layout({ children }: Props) {
 
   return (
     <>
+      <Head key="layout-tags">
+        <link
+          href={`https://fonts.googleapis.com/css2?family=${
+            currentTheme.titleFont ?? 'Bungee+Shade'
+          }&display=block`}
+          rel="preload"
+          as="style"
+          type="text/css"
+          crossOrigin="anonymous"
+          onLoad={"this.rel='stylesheet';this.onload=null" as any}
+        />
+        <link
+          href={`https://fonts.googleapis.com/css2?family=${
+            currentTheme.subtitleFont ?? 'Indie+Flower'
+          }&display=swap`}
+          rel="preload"
+          as="style"
+          type="text/css"
+          crossOrigin="anonymous"
+          onLoad={"this.rel='stylesheet';this.onload=null" as any}
+        />
+      </Head>
       <Meta />
-      <ThemeContext.Provider
-        value={{
-          currentTheme,
-          setCurrentTheme: handleThemeChange,
-        }}>
-        <BoredContext.Provider value={isBored}>
-          <Header setIsBored={setIsBored} />
-          <main>
-            <Sidebar />
-            {children}
-          </main>
-        </BoredContext.Provider>
-        <Footer />
-      </ThemeContext.Provider>
+      <BoredContext.Provider value={isBored}>
+        <Header
+          setIsBored={setIsBored}
+          theme={{
+            currentTheme,
+            setCurrentTheme: handleThemeChange,
+          }}
+        />
+        <main>
+          <Sidebar />
+          {children}
+        </main>
+      </BoredContext.Provider>
+      <Footer />
     </>
   )
 }

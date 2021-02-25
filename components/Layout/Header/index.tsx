@@ -12,9 +12,10 @@ import { useRouter } from 'next/dist/client/router'
 
 type HeaderProps = {
   setIsBored: Dispatch<SetStateAction<boolean>>
+  theme: ThemeContextProps
 }
 
-export default function Header({ setIsBored }: HeaderProps) {
+export default function Header({ setIsBored, theme }: HeaderProps) {
   const isBored = useContext(BoredContext)
   const router = useRouter()
 
@@ -44,7 +45,7 @@ export default function Header({ setIsBored }: HeaderProps) {
               </button>
             )}
           </div>
-          <ThemeMenu />
+          <ThemeMenu {...theme} />
           <Link href="/blog">
             <a className="not-hyperlink link">Blog</a>
           </Link>

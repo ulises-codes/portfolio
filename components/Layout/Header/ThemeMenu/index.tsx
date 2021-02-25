@@ -1,11 +1,12 @@
-import { ThemeContext } from 'components/Layout'
 import themeList from 'lib/themeList'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import styles from './styles.module.scss'
 
-export default function ThemeMenu() {
+export default function ThemeMenu({
+  currentTheme,
+  setCurrentTheme,
+}: ThemeContextProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const { currentTheme, setCurrentTheme } = useContext(ThemeContext)
 
   return (
     <div

@@ -7,13 +7,10 @@
 
       if (!root) return
 
-      if (
-        (!theme || theme.name === 'default') &&
-        root.classList.value !== 'theme-default'
-      ) {
-        root.classList.value = 'theme-default'
-      } else if (theme && root.classList.value !== `theme-${theme.name}`) {
+      if (theme && root.classList.value !== `theme-${theme.name}`) {
         root.classList.value = `theme-${theme.name}`
+      } else {
+        root.classList.value = 'theme-default'
       }
     },
     { once: true }

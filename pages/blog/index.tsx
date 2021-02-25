@@ -18,20 +18,12 @@ export default function BlogPage(props: {
 
 export const getStaticProps: GetStaticProps = async () => {
   const { getAllPosts } = await import('lib/getPosts')
-  const { dedupeString } = await import('@ulises-codes/helper-functions')
 
   const posts = getAllPosts()
-  const dedupedTitles = dedupeString(
-    posts
-      .map(post => post.data.title)
-      .concat(['Blog', 'Theme', "I'm Bored"])
-      .join('')
-  )
 
   return {
     props: {
       posts,
-      dedupedTitles,
     },
   }
 }

@@ -1,5 +1,6 @@
 /// <reference path="./blog.d.ts" />
 /// <reference path="./modules.d.ts" />
+/// <reference path="./theme.d.ts" />
 
 export declare global {
   interface Window {

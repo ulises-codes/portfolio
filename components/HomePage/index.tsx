@@ -1,10 +1,8 @@
 import dynamic from 'next/dynamic'
 
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import SEO from 'util/SEO'
-
-import { ThemeContext } from 'components/Layout'
 
 import type { MutableRefObject } from 'react'
 
@@ -15,8 +13,6 @@ const Skills = dynamic(() => import('components/HomePage/Skills'))
 
 export default function HomePage() {
   const [visibleSections, setVisibleSections] = useState<string[]>([])
-
-  const { currentTheme } = useContext(ThemeContext)
 
   const bioRef = useRef() as MutableRefObject<HTMLDivElement>
   const skillsRef = useRef() as MutableRefObject<HTMLDivElement>
@@ -55,28 +51,7 @@ export default function HomePage() {
 
   return (
     <>
-      <SEO>
-        {currentTheme?.titleFont && (
-          <link
-            href={`https://fonts.googleapis.com/css2?family=${currentTheme.titleFont}&display=block&text=Greetings.IamUlises.`}
-            rel="preload"
-            as="style"
-            type="text/css"
-            crossOrigin="anonymous"
-            onLoad={"this.rel='stylesheet';this.onload=null" as any}
-          />
-        )}
-        {currentTheme?.subtitleFont && (
-          <link
-            href={`https://fonts.googleapis.com/css2?family=${currentTheme.subtitleFont}&display=swap&text=Imawebdlvopr.S'cnfkisuthTL;DRMFBCPgj`}
-            rel="preload"
-            as="style"
-            type="text/css"
-            crossOrigin="anonymous"
-            onLoad={"this.rel='stylesheet';this.onload=null" as any}
-          />
-        )}
-      </SEO>
+      <SEO />
       <div className="page-root">
         <HomeTop />
         <div id="Bio" style={{ minHeight: '300px' }} ref={bioRef}>

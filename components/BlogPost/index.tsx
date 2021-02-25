@@ -1,43 +1,19 @@
-import { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import hydrate from 'next-mdx-remote/hydrate'
 
 import SEO from 'util/SEO'
-import { ThemeContext } from 'components/Layout'
 
 import type { BlogPostProps } from 'interfaces/blog'
 
 import styles from './styles.module.scss'
 
 export default function BlogPost({ source, meta }: BlogPostProps) {
-  const { currentTheme } = useContext(ThemeContext)
   const content = hydrate(source)
 
   return (
     <>
-      <SEO title={meta.title}>
-        {currentTheme?.titleFont && (
-          <link
-            href={`https://fonts.googleapis.com/css2?family=${currentTheme.titleFont}&display=block&text=${meta.title}`}
-            rel="preload"
-            as="style"
-            type="text/css"
-            crossOrigin="anonymous"
-            onLoad={"this.rel='stylesheet';this.onload=null" as any}
-          />
-        )}
-        {currentTheme?.subtitleFont && (
-          <link
-            href={`https://fonts.googleapis.com/css2?family=${currentTheme.subtitleFont}&display=swap`}
-            rel="preload"
-            as="style"
-            type="text/css"
-            crossOrigin="anonymous"
-            onLoad={"this.rel='stylesheet';this.onload=null" as any}
-          />
-        )}
-      </SEO>
+      <SEO title={meta.title} />
       <div className={styles.blogPost}>
         <div className="blog-heading">
           <h1>{meta.title}</h1>
@@ -67,7 +43,6 @@ export default function BlogPost({ source, meta }: BlogPostProps) {
           </div>
           <hr />
         </div>
-
         <div>{content}</div>
       </div>
     </>
