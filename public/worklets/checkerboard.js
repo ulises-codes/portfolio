@@ -19,7 +19,7 @@ class CheckerboardPainter {
 
     const checkerboardColor = properties.get('--checkerboard-color').toString()
 
-    const fillColors = checkerboardColor && checkerboardColor.split(', ')
+    const fillColors = checkerboardColor && checkerboardColor.split(',')
 
     const checkerboardStrokeWidth = properties
       .get('--checkerboard-stroke-width')

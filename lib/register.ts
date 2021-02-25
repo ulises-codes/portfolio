@@ -1,4 +1,6 @@
-;(async function registerWorklets() {
+export default (async function registerWorklets() {
+  if (typeof window === 'undefined') return
+
   const register = () => {
     const WORKLETS = [
       'checkerboard',
@@ -8,7 +10,7 @@
     ]
 
     WORKLETS.forEach(worklet => {
-      CSS.paintWorklet.addModule(`/worklets/${worklet}.js`)
+      window.CSS.paintWorklet.addModule(`/worklets/${worklet}.js`)
     })
   }
 
@@ -16,9 +18,7 @@
     return register()
   }
 
-  await import(
-    'https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js'
-  )
+  await import('css-paint-polyfill')
 
   return register()
 })()

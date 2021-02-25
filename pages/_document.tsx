@@ -18,22 +18,6 @@ class MyDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            rel="preconnect"
-            href="https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js"
-          />
-          <link
-            rel="preload"
-            href="/worklets/register.js"
-            as="script"
-            type="text/javascript"
-          />
-          <link
-            rel="preload"
-            href="https://unpkg.com/css-paint-polyfill@next/dist/css-paint-polyfill.js"
-            as="script"
-            type="text/javascript"
-          />
-          <link
             rel="preload"
             href="/getTheme.js"
             as="script"

@@ -8,7 +8,6 @@ export default function Meta() {
         name="viewport"
         content="initial-scale=1.0, width=device-width, shrink-to-fit=no"
       />
-      <script src="/worklets/register.js" async defer />
       <script src="/getTheme.js"></script>
       <link
         href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"

@@ -1,11 +1,10 @@
 import type { BlogPostInfo } from 'interfaces/blog'
 import { ThemeContext } from 'components/Layout'
 
-import Head from 'next/head'
-
 import Link from 'next/link'
 import { useContext } from 'react'
 import styles from './styles.module.css'
+import SEO from 'util/SEO'
 
 export default function Blog({
   posts,
@@ -18,7 +17,7 @@ export default function Blog({
 
   return (
     <>
-      <Head>
+      <SEO title="Blog">
         {currentTheme?.subtitleFont && (
           <link
             href={`https://fonts.googleapis.com/css2?family=${currentTheme.subtitleFont}&display=block&text=${dedupedTitles}`}
@@ -29,7 +28,7 @@ export default function Blog({
             onLoad={"this.rel='stylesheet';this.onload=null" as any}
           />
         )}
-      </Head>
+      </SEO>
       <div>
         {posts.map(({ slug, data }) => (
           <div key={slug} className={[styles.post, 'blog-listing'].join(' ')}>

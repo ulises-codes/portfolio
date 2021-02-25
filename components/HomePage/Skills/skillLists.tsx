@@ -2,15 +2,20 @@ const BACKEND_SKILLS = [
   'Node',
   'Express',
   'GraphQL',
-  'MongoDB',
   'Firebase',
-  'Next JS',
-  'GatsbyJS',
   'Git',
   'Headless CMS',
 ]
 
-const FRONTEND_SKILLS = ['JavaScript', 'HTML', 'CSS', 'React', 'Typescript']
+const FRONTEND_SKILLS = [
+  'JavaScript',
+  'HTML',
+  'CSS',
+  'React',
+  'Typescript',
+  'Next JS',
+  'GatsbyJS',
+]
 
 const CREATIVE_SKILLS = [
   'Adobe Photoshop',

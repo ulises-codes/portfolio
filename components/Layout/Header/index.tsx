@@ -22,7 +22,9 @@ export default function Header({ setIsBored }: HeaderProps) {
     <header className={styles.header}>
       <nav>
         <Link href="/">
-          <a className={['not-hyperlink', styles.logoLink].join(' ')}>
+          <a
+            className={['not-hyperlink', styles.logoLink].join(' ')}
+            aria-label="ulises-codes-logo">
             <LogoSymbol className={styles.logoSymbol} height="32" width="32" />
             <FullLogo className={styles.fullLogo} height="46" width="250" />
           </a>

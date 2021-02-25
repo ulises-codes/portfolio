@@ -8,8 +8,6 @@ import type {
   OffscreenGameProps,
 } from '@ulises-codes/bite-me/dist/types'
 
-import dynamic from 'next/dynamic'
-
 import LanguageCells from 'components/HomePage/Languages'
 import Divider from 'util/houdini/Divider'
 import Underline from 'util/houdini/Underline'
@@ -17,21 +15,20 @@ import Underline from 'util/houdini/Underline'
 export default function HomeTop() {
   const isBored = useContext(BoredContext)
 
-  const [SnakeGame, setSnakeGame] = useState<any>()
+  const [SnakeGame, setSnakeGame] = useState<
+    | ((props: GameProps) => JSX.Element)
+    | ((props: OffscreenGameProps) => JSX.Element)
+  >()
 
   useEffect(() => {
     async function importGame() {
       if (isBored && !SnakeGame) {
         if ('OffscreenCanvas' in window) {
-          const Game = dynamic<OffscreenGameProps>(
-            () => import('@ulises-codes/bite-me/offscreen')
-          )
+          const Game = (await import('@ulises-codes/bite-me/offscreen')).default
 
           setSnakeGame(() => Game)
         } else {
-          const Game = dynamic<GameProps>(
-            () => import('@ulises-codes/bite-me/snake')
-          )
+          const Game = (await import('@ulises-codes/bite-me/snake')).default
 
           setSnakeGame(() => Game)
         }
@@ -77,7 +74,10 @@ export default function HomeTop() {
                 snakeStyle={{
                   color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
                 }}
-                publicPath="/snakeAssets/worker.js"
+                workerPaths={{
+                  snakeWorker: '/snakeAssets/snakeWorker.js',
+                  canvasWorker: '/snakeAssets/canvasWorker.js',
+                }}
               />
             </div>
           ) : (

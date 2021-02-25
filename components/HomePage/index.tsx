@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import Head from 'next/head'
 
 import { useContext, useEffect, useRef, useState } from 'react'
 
@@ -56,8 +55,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Head key="home-tags">
-        <SEO />
+      <SEO>
         {currentTheme?.titleFont && (
           <link
             href={`https://fonts.googleapis.com/css2?family=${currentTheme.titleFont}&display=block&text=Greetings.IamUlises.`}
@@ -78,7 +76,7 @@ export default function HomePage() {
             onLoad={"this.rel='stylesheet';this.onload=null" as any}
           />
         )}
-      </Head>
+      </SEO>
       <div className="page-root">
         <HomeTop />
         <div id="Bio" style={{ minHeight: '300px' }} ref={bioRef}>
