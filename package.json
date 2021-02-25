@@ -7,6 +7,8 @@
     "build": "next build",
     "export": "next build && next export",
     "start": "next start -p 3001",
+    "prepublish": "tsc ./lib/mergeWebmanifest.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node  && node ./lib/mergeWebmanifest.js && rm ./lib/mergeWebmanifest.js && rm ./lib/themeList.js",
+    "publish": "npm run prepublish && git push",
     "type-check": "tsc"
   },
   "dependencies": {

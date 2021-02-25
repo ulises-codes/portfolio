@@ -1,7 +1,8 @@
 export default (async function registerWorklets() {
   if (typeof window === 'undefined') return
+  await import('css-paint-polyfill')
 
-  const register = () => {
+  function register() {
     const WORKLETS = [
       'checkerboard',
       'curved-line',
@@ -17,8 +18,4 @@ export default (async function registerWorklets() {
   if ('paintWorklet' in CSS) {
     return register()
   }
-
-  await import('css-paint-polyfill')
-
-  return register()
 })()

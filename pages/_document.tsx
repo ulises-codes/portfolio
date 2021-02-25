@@ -29,12 +29,19 @@ class MyDocument extends Document {
             type="image/x-icon"
           />
           <link rel="alternate icon" href="/images/logo/favicon.png" />
+          <link rel="apple-touch-icon" href="/images/logo/icon@192x.png" />
+          <link id="ulises-codes-webmanifest" rel="manifest" href="" />
           <link
+            id="ulises-codes-mask-icon"
             rel="mask-icon"
             href="/images/logo/mask-icon.svg"
             color="#f1dd6d"
           />
-          <link rel="apple-touch-icon" href="/images/logo/icon@192x.png" />
+          <meta
+            id="ulises-codes-theme-color--meta"
+            name="theme-color"
+            content=""
+          />
           <meta
             name="description"
             content="Ulises Himely is a Web Developer, specializing in React, Typescript, GraphQL, and other technologies. He is also an avid human being. There is no proof that aliens are living among us in disguise."
@@ -58,10 +65,6 @@ class MyDocument extends Document {
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="msapplication-TileColor" content="#f1dd6d" />
           <meta name="msapplication-tap-highlight" content="no" />
-          <meta name="theme-color" content="#24748f" />
-
-          <link rel="manifest" href="/manifest.webmanifest" />
-
           <meta property="og:title" content="Ulises Himely | Web Developer" />
           <meta
             property="og:description"
@@ -75,7 +78,6 @@ class MyDocument extends Document {
           <meta property="og:image:height" content="630" />
           <meta property="og:url" content="https://ulises.codes" />
           <meta property="og:type" content="website" />
-
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@uliseshimely" />
           <meta name="twitter:title" content="Ulises Himely | Web Developer" />

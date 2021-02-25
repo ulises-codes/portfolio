@@ -47,9 +47,19 @@ export default function Layout({ children }: Props) {
   const handleThemeChange = (theme: ThemeProps) => {
     const body = document.querySelector('body')
 
-    if (!body) return
+    const manifest = document.querySelector(
+      '#ulises-codes-webmanifest'
+    ) as HTMLLinkElement
+
+    const themeMeta = document.querySelector(
+      '#ulises-codes-theme-color--meta'
+    ) as HTMLMetaElement
+
+    if (!body || !manifest) return
 
     body.classList.value = `theme-${theme.name}`
+    manifest.href = `/webmanifest/${theme.name}.webmanifest`
+    themeMeta.setAttribute('content', theme.background_color ?? '#f1dd6d')
 
     const el = document.getElementById('__next')
     if (el && el.dataset.cssPaint) {

@@ -2,6 +2,12 @@ if (process.env.NODE_ENV === 'development') {
   import('preact/debug')
 }
 
+if (typeof window !== 'undefined') {
+  import('css-paint-polyfill')
+}
+
+import 'lib/register'
+
 import { useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
@@ -13,8 +19,6 @@ import type { MotionConfigProps } from 'framer-motion/types/motion/context/Motio
 
 import 'components/styles/global.scss'
 import { useRouter } from 'next/dist/client/router'
-
-import 'lib/register'
 
 const Layout = dynamic(() => import('components/Layout'))
 
