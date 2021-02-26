@@ -7,11 +7,9 @@ const BlogPost = dynamic(() => import('components/BlogPost'))
 
 export default function Post({ source, meta }: BlogPostProps) {
   return (
-    <>
-      <div className="page-root">
-        <BlogPost source={source} meta={meta} />
-      </div>
-    </>
+    <div className="page-root">
+      <BlogPost source={source} meta={meta} />
+    </div>
   )
 }
 
@@ -28,6 +26,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { source, meta: post.meta },
+    revalidate: 1,
   }
 }
 
