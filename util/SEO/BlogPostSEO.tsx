@@ -24,7 +24,7 @@ export default function BlogPostSEO({
           __html: `{
           "@context": "http://schema.org",
           "@type": "BlogPosting",
-          "@id": "https://allergy.guru/blog/posts/post/${slug}",
+          "@id": "https://ulises.codes/blog/${slug}",
           "headline" :"${title.slice(0, 109)}",
           "datePublished": "${meta.publishDate}",
           "dateModified": "${meta.editedDate}",
