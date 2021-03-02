@@ -3,7 +3,6 @@ import hydrate from 'next-mdx-remote/hydrate'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import SEO from 'util/SEO'
 import MyImage from 'util/MyImage'
 
 import styles from './styles.module.scss'
@@ -11,8 +10,10 @@ import styles from './styles.module.scss'
 import type { BlogPostProps } from 'interfaces/blog'
 import type { HTMLAttributes } from 'react'
 import SocialIcons from 'components/SocialIcons'
+import BlogPostSEO from 'util/SEO/BlogPostSEO'
+import { AVATAR as avatar } from 'util/SEO'
 
-export default function BlogPost({ source, meta }: BlogPostProps) {
+export default function BlogPost({ source, meta, slug }: BlogPostProps) {
   const content = hydrate(source, {
     components: {
       img: MyImage,
@@ -38,17 +39,16 @@ export default function BlogPost({ source, meta }: BlogPostProps) {
 
   return (
     <>
-      <SEO title={meta.title} />
+      <BlogPostSEO title={meta.title} meta={meta} slug={slug} avatar={avatar} />
       <article className={styles.blogPost}>
         <div className="blog-heading">
           <h1 className="title">{meta.title}</h1>
           <div className="single-line-divider" />
-
           <div className={[styles.meta, 'blog-meta'].join(' ')}>
             <Link href="/">
               <a rel="author" className={styles.author}>
                 <Image
-                  src="e_improve/v1613346960/ulises.codes/avatars/IMG_6191_ywrvt1.jpg"
+                  src={avatar}
                   width={30}
                   height={30}
                   objectFit="cover"

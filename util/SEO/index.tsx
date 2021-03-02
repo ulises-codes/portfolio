@@ -17,3 +17,6 @@ export default function SEO({
     </Head>
   )
 }
+
+export const AVATAR =
+  'e_improve/v1613346960/ulises.codes/avatars/IMG_6191_ywrvt1.jpg'

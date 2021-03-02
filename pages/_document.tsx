@@ -43,10 +43,6 @@ class MyDocument extends Document {
             content=""
           />
           <meta
-            name="description"
-            content="Ulises Himely is a Web Developer, specializing in React, Typescript, GraphQL, and other technologies. He is also an avid human being. There is no proof that aliens are living among us in disguise."
-          />
-          <meta
             name="keywords"
             content="portfolio, javascript, react, developer, typescript"
           />
@@ -65,11 +61,8 @@ class MyDocument extends Document {
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="msapplication-TileColor" content="#f1dd6d" />
           <meta name="msapplication-tap-highlight" content="no" />
+          <meta property="og:site_name" content="ulises.codes" />
           <meta property="og:title" content="Ulises Himely | Web Developer" />
-          <meta
-            property="og:description"
-            content="Ulises Himely is a Web Developer, specializing in React, Typescript, GraphQL, and other technologies. He is also an avid human being. There is no proof that aliens are living among us in disguise."
-          />
           <meta
             property="og:image"
             content="https://res.cloudinary.com/da3fgujdy/image/upload/c_fill,g_north_west,h_630,q_100,w_1200/v1610482183/ulises.codes/portfolio-screenshot_uz1fon.png"
@@ -98,9 +91,9 @@ class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 '@context': 'https://schema.org',
-                '@type': 'Organization',
+                '@type': 'Person',
                 url: 'https://www.ulises.codes',
-                logo: 'https://www.ulises.codes/images/logo/icon@192x.png',
+                image: 'https://www.ulises.codes/images/logo/icon@192x.png',
               }),
             }}
           />

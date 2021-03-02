@@ -15,7 +15,6 @@ interface BlogPostInfo {
   slug: string
 }
 
-interface BlogPostProps {
-  meta: BlogPostMeta
+interface BlogPostProps extends BlogPostInfo {
   source: MdxRemote.Source
 }

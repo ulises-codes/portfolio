@@ -1,6 +1,5 @@
 import type { BlogPostInfo } from 'interfaces/blog'
-
-import SEO from 'util/SEO'
+import BlogSEO from 'util/SEO/BlogSEO'
 
 import PostCard from './PostCard'
 
@@ -12,7 +11,7 @@ export default function Blog({
 }) {
   return (
     <>
-      <SEO title="Blog" />
+      <BlogSEO posts={posts} />
       {posts.map(post => (
         <PostCard {...post} key={post.slug} />
       ))}
