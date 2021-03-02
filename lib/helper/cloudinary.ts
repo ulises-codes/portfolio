@@ -9,5 +9,5 @@ export const constructURLPrefix = (w: number, h: number, suffix: string) => {
 }
 
 export const generateURLs = (url: string) => {
-  return ratios.map(({ w, h }) => `"${constructURLPrefix(w, h, url)}"`)
+  return ratios.map(({ w, h }) => constructURLPrefix(w, h, url))
 }
