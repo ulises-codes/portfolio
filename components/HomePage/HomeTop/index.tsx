@@ -9,8 +9,6 @@ import type {
 } from '@ulises-codes/bite-me/dist/types'
 
 import LanguageCells from 'components/HomePage/Languages'
-import Divider from 'util/houdini/Divider'
-import Underline from 'util/houdini/Underline'
 
 export default function HomeTop() {
   const isBored = useContext(BoredContext)
@@ -48,9 +46,7 @@ export default function HomeTop() {
               <br />
               <span>I am Ulises.</span>
             </h1>
-            <Underline>
-              <h2 className="subtitle">I'm a web developer.</h2>
-            </Underline>
+            <h2 className="subtitle">I'm a web developer.</h2>
           </hgroup>
         </div>
         <div className={styles['top-right--div']}>
@@ -85,7 +81,7 @@ export default function HomeTop() {
           )}
         </div>
       </div>
-      <Divider />
+      <div className="checkerboard" />
     </div>
   )
 }

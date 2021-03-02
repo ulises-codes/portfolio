@@ -8,6 +8,6 @@ interface ThemeProps {
 }
 
 interface ThemeContextProps {
-  currentTheme?: ThemeProps
-  setCurrentTheme?: (theme: ThemeProps) => void
+  currentTheme: ThemeProps
+  setCurrentTheme: (theme: ThemeProps) => void
 }

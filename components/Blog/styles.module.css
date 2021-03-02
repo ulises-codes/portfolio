@@ -3,37 +3,30 @@
   --paint-color: var(--primary);
   --stroke-weight: 4;
   color: var(--text-on-surface);
-  max-width: 650px;
+  max-width: 475px;
   margin: 0 auto var(--margin) auto;
   padding: 8px;
 }
 
 .inner {
-  padding: var(--padding);
-  display: flex;
-  gap: var(--margin);
-  border: 8px solid var(--background);
-  border-radius: 16px;
-}
-
-.date {
-  flex: 1 0 75px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* padding: var(--padding); */
+  border: 8px solid var(--background);
 }
 
-.monthDate {
-  font-size: 1.25em;
+.titleWrapper,
+.excerpt {
+  padding: var(--padding);
 }
 
-.titleWrapper > a > h2 {
+.title {
   margin: 0;
-  font-family: var(--subtitle-font);
+  font-size: 1.75rem;
 }
 
 .hr {
-  margin-top: 0;
+  margin: 0;
+  background-color: var(--background);
+  height: 8px;
 }

@@ -6,10 +6,12 @@ interface BlogPostMeta {
   editedDate?: string
   author: string
   excerpt: string
+  headerImageSrc: string
+  headerImageAlt: string
 }
 
 interface BlogPostInfo {
-  data: BlogPostMeta
+  meta: BlogPostMeta
   slug: string
 }
 

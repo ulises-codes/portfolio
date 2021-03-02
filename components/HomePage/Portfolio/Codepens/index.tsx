@@ -4,6 +4,8 @@ import Codepen from './Codepen'
 import { useScript } from '@ulises-codes/react-hooks'
 import { useEffect, useState } from 'react'
 
+import styles from './styles.module.scss'
+
 export default function Codepens() {
   const [src, setSrc] = useState('')
 
@@ -21,19 +23,11 @@ export default function Codepens() {
 
   return (
     <>
-      <div className="codepens--div">
+      <div className={styles.codepens}>
         {status === 'ready' &&
           codepenList.map(codepenProps => (
             <Codepen key={codepenProps.slug} {...codepenProps} />
           ))}
-        <style jsx>{`
-          .codepens--div {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 1%;
-            min-height: 400px;
-          }
-        `}</style>
       </div>
     </>
   )

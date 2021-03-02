@@ -14,9 +14,6 @@ const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)
 )
 
-import Divider from 'util/houdini/Divider'
-import Underline from 'util/houdini/Underline'
-
 const BIO_SECTIONS = [
   {
     title: 'TL;DR',
@@ -33,9 +30,7 @@ export default function HomeSection() {
 
   return (
     <div className={styles['bio-section--div']}>
-      <Underline>
-        <h3 className="subtitle">Some Info</h3>
-      </Underline>
+      <h3 className="subtitle">Some Info</h3>
       <div className={styles['bio-btns-wrapper--div']}>
         {BIO_SECTIONS.map((section, i) => (
           <div
@@ -67,7 +62,7 @@ export default function HomeSection() {
                 </MotionDiv>
               )
           )}
-          <Divider />
+          <div className="checkerboard" />
         </MotionDiv>
       </AnimatePresence>
     </div>

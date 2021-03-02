@@ -1,25 +1,32 @@
 import type { CodepenProps } from './codepenList'
-
-import AngledCorners from 'util/houdini/AngledCorners'
+import styles from './styles.module.scss'
 
 export default function Codepen({ description, slug, title }: CodepenProps) {
+  const body = document.querySelector('body') as HTMLBodyElement
+
+  const surface = getComputedStyle(body).getPropertyValue('--surface')
+  const textColor = getComputedStyle(body).getPropertyValue('--text-on-surface')
+  const activeColor = getComputedStyle(body).getPropertyValue(
+    '--active-tab-color'
+  )
+
   return (
-    <AngledCorners className="codepen-wrapper--div">
+    <div className={[styles.codepenWrapper, 'surface'].join(' ')}>
       <div
         className="codepen"
         data-height="375"
         data-theme-id="light"
-        data-default-tab="js,result"
+        data-default-tab="result"
         data-user="ulises-codes"
         data-slug-hash={slug}
         data-preview="none"
         data-border="none"
-        data-tab-bar-color="#f1dd6d"
-        data-active-tab-accent-color="#f1dd6d"
-        data-active-tab-color="#f1dd6d"
-        data-tab-color="#f1dd6d"
-        data-tab-link-color="#171717"
-        data-active-link-color="#24748f"
+        data-tab-bar-color={surface}
+        data-active-tab-accent-color={surface}
+        data-active-tab-color={surface}
+        data-tab-color={surface}
+        data-tab-link-color={textColor}
+        data-active-link-color={activeColor}
         data-pen-title={title}>
         <span>
           See the Pen
@@ -30,6 +37,6 @@ export default function Codepen({ description, slug, title }: CodepenProps) {
           <a href="https://codepen.io">CodePen</a>.
         </span>
       </div>
-    </AngledCorners>
+    </div>
   )
 }

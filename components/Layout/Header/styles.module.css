@@ -3,6 +3,7 @@
   height: var(--header-height);
   width: 100%;
   margin-bottom: var(--margin);
+  padding: 0 var(--padding);
 }
 
 .header > nav {

@@ -4,8 +4,6 @@ import { PackageProps } from './packageList'
 
 import styles from './styles.module.css'
 
-import AngledCorners from 'util/houdini/AngledCorners'
-
 export default function Package({
   description,
   languages,
@@ -13,11 +11,10 @@ export default function Package({
   repo,
 }: PackageProps) {
   return (
-    <AngledCorners
-      className={[styles.packageWrapper, 'package-wrapper'].join(' ')}>
-      <div className={styles['package-inner--div']}>
+    <div className={[styles.packageWrapper, 'surface'].join(' ')}>
+      <div className={styles.packageInner}>
         <h4>{title}</h4>
-        <div className={styles['language-logo-badges--div']}>
+        <div className={styles.languageLogoBadges}>
           {languageMap
             .filter(({ name }) => languages.includes(name))
             .map(({ filename, name }) => (
@@ -32,17 +29,17 @@ export default function Package({
               />
             ))}
         </div>
-        <p className={styles['package-description--p']}>{description}</p>
-        <div className={styles['package-link--div']}>
+        <p className={styles.packageDescription}>{description}</p>
+        <div className={styles.packageLink}>
           <a
             href={`https://github.com/ulises-codes/${repo}`}
-            className={['hyperlink', styles['package-link--a']].join(' ')}
+            className={['link', styles.packageLink].join(' ')}
             target="_blank"
             rel="noopener noreferrer">
             Go to Repo
           </a>
         </div>
       </div>
-    </AngledCorners>
+    </div>
   )
 }

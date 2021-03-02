@@ -5,40 +5,40 @@ import TwitterIcon from 'public/images/social/twitter.svg'
 
 import styles from './styles.module.scss'
 
-export default function SocialIcons() {
+export default function SocialIcons({ size = 24 }) {
   return (
     <>
       <a
         href="https://github.com/ulises-codes"
         target="_blank"
         rel="noreferrer noopener"
-        className={[styles.socialIcon, 'not-hyperlink'].join(' ')}
+        className={styles.socialIcon}
         aria-label="Click to visit my GitHub profile">
-        <GithubLogo width="24" height="24" />
+        <GithubLogo width={size} height={size} />
       </a>
       <a
         href="https://www.linkedin.com/in/ulises-h-9abb00124/"
         target="_blank"
         rel="noreferrer noopener"
-        className={[styles.socialIcon, 'not-hyperlink'].join(' ')}
+        className={styles.socialIcon}
         aria-label="Click to visit my LinkedIn profile">
-        <LinkedInLogo width="24" height="24" />
+        <LinkedInLogo width={size} height={size} />
       </a>
       <a
         href="https://twitter.com/UlisesHimely"
         target="_blank"
         rel="noreferrer noopener"
-        className={[styles.socialIcon, 'not-hyperlink'].join(' ')}
+        className={styles.socialIcon}
         aria-label="Click to visit my Twitter profile">
-        <TwitterIcon width="24" height="24" />
+        <TwitterIcon width={size} height={size} />
       </a>
       <a
         href="mailto:hi@ulises.codes"
         target="_blank"
         rel="noreferrer noopener"
-        className={[styles.socialIcon, 'not-hyperlink'].join(' ')}
+        className={styles.socialIcon}
         aria-label="Click to send me an email">
-        <EmailIcon width="24" height="24" />
+        <EmailIcon width={size} height={size} />
       </a>
     </>
   )

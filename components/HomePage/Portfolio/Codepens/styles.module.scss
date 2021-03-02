@@ -1,0 +1,12 @@
+.codepens {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1%;
+  min-height: 450px;
+}
+
+.codepenWrapper {
+  $codepen-padding: 17px;
+  padding: $codepen-padding;
+  height: 375px + $codepen-padding * 2;
+}

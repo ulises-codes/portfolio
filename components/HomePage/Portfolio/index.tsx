@@ -11,8 +11,6 @@ import styles from './styles.module.css'
 
 import { AnimatePresence } from 'framer-motion'
 
-import Underline from 'util/houdini/Underline'
-
 const projects = ['Packages', 'Codepens', 'Projects']
 
 const TabContent = [Packages, Codepens, Projects]
@@ -22,9 +20,7 @@ export default function Portfolio() {
 
   return (
     <div className={styles['portfolio-wrapper--div']}>
-      <Underline>
-        <h3 className="subtitle">Some Stuff I've Made</h3>
-      </Underline>
+      <h3 className="subtitle">Some Stuff I've Made</h3>
       <div className={styles['portfolio-tabs-btns-wrapper--div']}>
         {projects.map((name, i) => (
           <div key={name} className={styles['portfolio-tabs-btn--div']}>

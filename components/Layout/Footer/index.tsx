@@ -15,14 +15,15 @@ function FooterContent() {
         <a
           href="https://github.com/ulises-codes/portfolio"
           target="_blank"
-          rel="noreferrer noopener">
+          rel="noreferrer noopener"
+          className="link">
           Go to Repo
         </a>
       </small>
       <div className={styles.social}>
         <hr />
         <div className={styles.socialIcons}>
-          <SocialIcons />
+          <SocialIcons size={16} />
         </div>
       </div>
       <hr />
@@ -31,6 +32,7 @@ function FooterContent() {
         <cite>
           <a
             href="https://music.apple.com/us/album/eco-echo/1450301682?i=1450301683"
+            className="link"
             target="_blank"
             rel="noreferrer noopener">
             Echo by Elevation Worship

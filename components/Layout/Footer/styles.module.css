@@ -40,7 +40,7 @@
   align-items: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1065px) {
   .social {
     display: block;
   }

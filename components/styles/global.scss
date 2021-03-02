@@ -2,6 +2,7 @@
 
 html {
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 *,
@@ -11,27 +12,27 @@ html {
 }
 
 :root {
-  --page-width: 82vw;
+  --page-width: 960px;
   --margin: 16px;
   --padding: 16px;
   --header-height: 100px;
   --footer-height: 225px;
-
-  --checkerboard-spacing: 7;
-  --checkerboard-size: 16;
-
-  --curved-lineSpread: 50;
-  --curved-lineWidth: 2;
-  --curved-lineHeight: 20;
-
-  --corner-radius: 30 30 30 30 30;
-  --texture: none;
 }
 
 ::selection {
   background-color: var(--selection-background);
   color: var(--selection-text);
   font-weight: bold;
+}
+
+.curved-line-vertical {
+  background: paint(curved-line);
+  height: 150px;
+  width: 20px;
+}
+
+.curved-line-vertical:last-child {
+  transform: scale(-1);
 }
 
 .theme-default,
@@ -68,12 +69,30 @@ html {
 
   --hr-color: var(--primary);
 
+  --curved-lineSpread: 50;
+  --curved-lineWidth: 2;
+  --curved-lineHeight: 20;
+
+  scrollbar-color: var(--primary) var(--secondary);
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--background);
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
   .curved-line-vertical {
     --curved-lineColor: #{var(--white)};
   }
 
   .blog-meta {
-    color: var(--primary);
+    color: var(--white);
   }
 }
 
@@ -136,6 +155,22 @@ html {
   --ellipse-color: var(--black);
 
   --hr-color: var(--black);
+
+  scrollbar-width: thin;
+  scrollbar-color: transparent var(--surface);
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 16px;
+    background-color: var(--surface);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
 
   & #__next {
     background-image: var(--background-texture);
@@ -202,6 +237,22 @@ html {
 
   --codepen-color: var(--primary);
 
+  scrollbar-width: thin;
+  scrollbar-color: transparent var(--primary);
+
+  &::-webkit-scrollbar-thumb {
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
   h1 {
     text-shadow: 0px 0px 9px var(--white);
     color: transparent;
@@ -249,9 +300,11 @@ body {
   background-color: var(--background);
 
   color: var(--text-primary);
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--subtitle-font), sans-serif;
   min-height: 100vh;
   position: relative;
+
+  scrollbar-width: thin;
 
   #__next {
     min-height: 100vh;
@@ -272,37 +325,53 @@ main {
 }
 
 h1 {
+  display: inline-block;
   font-family: var(--title-font);
   color: var(--title-color);
-  background-color: var(--title-background-color);
-  display: inline;
-  background-clip: content-box;
-  font-size: 2.5em;
+  font-size: 2.5rem;
   line-height: 1.2;
 }
 
+h4 {
+  font-size: 1.25rem;
+}
+
+.title {
+  background-color: var(--title-background-color);
+}
+
 .subtitle,
 .button,
-.active-tab,
-.link {
+.active-tab {
   font-family: var(--subtitle-font);
   width: max-content;
-  color: var(--subtitle-color);
-  -webkit-text-stroke: var(--subtitle-stroke);
 }
 
 .subtitle {
-  font-size: 1.4em;
+  --extra-underlineNumber: 3;
+  --extra-underlineColor: #{var(--primary)};
+  --extra-underlineWidth: 1;
+  --extra-underlineSpread: 8;
+  font-size: 1.4rem;
+  line-height: normal;
+  width: max-content;
+  background: paint(extra-underline);
+}
+
+.subtitle:not(.on-surface) {
+  -webkit-text-stroke: var(--subtitle-stroke);
+  color: var(--subtitle-color);
 }
 
 .button,
-.active-tab,
-.link {
-  font-size: 1.2em;
+.active-tab {
+  -webkit-text-stroke: var(--subtitle-stroke);
+  font-size: 1.2rem;
+  color: var(--subtitle-color);
 }
 
 .subtitle,
-.button,
+.button:not(a),
 .active-tab {
   min-height: 33px;
 }
@@ -316,12 +385,13 @@ a {
   outline: none;
   font-family: inherit;
   color: inherit;
+  font-size: inherit;
+  line-height: 0;
 }
 
-a:not(.not-hyperlink) {
+.link {
   color: var(--black);
   background-color: var(--selection-background);
-  display: inline-block;
   color: var(--selection-text);
 
   &::before {
@@ -349,52 +419,40 @@ cite {
 
 p {
   line-height: 1.5;
-}
-
-.underline--div {
-  --extra-underlineNumber: 3;
-  --extra-underlineColor: #{var(--primary)};
-  --extra-underlineWidth: 1;
-  --extra-underlineSpread: 8;
-  background: paint(extra-underline);
-  width: max-content;
-}
-
-.curved-line-vertical {
-  background: paint(curved-line);
-  height: 150px;
-  width: 20px;
-}
-
-.curved-line-vertical:last-child {
-  transform: scale(-1);
-}
-
-.checkerboard {
-  background: paint(checkerboard);
-}
-
-.package-wrapper,
-.blog-listing {
-  background-color: var(--surface);
-  background: paint(angled-corners);
-}
-
-.codepen-wrapper--div {
-  background: paint(angled-corners);
-  --fill-color: #{var(--primary)};
-  --paint-color: #{var(--primary)};
-  --stroke-weight: 16;
-
-  $codepen-padding: 17px;
-  padding: $codepen-padding;
-  height: 375px + $codepen-padding * 2;
+  font-size: 1.1rem;
 }
 
 .page-root {
   max-width: var(--page-width);
   padding: 0 var(--padding);
   margin: auto;
+  overflow: hidden;
+}
+
+.single-line-divider {
+  --checkerboard-spacing: 4;
+  --checkerboard-size: 4;
+  height: 6px;
+  width: 100%;
+  margin: 4px auto;
+  filter: var(--checkerboard-filter);
+  animation: var(--checkerboard-animation);
+  background: transparent paint(checkerboard);
+}
+
+.checkerboard {
+  --checkerboard-spacing: 7;
+  --checkerboard-size: 16;
+  background: paint(checkerboard);
+  height: 62px;
+  width: 100%;
+  margin: 32px auto;
+  filter: var(--checkerboard-filter);
+  animation: var(--checkerboard-animation);
+}
+
+.surface {
+  background-color: var(--surface);
 }
 
 .language-logo-badge--img {
@@ -412,38 +470,20 @@ p {
 }
 
 @media (max-width: 827px) {
-  h1 {
-    font-size: 2.25em;
+  :root {
+    font-size: 18px;
   }
 }
 
 @media (max-width: 773px) {
-  h1 {
-    font-size: 2em;
+  :root {
+    font-size: 16px;
   }
 }
 
 @media (max-width: 600px) {
   :root {
     --header-height: 56px;
-  }
-}
-
-@media (max-width: 450px) {
-  body {
     font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2.2em;
-  }
-
-  .page-root {
-    padding: 0;
-  }
-
-  .button,
-  .subtitle {
-    font-size: 1.1em;
   }
 }

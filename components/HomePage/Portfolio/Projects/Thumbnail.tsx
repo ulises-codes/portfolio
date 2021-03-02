@@ -46,7 +46,7 @@ export default function Thumbnail({
         initial="hidden"
         variants={detailsVariants}>
         <a
-          className="hyperlink"
+          className="link"
           href={`https://${url}`}
           target="_blank"
           rel="noopener noreferrer">

@@ -3,10 +3,10 @@
 .skill-btns-wrapper--div {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--margin);
 }
 
 .skill-btn--div {
+  margin-right: var(--margin);
   position: relative;
   margin-bottom: var(--margin);
   text-align: center;

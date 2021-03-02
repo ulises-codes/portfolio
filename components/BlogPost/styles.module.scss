@@ -7,12 +7,6 @@
     padding: calc(var(--padding) / 2);
     background-color: var(--code-background);
     color: var(--code-text-color);
-    border-radius: 4px;
-
-    &,
-    code {
-      border-radius: 8px;
-    }
 
     code {
       border: 8px solid var(--background);
@@ -28,17 +22,26 @@
   justify-content: space-between;
   padding: 0 var(--padding);
 
-  a {
-    color: var(--text-secondary);
+  .social {
+    display: flex;
+    align-items: center;
+
+    a {
+      margin: 0 8px;
+    }
   }
 }
 
 .author {
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
-  gap: 8px;
-}
 
-.avatar {
-  border-radius: 50%;
+  .avatar {
+    border-radius: 50%;
+  }
+
+  span {
+    margin-left: 8px;
+  }
 }

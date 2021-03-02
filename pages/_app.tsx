@@ -12,13 +12,16 @@ import { useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
 
+import { useRouter } from 'next/router'
+
 import { MotionFeature } from 'framer-motion'
 
 import type { AppProps } from 'next/app'
 import type { MotionConfigProps } from 'framer-motion/types/motion/context/MotionConfigContext'
 
 import 'components/styles/global.scss'
-import { useRouter } from 'next/dist/client/router'
+
+import themeList from 'lib/themeList'
 
 const Layout = dynamic(() => import('components/Layout'))
 
@@ -29,6 +32,11 @@ const MotionConfig = dynamic<MotionConfigProps>(() =>
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [features, setFeatures] = useState<MotionFeature[]>([])
   const [isOnline, setIsOnline] = useState(true)
+  const [currentTheme, setCurrentTheme] = useState<ThemeProps>({
+    name: 'default',
+  })
+
+  const router = useRouter()
 
   useEffect(() => {
     if (
@@ -51,12 +59,26 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       }
     }
 
-    import('util/motion-features').then(async mod =>
-      setFeatures(await mod.default())
-    )
-  }, [])
+    const getThemeFromLocalStorage = () => {
+      const body = document.querySelector('body')
 
-  const router = useRouter()
+      if (!body) return
+
+      const theme = localStorage.getItem('theme')
+
+      const parsedTheme = theme && JSON.parse(theme)
+
+      if (!theme) {
+        setCurrentTheme(themeList[0])
+      } else {
+        body.classList.value = `theme-${parsedTheme.name}`
+
+        setCurrentTheme(parsedTheme)
+      }
+    }
+
+    getThemeFromLocalStorage()
+  }, [])
 
   useEffect(() => {
     if (
@@ -73,11 +95,20 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         })
       }
     }
+    if (router.pathname === '/') {
+      import('util/motion-features').then(async mod =>
+        setFeatures(await mod.default())
+      )
+    }
   }, [isOnline, router.route])
 
   return (
     <MotionConfig features={features}>
-      <Layout>
+      <Layout
+        theme={{
+          currentTheme,
+          setCurrentTheme: theme => setCurrentTheme(theme),
+        }}>
         <Component {...pageProps} />
       </Layout>
     </MotionConfig>

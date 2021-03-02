@@ -5,7 +5,7 @@ export default function TLDR() {
         My name is Ulises Himely. Species: human. My name is pronounced the same
         as{' '}
         <a
-          className="hyperlink"
+          className="link"
           href="https://en.wikipedia.org/wiki/Ulysses_S._Grant"
           rel="norefferer noopener"
           target="_blank">

@@ -1,10 +1,9 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 import type { ReactNode } from 'react'
 
 import dynamic from 'next/dynamic'
 import Header from './Header'
 import Meta from 'util/Meta'
-import themeList from 'lib/themeList'
 import Head from 'next/head'
 
 const Footer = dynamic(() => import('./Footer'))
@@ -12,37 +11,16 @@ const Sidebar = dynamic(() => import('./Sidebar'))
 
 type Props = {
   children?: ReactNode
+  theme: ThemeContextProps
 }
 
 export const BoredContext = createContext(false)
 
-export default function Layout({ children }: Props) {
+export default function Layout({
+  children,
+  theme: { currentTheme, setCurrentTheme },
+}: Props) {
   const [isBored, setIsBored] = useState(false)
-  const [currentTheme, setCurrentTheme] = useState<ThemeProps>({
-    name: 'default',
-  })
-
-  useEffect(() => {
-    const getThemeFromLocalStorage = () => {
-      const body = document.querySelector('body')
-
-      if (!body) return
-
-      const theme = localStorage.getItem('theme')
-
-      const parsedTheme = theme && JSON.parse(theme)
-
-      if (!theme) {
-        setCurrentTheme(themeList[0])
-      } else {
-        body.classList.value = `theme-${parsedTheme.name}`
-
-        setCurrentTheme(parsedTheme)
-      }
-    }
-
-    getThemeFromLocalStorage()
-  }, [])
 
   const handleThemeChange = (theme: ThemeProps) => {
     const body = document.querySelector('body')
@@ -67,6 +45,8 @@ export default function Layout({ children }: Props) {
     }
 
     if (currentTheme?.name !== theme.name) {
+      console.log('SETTING NEW THEME: ', theme.name)
+
       setCurrentTheme(theme)
     }
 
@@ -84,7 +64,7 @@ export default function Layout({ children }: Props) {
           as="style"
           type="text/css"
           crossOrigin="anonymous"
-          onLoad={"this.rel='stylesheet';this.onload=null" as any}
+          onLoad={"this.rel='stylesheet'" as any}
         />
         <link
           href={`https://fonts.googleapis.com/css2?family=${
@@ -94,7 +74,7 @@ export default function Layout({ children }: Props) {
           as="style"
           type="text/css"
           crossOrigin="anonymous"
-          onLoad={"this.rel='stylesheet';this.onload=null" as any}
+          onLoad={"this.rel='stylesheet'" as any}
         />
       </Head>
       <Meta />

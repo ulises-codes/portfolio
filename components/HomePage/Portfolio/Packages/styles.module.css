@@ -13,21 +13,20 @@
   color: var(--text-on-surface);
 }
 
-.package-inner--div {
+.packageInner {
   padding: 8px 14px;
   border: 6px solid var(--background);
 }
 
-.package-link--div {
+.packageLink {
   width: 100%;
   text-align: right;
 }
 
-.language-logo-badges--div {
+.languageLogoBadges {
   display: flex;
 }
 
-.package-description--p {
-  font-size: 0.9em;
+.packageDescription {
   opacity: 0.9;
 }

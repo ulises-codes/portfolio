@@ -1,14 +1,8 @@
 export default (async function registerWorklets() {
   if (typeof window === 'undefined') return
-  await import('css-paint-polyfill')
 
   function register() {
-    const WORKLETS = [
-      'checkerboard',
-      'curved-line',
-      'extra-underline',
-      'angled-corners',
-    ]
+    const WORKLETS = ['checkerboard', 'curved-line', 'extra-underline']
 
     WORKLETS.forEach(worklet => {
       window.CSS.paintWorklet.addModule(`/worklets/${worklet}.js`)
@@ -18,4 +12,7 @@ export default (async function registerWorklets() {
   if ('paintWorklet' in CSS) {
     return register()
   }
+
+  await import('css-paint-polyfill')
+  register()
 })()

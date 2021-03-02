@@ -23,9 +23,7 @@ export default function Header({ setIsBored, theme }: HeaderProps) {
     <header className={styles.header}>
       <nav>
         <Link href="/">
-          <a
-            className={['not-hyperlink', styles.logoLink].join(' ')}
-            aria-label="ulises-codes-logo">
+          <a className={styles.logoLink} aria-label="ulises-codes-logo">
             <LogoSymbol className={styles.logoSymbol} height="32" width="32" />
             <FullLogo className={styles.fullLogo} height="46" width="250" />
           </a>
@@ -47,7 +45,7 @@ export default function Header({ setIsBored, theme }: HeaderProps) {
           </div>
           <ThemeMenu {...theme} />
           <Link href="/blog">
-            <a className="not-hyperlink link">Blog</a>
+            <a className="button">Blog</a>
           </Link>
         </div>
       </nav>

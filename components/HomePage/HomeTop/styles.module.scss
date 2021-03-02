@@ -31,23 +31,18 @@ $snake-game-border: 3px;
   flex: 0 0 48%;
 
   hgroup > h1 {
-    margin: 0;
-
     br {
       user-select: none;
     }
 
-    span {
-      white-space: nowrap;
-      min-height: 40px;
-      margin: 4px 0;
-      background-color: var(--title-background-color);
-      display: inline-block;
+    br::selection {
+      background-color: transparent;
+    }
 
-      &::selection {
-        background-color: var(--white);
-        color: var(--secondary);
-      }
+    span {
+      height: 40px;
+      background-color: var(--title-background-color);
+      display: inline;
     }
   }
 }

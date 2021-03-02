@@ -6,10 +6,10 @@ import SEO from 'util/SEO'
 
 import type { MutableRefObject } from 'react'
 
-const Portfolio = dynamic(() => import('components/HomePage/Portfolio'))
-const Bio = dynamic(() => import('components/HomePage/Bio'))
 const HomeTop = dynamic(() => import('components/HomePage/HomeTop'))
+const Bio = dynamic(() => import('components/HomePage/Bio'))
 const Skills = dynamic(() => import('components/HomePage/Skills'))
+const Portfolio = dynamic(() => import('components/HomePage/Portfolio'))
 
 export default function HomePage() {
   const [visibleSections, setVisibleSections] = useState<string[]>([])
@@ -54,15 +54,18 @@ export default function HomePage() {
       <SEO />
       <div className="page-root">
         <HomeTop />
-        <div id="Bio" style={{ minHeight: '300px' }} ref={bioRef}>
+        <section id="Bio" style={{ minHeight: '300px' }} ref={bioRef}>
           {visibleSections.includes('Bio') && <Bio />}
-        </div>
-        <div id="Skills" style={{ minHeight: '300px' }} ref={skillsRef}>
+        </section>
+        <section id="Skills" style={{ minHeight: '300px' }} ref={skillsRef}>
           {visibleSections.includes('Skills') && <Skills />}
-        </div>
-        <div id="Portfolio" style={{ minHeight: '300px' }} ref={portfolioRef}>
+        </section>
+        <section
+          id="Portfolio"
+          style={{ minHeight: '300px' }}
+          ref={portfolioRef}>
           {visibleSections.includes('Portfolio') && <Portfolio />}
-        </div>
+        </section>
       </div>
     </>
   )

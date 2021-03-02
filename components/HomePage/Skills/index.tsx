@@ -9,9 +9,6 @@ import { SECTIONS } from './skillLists'
 import styles from './styles.module.scss'
 import type { AnimatePresenceProps } from 'framer-motion'
 
-import Divider from 'util/houdini/Divider'
-import Underline from 'util/houdini/Underline'
-
 const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
   import('framer-motion').then(mod => mod.AnimatePresence)
 )
@@ -31,9 +28,7 @@ export default function Skills() {
 
   return (
     <div>
-      <Underline>
-        <h3 className="subtitle">Skills</h3>
-      </Underline>
+      <h3 className="subtitle">Skills</h3>
       <div className={styles['skill-btns-wrapper--div']}>
         {SECTIONS.map(({ title }, i) => (
           <div key={`skill-btn-${title}`} className={styles['skill-btn--div']}>
@@ -65,7 +60,7 @@ export default function Skills() {
           )}
         </AnimatePresence>
       </div>
-      <Divider />
+      <div className="checkerboard" />
     </div>
   )
 }
