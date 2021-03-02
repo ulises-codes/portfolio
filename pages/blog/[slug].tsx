@@ -5,10 +5,10 @@ import type { BlogPostProps } from 'interfaces/blog'
 
 const BlogPost = dynamic(() => import('components/BlogPost'))
 
-export default function Post({ source, meta }: BlogPostProps) {
+export default function Post({ source, meta, slug }: BlogPostProps) {
   return (
     <div className="page-root">
-      <BlogPost source={source} meta={meta} />
+      <BlogPost source={source} meta={meta} slug={slug} />
     </div>
   )
 }
@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const source = await markdownToHtml(post.content)
 
   return {
-    props: { source, meta: post.meta },
+    props: { source, meta: post.meta, slug },
     revalidate: 1,
   }
 }
