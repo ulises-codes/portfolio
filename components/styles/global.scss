@@ -461,12 +461,18 @@ p {
   object-fit: cover;
 }
 
-.hljs-keyword {
+.hljs-keyword,
+.hljs-selector-class {
   color: var(--code-keyword);
 }
 
-.hljs-string {
+.hljs-string,
+.hljs-attribute {
   color: var(--code-string);
+}
+
+.hljs-comment {
+  opacity: 0.7;
 }
 
 @media (max-width: 827px) {

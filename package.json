@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@svgr/webpack": "^5.5.0",
-    "@ulises-codes/bite-me": "^7.0.0",
+    "@ulises-codes/bite-me": "^7.0.3",
     "@ulises-codes/helper-functions": "^0.3.0",
     "@ulises-codes/react-hooks": "^0.1.0",
     "css-paint-polyfill": "^3.2.0",

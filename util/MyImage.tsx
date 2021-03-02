@@ -1,10 +1,11 @@
 import Image from 'next/image'
 
-type MyImageProps = {
+export type MyImageProps = {
   src: string
   width?: number
   height?: number
   alt: string
+  className?: string
 }
 
 export default function MyImage({
@@ -12,5 +13,5 @@ export default function MyImage({
   height = 540,
   ...props
 }: MyImageProps) {
-  return <Image width={width} height={height} objectFit="cover" {...props} />
+  return <Image width={width} height={height} objectFit="contain" {...props} />
 }

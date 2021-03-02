@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import MyImage from 'util/MyImage'
+import type { MyImageProps } from 'util/MyImage'
 
 import styles from './styles.module.scss'
 
@@ -16,7 +17,11 @@ import { AVATAR as avatar } from 'util/SEO'
 export default function BlogPost({ source, meta, slug }: BlogPostProps) {
   const content = hydrate(source, {
     components: {
-      img: MyImage,
+      img: (props: MyImageProps) => (
+        <div className={styles.blogImageWrapper}>
+          <MyImage {...props} className={styles.blogImage} />
+        </div>
+      ),
       h2: (props: HTMLAttributes<HTMLHeadingElement>) => (
         <h2 className="subtitle" {...props} />
       ),
@@ -75,6 +80,9 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
             objectFit="cover"
             priority={true}
           />
+        </div>
+        <div>
+          <p>{meta.excerpt}</p>
         </div>
         <div>{content}</div>
       </article>

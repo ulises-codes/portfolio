@@ -1,23 +1,135 @@
 ---
 title: 'My Portfolio Site'
 author: 'Ulises Himely'
-publishDate: '02/26/2021'
+publishDate: '03/02/2021'
 editedDate: ''
-excerpt: 'I set out to build something that had a unique look, but was also performant by modern standards.'
+excerpt: "Web Development has changed my life. It's given me a way to express both the creative and analytical sides of my personality while doing something that I really enjoy. I can say that I am very passionate about Web Development, and I wanted to display that passion in my very first portfolio site, both in design and in performance."
 headerImageSrc: 'v1614349932/ulises.codes/blog/my-portfolio-site/joshua-reddekopp-SyYmXSDnJ54-unsplash_lt25d5.jpg'
 headerImageAlt: 'A glowing laptop.'
 ---
 
-## A Subheading
+## The 'Stack'
 
-Alternate UI themes (such as Dark Mode) have changed how web users can personalize their online experience, but they are also a way for you, the developer, to express yourself. But, where to begin? And how do you persist the user's choice even after they've closed the browser? While there are tons of UI and component libraries out there that can handle theming for you, often the best solution can be found with HTML, CSS, and some good ol' JS.
+It's really just a basic frontend stack.
 
-In this post we will look at a very simple theme switching solution using the [Local Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage). The Local Storage API allows you to easily save arbitrary data in key:value pairs in the browser cache. This means that the data persists unless the user clears their browser's cache.
+- Next JS
+- Typescript
+- Preact
+- SASS
+- Next-PWA
+- MDX
+
+This site is built on [Next JS](https://nextjs.org). Next is an amazing React framework that is pretty opinionated on the frontend, but extremely flexible when it comes to your backend. My site doesn't have much of a backend, but I've used various backend structures with Next and they always integrate fabulously.
+
+Next supports Typescript out of the box, which keeps me sane. Next also integrates seamlessly with [Preact](https://preactjs.com), a library that exposes virtually the same API as React, with much less overhead in terms of bundle size. I'll explain why I chose Preact later in this article.
+
+For styles, I chose to go with a combination of CSS and SASS modules. Why not Styled Components or another CSS-in-JS solution? I've used them before and will likely use them again, but I wanted to get back to basics when it came to styles. It was important to me to not add unnecessary JS (like declaring theme properties in React Context, for example), to see if I could avoid some of the bloat I've run into in some other projects.
+
+This blog is written in MDX because MDX is easy to write and because of how well it integrates with Next. I could host it anywhere and use Next's getStaticProps, but I decided to just host the blog along with my project and just rebuild each time I deploy a new post. As I write more blog posts, I may see an impact on my build time, which may lead me to seek another solution.
+
+## The Look
+
+I recently discovered the [CSS Paint API](https://developers.google.com/web/updates/2018/01/paintapi), also known as [CSS Houdini](https://houdini.how/). This is new web standard that is picking up traction, and allows us to do some really sick things without stuffing the DOM with a ton of elements, by hacking CSS itself.
+
+How? The Paint API basically turns the element you want to style into a canavs. This means you can draw (or paint) your styles right onto the element. If you want to learn more about why CSS Houdini is awesome, check out [this article](https://www.smashingmagazine.com/2016/03/houdini-maybe-the-most-exciting-development-in-css-youve-never-heard-of/).
+
+I'm currently using three paint worklets on my site:
+
+### Curved Line
+
+<img
+  src="v1614709764/ulises.codes/blog/my-portfolio-site/curved-line_cpdd1y.png"
+  alt="Example of the curved line paint worklet on this site"
+  height={275}
+  width={75}
+/>
+
+### Checkerboard
+
+<img
+  src="v1614709764/ulises.codes/blog/my-portfolio-site/checkerboard_p0740j.png"
+  alt="Example of the checkerboard paint worklet on this site"
+  height={75}
+  width={425}
+/>
+
+### Extra Underline
+
+<img
+  src="v1614709764/ulises.codes/blog/my-portfolio-site/underline_ejetcd.png"
+  alt="Example of the extra underline paint worklet on this site"
+  height={75}
+  width={200}
+/>
+
+## Custom Themes
+
+I wanted to incorporate custom themes into the design, where a user can quickly alternate between themes. The themes use different fonts and they persist even when the user leaves closes their browser. I did this using a combination of CSS variables and the [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
+
+I'll write up a full post on this approach to theming, but it is quite simple. The only challenge was making sure to grab the user's preferred theme before rendering the page, because we all hate it when a site flashes from light mode to dark mode suddenly (or is it just me?).
 
 ```js
-import something from 'somewhere'
+// public/getTheme.js
+// Check if there is a theme saved in localStorage
+const theme = JSON.parse(localStorage.getItem('theme'))
 
-const hello = something('parameter')
+const root = document.querySelector('body')
 
-console.log('hi'.toUpperCase())
+// If we found a theme in localStorage and it's not applied, apply it via class attribute
+if (theme && root.classList.value !== `theme-${theme.name}`) {
+  root.classList.value = `theme-${theme.name}`
+}
+// If no theme in localStorage, fallback to default theme
+else {
+  root.classList.value = 'theme-default'
+}
 ```
+
+And, just reverse the process when the user chooses a new theme:
+
+```js
+// components/Layout.tsx
+const body = document.querySelector('body')
+
+if (!body) return
+
+body.classList.value = `theme-${theme.name}`
+
+...
+
+localStorage.setItem('theme', JSON.stringify(theme))
+```
+
+Then, in your CSS, something like this:
+
+```css
+.theme-neon {
+  --background: some-color;
+}
+
+.theme-dark {
+  --background: some-other-color;
+}
+
+body {
+  background-color: var(--background);
+}
+```
+
+## Performance & Optimization
+
+I wanted to reduce the initial bundle size as much as possible. The less code required to load your site, the better it will perform across devices. I started with code splitting. In addition to route-based code-splitting, Next has built-in lazy-loading functionality, so I employed this where it would benefit my project. This reduced the bundle size significantly, but Lighthouse kept telling me I was still shipping too much unused code. I was able to make a noticeable impact by making two changes.
+
+### 1) Framer Motion
+
+I use Framer Motion in my home page. One of the main reasons is that it is not natively possible to implement unmount animations in React. Framer Motion makes that very easy. But it does come with some overhead. Fortunately, the team has worked on reducing the bundle size, and has even suggested a lazy-loading approach for features that we may not use right when the page first loads. I'll cover this more in another post; suffice it to say that I also implemented my own lazy-loading approach to the Framer Motion components.
+
+### 2) Preact
+
+I am a React Developer through-and-through, and am confident the React team will continue optimizing their amazing library. That said, I literally cut my bundle size in half by switching to Preact. The best part is, it really didn't take long to switch over, since Next already has an [example Preact project](https://github.com/vercel/next.js/tree/canary/examples/using-preact).
+
+Aside from those two changes, I took note of Lighthouse's recommendations, such as adding height and width to each image element, making sure there are no major layout shifts during rendering, and reducing the time to First Contentful Paint (FCP). The biggest change there is that in my home page, each section loads only when needed by using the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). That's something I'll cover in another post, so don't forget to check back in if you want to learn more about that.
+
+## PWA
+
+Finally, this site is a functional Progressive Web App (PWA). If you don't know what that is, welcome to the world of tomorrow! This site works offline and simulates a native experience on devices that support PWA (which is virtually all modern devices).
