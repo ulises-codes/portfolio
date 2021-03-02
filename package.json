@@ -26,9 +26,9 @@
     "next-pwa": "^5.0.5",
     "preact": "^10.5.12",
     "preact-render-to-string": "^5.1.12",
-    "react": "npm:@preact/compat",
-    "react-dom": "npm:@preact/compat",
-    "react-ssr-prepass": "npm:preact-ssr-prepass",
+    "react": "npm:@preact/compat@^0.0.3",
+    "react-dom": "npm:@preact/compat@^0.0.3",
+    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.1.2",
     "rehype-highlight": "^4.0.0",
     "remark-external-links": "^8.0.0",
     "webpack": "^5.23.0"
