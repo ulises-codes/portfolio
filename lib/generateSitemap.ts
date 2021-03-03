@@ -2,7 +2,7 @@ import { getAllPostSlugs } from './markdown/getPosts'
 import globby from 'globby'
 import fs from 'fs'
 ;(async function generateSitemap() {
-  const posts = getAllPostSlugs().map(({ params }) => `blog/${params.slug}`)
+  const posts = getAllPostSlugs().map(({ params }) => `/blog/${params.slug}/`)
 
   const pages = await globby([
     'pages/**/*.tsx',
