@@ -11,23 +11,29 @@ import fs from 'fs'
     '!pages/api',
   ])
 
-  const paths = pages.concat(posts)
+  const routes = pages.map(page => {
+    const path = page
+      .replace('.tsx', '')
+      .replace('pages', '')
+      .replace('/index', '/')
+
+    return path
+  })
+
+  const paths = routes.concat(posts)
 
   const sitemap = `
 <?xml version="1.0" encoding="UTF-8"?>
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${paths
+  .map(
+    slug => `
     <url>
-        <loc>https://ulises.codes</loc>
-        <priority>1.0</priority>
-    </url>${paths
-      .map(
-        slug => `
-    <url>
-        <loc>https://ulises.codes/blog/${slug}</loc>
+        <loc>https://ulises.codes${slug}</loc>
     </url>`
-      )
-      .join('')}
+  )
+  .join('')}
 </urlset>
 `
 
