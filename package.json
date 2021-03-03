@@ -4,10 +4,12 @@
   "scripts": {
     "dev": "next",
     "dev:net": "next -p 10.0.0.87:3000",
-    "build": "next build",
+    "build": "npm run prepublish && next build",
     "export": "next build && next export",
     "start": "next start -p 3001",
-    "prepublish": "tsc ./lib/mergeWebmanifest.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node  && node ./lib/mergeWebmanifest.js && rm ./lib/mergeWebmanifest.js && rm ./lib/themeList.js",
+    "sitemap": "tsc ./lib/generateSitemap.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/generateSitemap.js && rm ./lib/generateSitemap.js ./lib/markdown/getPosts.js",
+    "manifest": "tsc ./lib/mergeWebmanifest.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/mergeWebmanifest.js && rm ./lib/mergeWebmanifest.js ./lib/themeList.js",
+    "prepublish": "npm run sitemap && npm run manifest",
     "publish": "npm run prepublish && git push",
     "type-check": "tsc"
   },
@@ -38,6 +40,7 @@
     "@types/node": "^12.19.9",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
+    "globby": "^11.0.2",
     "sass": "^1.32.4",
     "typescript": "^4.1.5"
   },

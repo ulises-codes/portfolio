@@ -14,7 +14,8 @@ export default function Post({ source, meta, slug }: BlogPostProps) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { getPostBySlug, markdownToHtml } = await import('lib/getPosts')
+  const { getPostBySlug } = await import('lib/markdown/getPosts')
+  const { markdownToHtml } = await import('lib/markdown/markdownToHtml')
 
   if (!params) return { props: {} }
 
@@ -30,7 +31,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths = async () => {
-  const { getAllPostSlugs } = await import('lib/getPosts')
+  const { getAllPostSlugs } = await import('lib/markdown/getPosts')
 
   return { paths: getAllPostSlugs(), fallback: false }
 }

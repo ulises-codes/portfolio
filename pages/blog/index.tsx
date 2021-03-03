@@ -17,7 +17,7 @@ export default function BlogPage(props: {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { getAllPosts } = await import('lib/getPosts')
+  const { getAllPosts } = await import('lib/markdown/getPosts')
 
   const posts = getAllPosts()
 
