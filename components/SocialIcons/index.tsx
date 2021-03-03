@@ -17,7 +17,7 @@ export default function SocialIcons({ size = 24 }) {
         <GithubLogo width={size} height={size} />
       </a>
       <a
-        href="https://www.linkedin.com/in/ulises-h-9abb00124/"
+        href="https://www.linkedin.com/in/ulises-h/"
         target="_blank"
         rel="noreferrer noopener"
         className={styles.socialIcon}
