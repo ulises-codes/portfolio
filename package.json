@@ -1,6 +1,6 @@
 {
   "name": "ulises.codes",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "scripts": {
     "dev": "next",
     "dev:net": "next -p 10.0.0.87:3000",
