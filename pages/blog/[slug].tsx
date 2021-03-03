@@ -26,7 +26,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { source, meta: post.meta, slug },
-    revalidate: 1,
   }
 }
 
