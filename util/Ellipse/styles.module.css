@@ -2,7 +2,7 @@
   position: absolute;
   width: 115px;
   fill: none;
-  stroke: var(--ellipse-color);
+  stroke: var(--outline);
   stroke-width: 15px;
   top: -21px;
   left: -20px;

@@ -15,4 +15,14 @@
       transition: all 250ms ease-in;
     }
   }
+
+  &:focus {
+    path {
+      stroke: var(--selection-text);
+      stroke-width: 0.5;
+      fill: var(--selection-background);
+      stroke-width: var(--icon-stroke-width);
+      transition: all 250ms ease-in;
+    }
+  }
 }

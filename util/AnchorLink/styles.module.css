@@ -1,25 +1,23 @@
-.wrapper {
+.button {
   display: flex;
   align-items: center;
 }
 
-.wrapper > button {
-  opacity: 0.7;
+.button > span {
+  -webkit-text-stroke: transparent;
+  opacity: 0.6;
   height: 100%;
-  padding-block-end: var(--padding);
   margin-left: var(--margin);
   font-size: 1.75rem;
+  padding-block-end: var(--padding);
   transition: all 250ms ease;
+  user-select: none;
 }
 
-.wrapper > button:hover {
+.button:hover > span {
   opacity: 1;
-  color: var(--primary);
-  transition: all 250ms ease;
 }
 
-.wrapper > button:active {
-  opacity: 0.8;
-  color: var(--primary);
-  transition: all 250ms ease;
+.button:active > span {
+  opacity: 0.7;
 }

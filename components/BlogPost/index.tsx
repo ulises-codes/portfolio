@@ -46,7 +46,9 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
       <BlogPostSEO title={meta.title} meta={meta} slug={slug} avatar={avatar} />
       <article className={styles.blogPost}>
         <div className="blog-heading">
-          <h1 className="title">{meta.title}</h1>
+          <div className={styles.titleWrapper}>
+            <h1 className="title">{meta.title}</h1>
+          </div>
           <div className="single-line-divider" />
           <div className={[styles.meta, 'blog-meta'].join(' ')}>
             <Link href="/">
@@ -64,7 +66,7 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
               </a>
             </Link>
             <div className={styles.social}>
-              <SocialIcons size={16} />
+              <SocialIcons size={18} />
             </div>
             <time dateTime={publishDate}>{publishDate}</time>
           </div>

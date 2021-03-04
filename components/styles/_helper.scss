@@ -1,0 +1,167 @@
+@use 'sass:color';
+
+@mixin theme-colors($white, $black, $primary, $secondary, $outline) {
+  --white: #{$white};
+  --black: #{$black};
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --outline: #{$outline};
+}
+
+@mixin surface-colors(
+  $background,
+  $background-texture,
+  $surface,
+  $hex-stroke-color,
+  $game-background,
+  $hr-color
+) {
+  --background: #{$background};
+  --background-texture: #{$background-texture};
+  --surface: #{$surface};
+  --hex-stroke-color: #{$hex-stroke-color};
+  --game-background: #{$game-background};
+  --hr-color: #{$hr-color};
+}
+
+@mixin theme-text(
+  $text-primary,
+  $text-on-surface,
+  $title-font,
+  $title-color,
+  $title-background-color,
+  $subtitle-font,
+  $subtitle-color,
+  $selection-background,
+  $selection-text
+) {
+  --text-primary: #{$text-primary};
+  --text-on-surface: #{$text-on-surface};
+  --title-font: #{$title-font};
+  --title-color: #{$title-color};
+  --title-background-color: #{$title-background-color};
+  --subtitle-font: #{$subtitle-font};
+  --subtitle-color: #{$subtitle-color};
+  --selection-background: #{$selection-background};
+  --selection-text: #{$selection-text};
+
+  --inactive-text: #{color.scale($text-primary, $alpha: -50%)};
+}
+
+@mixin code-element(
+  $code-background,
+  $code-keyword,
+  $code-string,
+  $code-text-color
+) {
+  --code-background: #{$code-background};
+  --code-keyword: #{$code-keyword};
+  --code-string: #{$code-string};
+  --code-text-color: #{$code-text-color};
+}
+
+@mixin worklets(
+  $checkerboard-color,
+  $checkerboard-spacing,
+  $checkerboard-size,
+  $curved-lineColor,
+  $curved-lineSpread,
+  $curved-lineWidth,
+  $curved-lineHeight
+) {
+  --checkerboard-color: #{$checkerboard-color};
+  --checkerboard-spacing: #{$checkerboard-spacing};
+  --checkerboard-size: #{$checkerboard-size};
+  --curved-lineColor: #{$curved-lineColor};
+  --curved-lineSpread: #{$curved-lineSpread};
+  --curved-lineWidth: #{$curved-lineWidth};
+  --curved-lineHeight: #{$curved-lineHeight};
+}
+
+@mixin icons($icon-fill, $icon-stroke) {
+  --icon-fill: #{$icon-fill};
+  --icon-stroke: #{$icon-stroke};
+}
+
+@mixin create-theme(
+  $theme-name,
+  $white: #fff8e2,
+  $black: #171717,
+  $primary: #f1dd6d,
+  $secondary: #24748f,
+  $outline: var(--primary),
+  $background,
+  $background-texture: none,
+  $surface,
+  $hex-stroke-color: var(--white),
+  $game-background: var(--background),
+  $hr-color: var(--primary),
+  $text-primary: #fff8e2,
+  $text-on-surface,
+  $title-font: "'Bungee Shade', Arial, sans-serif",
+  $title-color: var(--black),
+  $title-background-color: var(--primary),
+  $subtitle-font: "'Indie Flower', cursive, sans-serif",
+  $subtitle-color: var(--text-primary),
+  $selection-background: rgba(241, 221, 109, 0.99),
+  $selection-text: var(--black),
+  $code-background: var(--surface),
+  $code-keyword: #f26463,
+  $code-string,
+  $code-text-color: var(--text-on-surface),
+  $checkerboard-color: #{'#BF43A1, #F26463, #F1DD6D, #24748F, #2BACB3'},
+  $checkerboard-spacing: 7,
+  $checkerboard-size: 16,
+  $curved-lineColor: var(--white),
+  $curved-lineSpread: 50,
+  $curved-lineWidth: 2,
+  $curved-lineHeight: 20,
+  $icon-fill: var(--white),
+  $icon-stroke: none
+) {
+  .theme-#{$theme-name} {
+    @include theme-colors($white, $black, $primary, $secondary, $outline);
+
+    @include surface-colors(
+      $background,
+      $background-texture,
+      $surface,
+      $hex-stroke-color,
+      $game-background,
+      $hr-color
+    );
+
+    @include theme-text(
+      $text-primary,
+      $text-on-surface,
+      $title-font,
+      $title-color,
+      $title-background-color,
+      $subtitle-font,
+      $subtitle-color,
+      $selection-background,
+      $selection-text
+    );
+
+    @include code-element(
+      $code-background,
+      $code-keyword,
+      $code-string,
+      $code-text-color
+    );
+
+    @include worklets(
+      $checkerboard-color,
+      $checkerboard-spacing,
+      $checkerboard-size,
+      $curved-lineColor,
+      $curved-lineSpread,
+      $curved-lineWidth,
+      $curved-lineHeight
+    );
+
+    @include icons($icon-fill, $icon-stroke);
+
+    @content;
+  }
+}

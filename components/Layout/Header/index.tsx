@@ -1,8 +1,6 @@
 import { useContext } from 'react'
 import { BoredContext } from 'components/Layout'
 import Link from 'next/link'
-import FullLogo from 'public/images/logo/full-logo.svg'
-import LogoSymbol from 'public/images/logo/symbol.svg'
 
 import styles from './styles.module.css'
 
@@ -24,8 +22,18 @@ export default function Header({ setIsBored, theme }: HeaderProps) {
       <nav>
         <Link href="/">
           <a className={styles.logoLink} aria-label="ulises-codes-logo">
-            <LogoSymbol className={styles.logoSymbol} height="32" width="32" />
-            <FullLogo className={styles.fullLogo} height="46" width="250" />
+            <img
+              className={styles.logoSymbol}
+              src="/images/logo/symbol.svg"
+              height="32"
+              width="32"
+            />
+            <img
+              className={styles.fullLogo}
+              src="/images/logo/full-logo.svg"
+              height="46"
+              width="250"
+            />
           </a>
         </Link>
         <div className={styles.navLinks}>

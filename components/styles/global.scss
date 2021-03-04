@@ -1,4 +1,6 @@
+@use 'sass:color';
 @use 'styles/variables';
+@use 'styles/helper';
 
 html {
   box-sizing: border-box;
@@ -13,7 +15,7 @@ html {
 
 :root {
   --page-width: 960px;
-  --margin: 16px;
+  --margin: 1.2rem;
   --padding: 16px;
   --header-height: 100px;
   --footer-height: 225px;
@@ -35,44 +37,7 @@ html {
   transform: scale(-1);
 }
 
-.theme-default,
-.theme-dark {
-  --white: #fff8e2;
-  --black: #171717;
-  --primary: #f1dd6d;
-  --secondary: #24748f;
-
-  --text-primary: var(--white);
-
-  --title-font: 'Bungee Shade', Arial, sans-serif;
-  --title-color: var(--black);
-  --title-background-color: var(--primary);
-
-  --subtitle-font: 'Indie Flower', cursive, sans-serif;
-  --subtitle-color: var(--text-primary);
-
-  --selection-background: rgba(241, 221, 109, 0.99);
-  --selection-text: var(--black);
-
-  --icon-fill: var(--white);
-
-  --code-background: var(--surface);
-  --code-keyword: #f26463;
-  --code-text-color: var(--text-on-surface);
-
-  --checkerboard-color: #{'#BF43A1, #F26463, #F1DD6D, #24748F, #2BACB3'};
-
-  --hex-stroke-color: var(--white);
-  --ellipse-color: var(--primary);
-
-  --game-background: var(--background);
-
-  --hr-color: var(--primary);
-
-  --curved-lineSpread: 50;
-  --curved-lineWidth: 2;
-  --curved-lineHeight: 20;
-
+@mixin default-styles {
   scrollbar-color: var(--primary) var(--secondary);
 
   &::-webkit-scrollbar-thumb {
@@ -86,76 +51,62 @@ html {
   &::-webkit-scrollbar {
     width: 8px;
   }
-
-  .curved-line-vertical {
-    --curved-lineColor: #{var(--white)};
-  }
-
-  .blog-meta {
-    color: var(--white);
-  }
 }
 
-.theme-default {
-  --background: #24748f;
-  --background-texture: none;
-
-  --surface: var(--white);
-  --text-on-surface: var(--black);
-  --code-string: #2bacb3;
+@include helper.create-theme(
+  $theme-name: default,
+  $background: #24748f,
+  $surface: var(--white),
+  $text-on-surface: var(--black),
+  $code-string: #2bacb3
+) {
+  @include default-styles;
 }
 
-.theme-dark {
-  --background: #232625;
-  --background-texture: none;
-  --surface: var(--secondary);
-  --text-on-surface: var(--white);
-  --code-string: var(--primary);
+@include helper.create-theme(
+  $theme-name: dark,
+  $background: #232625,
+  $surface: var(--secondary),
+  $text-on-surface: var(--white),
+  $code-string: var(--primary)
+) {
+  @include default-styles;
 }
 
-.theme-paper {
-  --background: #d9d2d0;
-  --background-texture: paint(checkerboard);
-
-  --white: #fff8e2;
-  --black: #0d0d0d;
-
-  --secondary: var(--background);
-  --surface: #40404c;
-
-  --text-primary: var(--black);
-  --text-on-surface: var(--white);
-
-  --title-font: 'IM Fell English';
-  --subtitle-font: 'Signika';
-  --subtitle-color: var(--text-primary);
-
-  --selection-background: var(--white);
-  --selection-text: var(--black);
-
-  --icon-fill: var(--black);
-
-  --code-background: var(--surface);
-  --code-keyword: #f2f2f2;
-  --code-string: #d9d8d7;
-  --code-text-color: var(--white);
-
-  --game-background: var(--black);
-
-  --hex-stroke-color: var(--black);
-
-  --checkerboard-color: #{var(--surface)};
-  --checkerboard-spacing: 18;
-  --checkerboard-size: 1;
-
-  --curved-lineSpread: 100;
-  --curved-lineWidth: 3;
-  --curved-lineHeight: 25;
-
-  --ellipse-color: var(--black);
-
-  --hr-color: var(--black);
-
+@include helper.create-theme(
+  $theme-name: paper,
+  $white: #fff8e2,
+  $black: #0d0d0d,
+  $primary: none,
+  $background: #d9d2d0,
+  $background-texture: paint(checkerboard),
+  $secondary: var(--background),
+  $surface: #40404c,
+  $text-primary: #171717,
+  $text-on-surface: var(--white),
+  $title-font: 'IM Fell English',
+  $title-background-color: none,
+  $subtitle-font: 'Signika',
+  $subtitle-color: var(--text-primary),
+  $selection-background: var(--white),
+  $selection-text: var(--black),
+  $icon-fill: var(--black),
+  $code-background: var(--surface),
+  $code-keyword: #f2f2f2,
+  $code-string: #d9d8d7,
+  $code-text-color: var(--white),
+  $game-background: var(--black),
+  $hex-stroke-color: var(--black),
+  $checkerboard-color: #{var(--surface)},
+  $checkerboard-spacing: 18,
+  $checkerboard-size: 1,
+  $curved-lineColor: var(--black),
+  $curved-lineSpread: 100,
+  $curved-lineWidth: 3,
+  $curved-lineHeight: 25,
+  $outline: var(--black),
+  $hr-color: var(--black)
+) {
   scrollbar-width: thin;
   scrollbar-color: transparent var(--surface);
 
@@ -175,67 +126,52 @@ html {
   & #__next {
     background-image: var(--background-texture);
   }
-
-  .curved-line-vertical {
-    --curved-lineColor: #{var(--black)};
-  }
-
-  .blog-meta {
-    color: var(--black);
-  }
 }
 
-.theme-neon {
-  --background: #4c1e59;
-  --background-texture: none;
-
-  --white: #fff8e2;
-  --black: #171717;
-  --red: #f26463;
-  --primary: #ff00aa;
-  --secondary: #00aaff;
-  --surface: var(--secondary);
-
-  --title-font: 'Yesteryear', cursive;
-  --subtitle-font: 'Limelight', cursive;
-  --subtitle-color: transparent;
-  --subtitle-stroke: 1px var(--secondary);
-
-  --selection-background: rgba(255, 0, 170, 0.99);
-  --selection-text: var(--white);
-
-  --icon-fill: none;
-  --icon-stroke: var(--secondary);
+@include helper.create-theme(
+  $theme-name: neon,
+  $background: #4c1e59,
+  $background-texture: none,
+  $white: #fff8e2,
+  $black: #171717,
+  $primary: #ff00aa,
+  $secondary: #00aaff,
+  $surface: var(--secondary),
+  $title-font: "'Yesteryear', cursive",
+  $title-color: none,
+  $title-background-color: none,
+  $subtitle-font: "'Limelight', cursive",
+  $subtitle-color: transparent,
+  $selection-background: rgba(255, 0, 170, 0.99),
+  $selection-text: var(--white),
+  $icon-fill: none,
+  $icon-stroke: var(--secondary),
+  $text-primary: #fff8e2,
+  $text-on-surface: var(--black),
+  $code-background: transparent,
+  $code-keyword: var(--red),
+  $code-string: #2bacb3,
+  $code-text-color: var(--white),
+  $hex-stroke-color: var(--primary),
+  $hr-color: var(--primary),
+  $game-background: var(--secondary),
+  $checkerboard-color: var(--background),
+  $curved-lineColor: var(--secondary),
+  $curved-lineSpread: 3,
+  $curved-lineWidth: 3,
+  $curved-lineHeight: 20,
+  $outline: none
+) {
   --icon-stroke-width: 1px;
-
+  --subtitle-stroke: #{1px var(--secondary)};
+  --red: #f26463;
+  --active-tab-color: #{var(--subtitle-color)};
+  --active-tab-stroke: #{1px var(--primary)};
+  --checkerboard-animation: glowing 5s ease infinite;
+  --checkerboard-stroke-color: #{var(--primary)};
+  --codepen-color: #{var(--primary)};
   --neon-glow: 0 0 0px;
   --neon-animation: glowing 5s linear infinite;
-
-  --text-primary: var(--white);
-  --text-on-surface: var(--black);
-
-  --active-tab-color: var(--subtitle-color);
-  --active-tab-stroke: 1px var(--primary);
-
-  --code-background: transparent;
-  --code-keyword: var(--red);
-  --code-string: #2bacb3;
-  --code-text-color: var(--white);
-
-  --hex-stroke-color: var(--primary);
-  --hr-color: var(--primary);
-
-  --game-background: var(--secondary);
-
-  --checkerboard-color: #{var(--background)};
-  --checkerboard-animation: glowing 5s ease infinite;
-  --checkerboard-stroke-color: var(--primary);
-
-  --curved-lineSpread: 3;
-  --curved-lineWidth: 3;
-  --curved-lineHeight: 20;
-
-  --codepen-color: var(--primary);
 
   scrollbar-width: thin;
   scrollbar-color: transparent var(--primary);
@@ -271,12 +207,12 @@ html {
   }
 
   .curved-line-vertical {
-    --curved-lineColor: #{var(--secondary)};
     filter: drop-shadow(2px 4px 6px var(--secondary));
   }
 
-  .blog-meta {
-    color: var(--secondary);
+  .blog-meta * {
+    color: transparent;
+    -webkit-text-stroke: var(--subtitle-stroke);
   }
 
   @keyframes glowing {
@@ -296,14 +232,14 @@ html {
 }
 
 body {
+  // $black: 'var(--black)';
+  // --inactive-text: #{color.scale($black, $alpha: -40%)};
   margin: 0;
   background-color: var(--background);
-
   color: var(--text-primary);
   font-family: var(--subtitle-font), sans-serif;
-  min-height: 100vh;
   position: relative;
-
+  min-height: 100vh;
   scrollbar-width: thin;
 
   #__next {
@@ -325,7 +261,6 @@ main {
 }
 
 h1 {
-  display: inline;
   font-family: var(--title-font);
   color: var(--title-color);
   font-size: 2.5rem;
@@ -337,6 +272,7 @@ h4 {
 }
 
 .title {
+  display: inline;
   background-color: var(--title-background-color);
 }
 
@@ -355,6 +291,7 @@ h4 {
   font-size: 1.4rem;
   width: max-content;
   background: paint(extra-underline);
+  padding-block-end: var(--padding);
 }
 
 .subtitle:not(.on-surface) {
@@ -403,6 +340,24 @@ button {
   cursor: pointer;
   padding: 0;
   outline: none;
+  transition: all 250ms ease;
+}
+
+button:hover,
+.button:hover {
+  color: var(--primary);
+}
+
+button:active {
+  color: var(--primary);
+  opacity: 0.8;
+}
+
+button:focus,
+.button:focus {
+  background-color: var(--selection-background);
+  color: var(--selection-text);
+  fill: var(--selection-text);
 }
 
 cite {
@@ -434,8 +389,8 @@ p {
 }
 
 .checkerboard {
-  --checkerboard-spacing: 7;
   --checkerboard-size: 16;
+  --checkerboard-spacing: 7;
   background: paint(checkerboard);
   height: 62px;
   width: 100%;
