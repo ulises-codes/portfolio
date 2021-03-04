@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper > button {
+  opacity: 0.7;
+  height: 100%;
+  padding-block-end: var(--padding);
+  margin-left: var(--margin);
+  font-size: 1.75rem;
+  transition: all 250ms ease;
+}
+
+.wrapper > button:hover {
+  opacity: 1;
+  color: var(--primary);
+  transition: all 250ms ease;
+}
+
+.wrapper > button:active {
+  opacity: 0.8;
+  color: var(--primary);
+  transition: all 250ms ease;
+}
