@@ -31,6 +31,7 @@ export default function PostCard({ slug, meta }: BlogPostInfo) {
           alt={meta.headerImageAlt}
           objectFit="cover"
           priority={true}
+          quality={50}
         />
         <hr className={styles.hr} />
         <div className={styles.excerpt}>{meta.excerpt}</div>

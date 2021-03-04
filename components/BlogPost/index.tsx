@@ -13,6 +13,7 @@ import type { HTMLAttributes } from 'react'
 import SocialIcons from 'components/SocialIcons'
 import BlogPostSEO from 'util/SEO/BlogPostSEO'
 import { AVATAR as avatar } from 'util/SEO'
+import AnchorLink from 'util/AnchorLink'
 
 export default function BlogPost({ source, meta, slug }: BlogPostProps) {
   const content = hydrate(source, {
@@ -22,9 +23,7 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
           <MyImage {...props} className={styles.blogImage} />
         </div>
       ),
-      h2: (props: HTMLAttributes<HTMLHeadingElement>) => (
-        <h2 className="subtitle" {...props} />
-      ),
+      h2: AnchorLink,
       a: (props: HTMLAttributes<HTMLAnchorElement>) => (
         <a
           {...props}
@@ -79,6 +78,7 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
             alt={meta.headerImageAlt}
             objectFit="cover"
             priority={true}
+            quality={50}
           />
         </div>
         <div>

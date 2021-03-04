@@ -7,6 +7,7 @@ import styles from 'components/BlogPost/styles.module.scss'
 
 import type { MyImageProps } from 'util/MyImage'
 import type { HTMLAttributes } from 'react'
+import AnchorLink from 'util/AnchorLink'
 
 export async function markdownToHtml(markdown: string) {
   return renderToString(markdown, {
@@ -19,7 +20,7 @@ export async function markdownToHtml(markdown: string) {
           <MyImage {...props} className={styles.blogImage} />
         </div>
       ),
-      h2: (props: HTMLAttributes<HTMLHeadingElement>) => <h2 {...props} />,
+      h2: AnchorLink,
       a: (props: HTMLAttributes<HTMLAnchorElement>) => (
         <a
           {...props}
