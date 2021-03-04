@@ -15,10 +15,13 @@ html {
 
 :root {
   --page-width: 960px;
+  --font-size: 18px;
   --margin: 1.2rem;
   --padding: 16px;
   --header-height: 100px;
   --footer-height: 225px;
+
+  font-size: var(--font-size);
 }
 
 ::selection {
@@ -232,8 +235,6 @@ html {
 }
 
 body {
-  // $black: 'var(--black)';
-  // --inactive-text: #{color.scale($black, $alpha: -40%)};
   margin: 0;
   background-color: var(--background);
   color: var(--text-primary);
@@ -241,6 +242,7 @@ body {
   position: relative;
   min-height: 100vh;
   scrollbar-width: thin;
+  line-height: 1.5;
 
   #__next {
     min-height: 100vh;
@@ -365,7 +367,6 @@ cite {
 }
 
 p {
-  line-height: 1.5;
   font-size: 1.1rem;
   letter-spacing: 1.1px;
 }
@@ -425,13 +426,13 @@ p {
 
 @media (max-width: 827px) {
   :root {
-    font-size: 18px;
+    --font-size: 17px;
   }
 }
 
 @media (max-width: 773px) {
   :root {
-    font-size: 16px;
+    --font-size: 16px;
   }
 }
 
