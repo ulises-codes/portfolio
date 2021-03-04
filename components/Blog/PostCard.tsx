@@ -10,7 +10,7 @@ export default function PostCard({ slug, meta }: BlogPostInfo) {
         <div className={styles.titleWrapper}>
           <Link href={`/blog/${slug}`}>
             <a>
-              <h2 className={['subtitle on-surface', styles.title].join(' ')}>
+              <h2 className={['on-surface', styles.title].join(' ')}>
                 {meta.title}
               </h2>
             </a>

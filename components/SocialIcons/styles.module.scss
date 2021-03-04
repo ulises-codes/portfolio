@@ -1,4 +1,6 @@
 .socialIcon {
+  display: inline-flex;
+
   path {
     fill: var(--icon-fill);
     stroke: var(--icon-stroke);

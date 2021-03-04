@@ -325,7 +325,7 @@ main {
 }
 
 h1 {
-  display: inline-block;
+  display: inline;
   font-family: var(--title-font);
   color: var(--title-color);
   font-size: 2.5rem;
@@ -353,7 +353,6 @@ h4 {
   --extra-underlineWidth: 1;
   --extra-underlineSpread: 8;
   font-size: 1.4rem;
-  line-height: normal;
   width: max-content;
   background: paint(extra-underline);
 }
@@ -370,12 +369,6 @@ h4 {
   color: var(--subtitle-color);
 }
 
-.subtitle,
-.button:not(a),
-.active-tab {
-  min-height: 33px;
-}
-
 .active-tab:not(:disabled) {
   -webkit-text-stroke: var(--active-tab-stroke);
 }
@@ -386,7 +379,6 @@ a {
   font-family: inherit;
   color: inherit;
   font-size: inherit;
-  line-height: 0;
 }
 
 .link {
@@ -420,6 +412,7 @@ cite {
 p {
   line-height: 1.5;
   font-size: 1.1rem;
+  letter-spacing: 1.1px;
 }
 
 .page-root {
@@ -487,9 +480,8 @@ p {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 662px) {
   :root {
     --header-height: 56px;
-    font-size: 14px;
   }
 }

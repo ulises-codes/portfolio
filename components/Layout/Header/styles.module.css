@@ -18,6 +18,7 @@
 
 .logoLink {
   width: max-content;
+  display: flex;
 }
 
 .logoSymbol,
