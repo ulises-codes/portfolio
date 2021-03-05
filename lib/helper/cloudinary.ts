@@ -11,3 +11,7 @@ export const constructURLPrefix = (w: number, h: number, suffix: string) => {
 export const generateURLs = (url: string) => {
   return ratios.map(({ w, h }) => constructURLPrefix(w, h, url))
 }
+
+export const constructMetaURL = (w: number, h: number, suffix: string) => {
+  return `https://res.cloudinary.com/da3fgujdy/c_fit,h_${h},w_${w}/${suffix}`
+}

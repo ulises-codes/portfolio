@@ -1,4 +1,4 @@
-import { constructURLPrefix, generateURLs } from 'lib/helper/cloudinary'
+import { constructMetaURL, generateURLs } from 'lib/helper/cloudinary'
 import SEO from '.'
 
 import type { BlogPostMeta } from 'interfaces/blog'
@@ -79,7 +79,7 @@ export default function BlogPostSEO({
       <meta property="og:article:author" content={meta.author} />
       <meta
         property="og:image"
-        content={constructURLPrefix(1080, 1080, meta.headerImageSrc)}
+        content={constructMetaURL(1080, 1080, meta.headerImageSrc)}
       />
       <meta property="og:image:width" content="1080" />
       <meta property="og:image:height" content="1080" />
@@ -90,7 +90,7 @@ export default function BlogPostSEO({
       <meta name="twitter:description" content={meta.excerpt} />
       <meta
         property="twitter:image"
-        content={constructURLPrefix(1200, 630, meta.headerImageSrc)}
+        content={constructMetaURL(1200, 630, meta.headerImageSrc)}
       />
       <meta
         name="twitter:image:alt"
