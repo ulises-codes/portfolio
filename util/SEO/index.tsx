@@ -17,6 +17,10 @@ export default function SEO({
         children
       ) : (
         <>
+          <meta
+            name="description"
+            content="Ulises Himely is a Web Developer, specializing in React, Typescript, GraphQL, and other technologies. He is also an avid human being. There is no proof that aliens are living among us in disguise."
+          />
           <meta property="og:title" content="Ulises Himely | Web Developer" />
           <meta
             property="og:image"
