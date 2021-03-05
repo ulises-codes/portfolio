@@ -1,4 +1,4 @@
-import { generateURLs } from 'lib/helper/cloudinary'
+import { constructURLPrefix, generateURLs } from 'lib/helper/cloudinary'
 import SEO, { AVATAR } from '.'
 
 import type { BlogPostInfo } from 'interfaces/blog'
@@ -53,11 +53,18 @@ export default function BlogSEO({ posts }: { posts: BlogPostInfo[] }) {
       <meta property="og:url" content={`https://ulises.codes/blog`} />
       <meta
         property="og:image"
-        content={constructURLPrefix(1080, 1080, meta.headerImageSrc)}
+        content={constructURLPrefix(
+          1080,
+          1080,
+          'v1610482183/ulises.codes/portfolio-screenshot_uz1fon.png'
+        )}
       />
       <meta property="og:image:width" content="1080" />
       <meta property="og:image:height" content="1080" />
-      <meta property="og:image:alt" content={meta.headerImageAlt} />
+      <meta
+        property="og:image:alt"
+        content="Screenshot of website ulises.codes"
+      />
       <meta
         property="twitter:image"
         content={constructURLPrefix(
