@@ -5,7 +5,7 @@ const ratios = [
 ]
 
 export const constructURLPrefix = (w: number, h: number, suffix: string) => {
-  return `"https://res.cloudinary.com/da3fgujdy/c_fill,h_${h},w_${w}/${suffix}"`
+  return `"https://res.cloudinary.com/da3fgujdy/c_fit,h_${h},w_${w}/${suffix}"`
 }
 
 export const generateURLs = (url: string) => {
