@@ -83,6 +83,21 @@ export default function BlogPostSEO({
       <meta property="og:image:width" content="1080" />
       <meta property="og:image:height" content="1080" />
       <meta property="og:image:alt" content={meta.headerImageAlt} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@uliseshimely" />
+      <meta name="twitter:title" content="Ulises Himely | Web Developer" />
+      <meta
+        name="twitter:description"
+        content="Ulises Himely is a Web Developer, specializing in React, Typescript, GraphQL, and other technologies. He is also an avid human being. There is no proof that aliens are living among us in disguise."
+      />
+      <meta
+        property="twitter:image"
+        content={constructURLPrefix(1200, 630, meta.headerImageSrc)}
+      />
+      <meta
+        name="twitter:image:alt"
+        content="Screenshot of website ulises.codes"
+      />
     </SEO>
   )
 }

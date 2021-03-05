@@ -48,6 +48,24 @@ export default function BlogSEO({ posts }: { posts: BlogPostInfo[] }) {
 }`,
         }}
       />
+      <meta property="og:title" content="Ulises Himely | Web Dev Blog" />
+      <meta property="og:type" content="article" />
+      <meta property="og:url" content={`https://ulises.codes/blog`} />
+      <meta
+        property="og:image"
+        content={constructURLPrefix(1080, 1080, meta.headerImageSrc)}
+      />
+      <meta property="og:image:width" content="1080" />
+      <meta property="og:image:height" content="1080" />
+      <meta property="og:image:alt" content={meta.headerImageAlt} />
+      <meta
+        property="twitter:image"
+        content={constructURLPrefix(
+          1200,
+          630,
+          'v1610482183/ulises.codes/portfolio-screenshot_uz1fon.png'
+        )}
+      />
     </SEO>
   )
 }
