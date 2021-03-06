@@ -1,6 +1,7 @@
 .button {
   display: flex;
   align-items: center;
+  will-change: opacity;
 }
 
 .button > span {

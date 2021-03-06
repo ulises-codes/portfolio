@@ -27,6 +27,7 @@
 }
 
 .meta {
+  min-height: 48px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -43,8 +44,9 @@
   align-items: center;
 
   a {
-    margin: 0 12px;
+    margin: 0 4px;
     width: max-content;
+    padding: 15px;
   }
 }
 
@@ -67,7 +69,7 @@
   margin: auto;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 490px) {
   .social {
     padding: 4px 0;
     order: 3;

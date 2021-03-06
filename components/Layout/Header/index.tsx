@@ -27,12 +27,16 @@ export default function Header({ setIsBored, theme }: HeaderProps) {
               src="/images/logo/symbol.svg"
               height="32"
               width="32"
+              role="presentation"
+              alt=""
             />
             <img
               className={styles.fullLogo}
               src="/images/logo/full-logo.svg"
               height="46"
               width="250"
+              role="presentation"
+              alt=""
             />
           </a>
         </Link>
