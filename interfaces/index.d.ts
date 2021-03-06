@@ -17,3 +17,7 @@ export declare global {
     }
   }
 }
+
+export interface PageProps {
+  theme: ThemeProps
+}

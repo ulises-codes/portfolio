@@ -45,8 +45,6 @@ export default function Layout({
     }
 
     if (currentTheme?.name !== theme.name) {
-      console.log('SETTING NEW THEME: ', theme.name)
-
       setCurrentTheme(theme)
     }
 
@@ -56,16 +54,6 @@ export default function Layout({
   return (
     <>
       <Head key="layout-tags">
-        <link
-          href={`https://fonts.googleapis.com/css2?family=${
-            currentTheme.titleFont ?? 'Bungee+Shade'
-          }&display=block`}
-          rel="preload"
-          as="style"
-          type="text/css"
-          crossOrigin="anonymous"
-          onLoad={"this.rel='stylesheet'" as any}
-        />
         <link
           href={`https://fonts.googleapis.com/css2?family=${
             currentTheme.subtitleFont ?? 'Indie+Flower'

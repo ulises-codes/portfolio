@@ -1,6 +1,7 @@
 import type { BlogPostInfo } from 'interfaces/blog'
-import Image from 'next/image'
+
 import Link from 'next/link'
+import MyImage from 'util/MyImage'
 import styles from './styles.module.css'
 
 export default function PostCard({ slug, meta }: BlogPostInfo) {
@@ -24,13 +25,11 @@ export default function PostCard({ slug, meta }: BlogPostInfo) {
           </time>
         </div>
         <hr className={styles.hr} />
-        <Image
+        <MyImage
           src={meta.headerImageSrc}
           width={650}
           height={267.19}
           alt={meta.headerImageAlt}
-          objectFit="cover"
-          priority={true}
           quality={50}
         />
         <hr className={styles.hr} />

@@ -1,6 +1,7 @@
 const withPlugins = require('next-compose-plugins')
 const withPreact = require('next-plugin-preact')
 const withPWA = require('next-pwa')
+const withPrefresh = require('@prefresh/next')
 
 const nextConfig = {
   poweredByHeader: false,
@@ -16,12 +17,12 @@ const nextConfig = {
     return config
   },
   images: {
-    loader: 'cloudinary',
-    path: ['https://res.cloudinary.com/da3fgujdy'],
+    domains: ['res.cloudinary.com'],
   },
 }
 
 module.exports = withPlugins([
+  [withPrefresh],
   [withPreact],
   [
     withPWA,

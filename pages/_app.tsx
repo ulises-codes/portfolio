@@ -14,8 +14,7 @@ import dynamic from 'next/dynamic'
 
 import { useRouter } from 'next/router'
 
-import { MotionFeature } from 'framer-motion'
-
+import type { MotionFeature } from 'framer-motion'
 import type { AppProps } from 'next/app'
 import type { MotionConfigProps } from 'framer-motion/types/motion/context/MotionConfigContext'
 
@@ -103,14 +102,18 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, [isOnline, router.route])
 
   return (
-    <MotionConfig features={features}>
-      <Layout
-        theme={{
-          currentTheme,
-          setCurrentTheme: theme => setCurrentTheme(theme),
-        }}>
-        <Component {...pageProps} />
-      </Layout>
-    </MotionConfig>
+    <Layout
+      theme={{
+        currentTheme,
+        setCurrentTheme: theme => setCurrentTheme(theme),
+      }}>
+      {router.pathname === '/' ? (
+        <MotionConfig features={features}>
+          <Component {...pageProps} theme={currentTheme} />
+        </MotionConfig>
+      ) : (
+        <Component {...pageProps} theme={currentTheme} />
+      )}
+    </Layout>
   )
 }

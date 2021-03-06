@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import { dedupeString } from '@ulises-codes/helper-functions'
 
 const postsDirectory = join(process.cwd(), 'blog')
 
@@ -11,7 +12,12 @@ export function getPostBySlug(slug: string) {
 
   const { data, content } = matter.read(fullPath)
 
-  return { slug: realSlug, meta: data, content }
+  return {
+    slug: realSlug,
+    meta: data,
+    content,
+    dedupedTitle: dedupeString(data.title),
+  }
 }
 
 export const getAllPostSlugs = () => {

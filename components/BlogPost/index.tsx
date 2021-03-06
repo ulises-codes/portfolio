@@ -1,6 +1,5 @@
 import hydrate from 'next-mdx-remote/hydrate'
 
-import Image from 'next/image'
 import Link from 'next/link'
 
 import MyImage from 'util/MyImage'
@@ -53,11 +52,11 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
           <div className={[styles.meta, 'blog-meta'].join(' ')}>
             <Link href="/">
               <a rel="author" className={styles.author}>
-                <Image
+                <MyImage
+                  layout="intrinsic"
                   src={avatar}
                   width={30}
                   height={30}
-                  objectFit="cover"
                   alt=""
                   role="presentation"
                   className={styles.avatar}
@@ -72,12 +71,11 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
           </div>
           <div className="single-line-divider" />
         </div>
-        <Image
+        <MyImage
           src={meta.headerImageSrc}
-          width={960}
           height={480}
+          width={960}
           alt={meta.headerImageAlt}
-          objectFit="cover"
           priority={true}
           quality={50}
         />
