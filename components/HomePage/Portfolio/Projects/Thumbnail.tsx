@@ -1,4 +1,3 @@
-import Image from 'next/image'
 
 import { useAnimation } from 'framer-motion'
 
@@ -8,6 +7,7 @@ import { ProjectProps } from './projectList'
 import languageMap from 'components/HomePage/Languages/languageMap'
 
 import styles from './styles.module.css'
+import MyImage from 'util/MyImage'
 
 export default function Thumbnail({
   name,
@@ -76,11 +76,10 @@ export default function Thumbnail({
         initial="initial"
         transition={{ type: 'tween' }}
         variants={imgVariants}>
-        <Image
+        <MyImage
           src={`ulises.codes/project-thumbnails/${imgSrc}`}
           width="275"
           height="178"
-          objectFit="contain"
         />
       </MotionDiv>
     </MotionDiv>

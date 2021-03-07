@@ -12,22 +12,18 @@ export default function Post({
   meta,
   slug,
   theme,
-  dedupedTitle,
 }: BlogPostProps & PageProps & { dedupedTitle: string }) {
   return (
     <>
       <Head key="blog-post-tags">
         <link
-          href={
-            theme && theme.titleFont
-              ? `https://fonts.googleapis.com/css2?family=${theme.titleFont}&display=block&text=${dedupedTitle}`
-              : ''
-          }
+          href={`/fonts/${
+            theme.titleFont ? theme.titleFont.toLowerCase() : 'bungee-shade'
+          }.woff2`}
           rel="preload"
-          as="style"
-          type="text/css"
+          as="font"
+          type="font/woff2"
           crossOrigin="anonymous"
-          onLoad={"this.rel='stylesheet'" as any}
         />
       </Head>
       <div className="page-root">

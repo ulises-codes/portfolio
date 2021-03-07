@@ -2,9 +2,9 @@ import { createContext, useState } from 'react'
 import type { ReactNode } from 'react'
 
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 import Header from './Header'
 import Meta from 'util/Meta'
-import Head from 'next/head'
 
 const Footer = dynamic(() => import('./Footer'))
 const Sidebar = dynamic(() => import('./Sidebar'))
@@ -55,14 +55,15 @@ export default function Layout({
     <>
       <Head key="layout-tags">
         <link
-          href={`https://fonts.googleapis.com/css2?family=${
-            currentTheme.subtitleFont ?? 'Indie+Flower'
-          }&display=swap`}
+          href={`/fonts/${
+            currentTheme.subtitleFont
+              ? currentTheme.subtitleFont.toLocaleLowerCase()
+              : 'indie-flower'
+          }.woff2`}
           rel="preload"
-          as="style"
-          type="text/css"
+          as="font"
+          type="font/woff2"
           crossOrigin="anonymous"
-          onLoad={"this.rel='stylesheet'" as any}
         />
       </Head>
       <Meta />

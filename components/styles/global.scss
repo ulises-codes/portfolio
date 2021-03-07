@@ -2,6 +2,54 @@
 @use 'styles/variables';
 @use 'styles/helper';
 
+@font-face {
+  font-family: 'Bungee Shade';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/bungee-shade.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Indie Flower';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/indie-flower.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IM Fell English';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/im-fell-english.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Signika';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/signika.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Yesteryear';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/yesteryear.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Limelight';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/limelight.woff2') format('woff2');
+}
+
 html {
   box-sizing: border-box;
   overflow-x: hidden;
