@@ -50,6 +50,14 @@
   src: url('/fonts/limelight.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'VT323';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/vt323.woff2') format('woff2');
+}
+
 html {
   box-sizing: border-box;
   overflow-x: hidden;
