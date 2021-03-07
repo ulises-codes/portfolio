@@ -19,7 +19,7 @@
     "@ulises-codes/helper-functions": "^0.3.0",
     "@ulises-codes/react-hooks": "^0.1.0",
     "css-paint-polyfill": "^3.2.0",
-    "framer-motion": "^3.6.1",
+    "framer-motion": "^3.10.0",
     "gray-matter": "^4.0.2",
     "next": "^10.0.7",
     "next-compose-plugins": "^2.2.1",

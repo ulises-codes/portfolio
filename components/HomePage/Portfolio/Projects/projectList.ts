@@ -1,4 +1,4 @@
-import { Languages } from 'interfaces/languages'
+import type { Languages } from 'interfaces/languages'
 
 export type ProjectProps = {
   name: string

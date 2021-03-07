@@ -1,7 +1,4 @@
-
-import { useAnimation } from 'framer-motion'
-
-import { MotionDiv } from 'util/MyMotion'
+import { m as motion, useAnimation } from 'framer-motion'
 
 import { ProjectProps } from './projectList'
 import languageMap from 'components/HomePage/Languages/languageMap'
@@ -37,11 +34,11 @@ export default function Thumbnail({
   }
 
   return (
-    <MotionDiv
+    <motion.div
       className={styles['thumbnail-root--div']}
       animate={controls}
       whileHover="hover">
-      <MotionDiv
+      <motion.div
         className={styles['thumbnail-details--div']}
         initial="hidden"
         variants={detailsVariants}>
@@ -70,8 +67,8 @@ export default function Thumbnail({
             {description}
           </span>
         )}
-      </MotionDiv>
-      <MotionDiv
+      </motion.div>
+      <motion.div
         className={styles['thumbnail-image-wrapper--div']}
         initial="initial"
         transition={{ type: 'tween' }}
@@ -81,7 +78,7 @@ export default function Thumbnail({
           width="275"
           height="178"
         />
-      </MotionDiv>
-    </MotionDiv>
+      </motion.div>
+    </motion.div>
   )
 }
