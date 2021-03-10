@@ -8,7 +8,7 @@ export default function AnchorLink(props: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <div className={styles.wrapper}>
       <h2 id={id} className="subtitle" {...props} />
-      {'clipboard' in navigator && (
+      {typeof window !== 'undefined' && 'clipboard' in navigator && (
         <button
           className={styles.button}
           title="Copy a link to this section"
