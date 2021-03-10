@@ -3,6 +3,8 @@ import { join } from 'path'
 import matter from 'gray-matter'
 import { dedupeString } from '@ulises-codes/helper-functions'
 
+import type { BlogPostMeta } from 'interfaces/blog'
+
 const postsDirectory = join(process.cwd(), 'blog')
 
 export function getPostBySlug(slug: string) {
@@ -10,7 +12,10 @@ export function getPostBySlug(slug: string) {
 
   const fullPath = join(postsDirectory, `${realSlug}.mdx`)
 
-  const { data, content } = matter.read(fullPath)
+  const { data, content } = (matter.read(fullPath) as unknown) as {
+    data: BlogPostMeta
+    content: string
+  }
 
   return {
     slug: realSlug,
@@ -39,7 +44,7 @@ export function getAllPosts() {
     .readdirSync(postsDirectory)
     .filter(filename => /.mdx$/.test(filename))
     .map(fileName => ({
-      meta: matter.read(join(postsDirectory, fileName)).data,
+      meta: matter.read(join(postsDirectory, fileName)).data as BlogPostMeta,
       slug: fileName.replace('.mdx', ''),
     }))
 
