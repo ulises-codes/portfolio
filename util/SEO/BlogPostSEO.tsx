@@ -96,6 +96,8 @@ export default function BlogPostSEO({
         name="twitter:image:alt"
         content="Screenshot of website ulises.codes"
       />
+      <meta name="twitter:creator" content="Ulises Himely" />
+      <meta name="twitter:creator:id" content="@uliseshimely" />
     </SEO>
   )
 }
