@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { m as motion, AnimatePresence } from 'framer-motion'
+import { MotionDiv } from 'util/MyMotion'
 import Packages from './Packages'
 import Codepens from './Codepens'
 import Projects from './Projects'
@@ -8,6 +8,8 @@ import Projects from './Projects'
 import Ellipse from 'util/Ellipse'
 
 import styles from './styles.module.css'
+
+import { AnimatePresence } from 'framer-motion'
 
 const projects = ['Packages', 'Codepens', 'Projects']
 
@@ -40,7 +42,7 @@ export default function Portfolio() {
           exitBeforeEnter>
           {TabContent.map((Tab, i) =>
             currentTab === i ? (
-              <motion.div
+              <MotionDiv
                 key={projects[i]}
                 initial={{
                   opacity: 0,
@@ -52,7 +54,7 @@ export default function Portfolio() {
                   filter: 'grayscale(100%)',
                 }}>
                 <Tab />
-              </motion.div>
+              </MotionDiv>
             ) : null
           )}
         </AnimatePresence>

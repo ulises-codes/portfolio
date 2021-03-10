@@ -1,11 +1,17 @@
 import { useState } from 'react'
 
-import { m as motion, AnimatePresence } from 'framer-motion'
+import { MotionDiv } from 'util/MyMotion'
 import Ellipse from 'util/Ellipse'
+import dynamic from 'next/dynamic'
 
 import { SECTIONS } from './skillLists'
 
 import styles from './styles.module.scss'
+import type { AnimatePresenceProps } from 'framer-motion'
+
+const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
+  import('framer-motion').then(mod => mod.AnimatePresence)
+)
 
 const mapSkills = (arr: string[]) => (
   <ul className={styles['skills-list--ul']}>
@@ -42,14 +48,14 @@ export default function Skills() {
           {SECTIONS.map(
             ({ tags, title }, i) =>
               currentView === i && (
-                <motion.div
+                <MotionDiv
                   layoutId="skills-section"
                   key={`skill-section-wrapper-${title}`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}>
                   {mapSkills(tags)}
-                </motion.div>
+                </MotionDiv>
               )
           )}
         </AnimatePresence>
