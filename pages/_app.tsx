@@ -14,7 +14,7 @@ import dynamic from 'next/dynamic'
 
 import { useRouter } from 'next/router'
 
-import type { MotionFeature } from 'framer-motion'
+import { MotionFeature } from 'framer-motion'
 import type { AppProps } from 'next/app'
 import type { MotionConfigProps } from 'framer-motion/types/motion/context/MotionConfigContext'
 
