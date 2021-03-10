@@ -71,14 +71,17 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
           </div>
           <div className="single-line-divider" />
         </div>
-        <MyImage
-          src={meta.headerImageSrc}
-          height={480}
-          width={960}
-          alt={meta.headerImageAlt}
-          priority={true}
-          quality={50}
-        />
+        <figure className={styles.headerImageFigure}>
+          <MyImage
+            src={meta.headerImageSrc}
+            height={480}
+            width={960}
+            alt={meta.headerImageAlt}
+            priority={true}
+            quality={50}
+          />
+          <figcaption>{meta.headerImageCaption}</figcaption>
+        </figure>
         <div>
           <p>{meta.excerpt}</p>
         </div>

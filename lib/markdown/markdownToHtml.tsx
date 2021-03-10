@@ -17,7 +17,7 @@ export async function markdownToHtml(markdown: string) {
     components: {
       img: (props: MyImageProps) => (
         <div className={styles.blogImageWrapper}>
-          <MyImage {...props} className={styles.blogImage} />
+          <MyImage {...props} />
         </div>
       ),
       h2: AnchorLink,

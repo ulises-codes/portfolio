@@ -16,7 +16,7 @@ export default function MyImage({
       {...props}
       width={width}
       height={height}
-      objectFit="cover"
+      objectFit={props.objectFit ?? 'cover'}
       layout={layout}
       src={`https://res.cloudinary.com/da3fgujdy/${src}`}
     />
