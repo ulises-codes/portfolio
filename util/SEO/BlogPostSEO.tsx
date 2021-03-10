@@ -86,7 +86,7 @@ export default function BlogPostSEO({
       <meta property="og:image:alt" content={meta.headerImageAlt} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@uliseshimely" />
-      <meta name="twitter:title" content="Ulises Himely | Web Developer" />
+      <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.excerpt} />
       <meta
         property="twitter:image"
