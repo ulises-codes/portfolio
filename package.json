@@ -2,6 +2,7 @@
   "name": "ulises.codes",
   "version": "2.6.0",
   "scripts": {
+    "analyze": "ANALYZE='true' npm run build",
     "dev": "next",
     "dev:net": "next -p 10.0.0.87:3000",
     "build": "next build",
