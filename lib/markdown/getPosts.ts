@@ -3,7 +3,7 @@ import { join } from 'path'
 import matter from 'gray-matter'
 import { dedupeString } from '@ulises-codes/helper-functions'
 
-import type { BlogPostMeta } from 'interfaces/blog'
+import type { BlogPostMeta } from '../../interfaces/blog'
 
 const postsDirectory = join(process.cwd(), 'blog')
 
