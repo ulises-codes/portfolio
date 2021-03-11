@@ -16,6 +16,13 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link rel="preconnect" href="https://www.googletagmanager.com/gtag" />
+          <link
+            rel="preload"
+            href="https://www.googletagmanager.com/gtag/js?id=G-M6ZF536ND5"
+            as="script"
+            type="application/javascript"
+          />
           <link
             rel="preload"
             href="/getTheme.js"
