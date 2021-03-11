@@ -99,11 +99,10 @@
 }
 
 .blogImageWrapper {
-  width: 100%;
+  min-width: max-content;
+  height: max-content;
   max-width: 720px;
   margin: auto;
-  display: flex;
-  justify-content: center;
 }
 
 @media (max-width: 490px) {

@@ -8,6 +8,7 @@ export default function MyImage({
   width = 960,
   height = 540,
   layout = 'responsive',
+  objectFit = 'cover',
   src,
   ...props
 }: MyImageProps) {
@@ -16,7 +17,7 @@ export default function MyImage({
       {...props}
       width={width}
       height={height}
-      objectFit={props.objectFit ?? 'cover'}
+      objectFit={objectFit}
       layout={layout}
       src={`https://res.cloudinary.com/da3fgujdy/${src}`}
     />
