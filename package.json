@@ -1,6 +1,6 @@
 {
   "name": "ulises.codes",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "scripts": {
     "analyze": "ANALYZE='true' npm run build",
     "dev": "next",
