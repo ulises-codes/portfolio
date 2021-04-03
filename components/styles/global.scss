@@ -427,6 +427,10 @@ p {
   letter-spacing: 1.1px;
 }
 
+img {
+  user-select: none;
+}
+
 .ul {
   min-height: 50px;
   display: grid;

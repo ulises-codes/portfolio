@@ -105,6 +105,17 @@
   margin: auto;
 }
 
+.inlineCode {
+  background-color: var(--surface);
+  color: var(--text-on-surface);
+  white-space: nowrap;
+
+  &::before,
+  &::after {
+    content: '\2003';
+  }
+}
+
 @media (max-width: 490px) {
   .social {
     padding: 4px 0;

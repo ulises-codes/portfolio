@@ -29,6 +29,16 @@ export async function markdownToHtml(markdown: string) {
           target="_blank"
         />
       ),
+      span: (props: HTMLAttributes<HTMLSpanElement>) => (
+        <span
+          className={
+            props.className === 'inline-code'
+              ? styles.inlineCode
+              : props.className
+          }
+          {...props}
+        />
+      ),
     },
   })
 }
