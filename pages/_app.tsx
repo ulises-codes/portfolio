@@ -32,7 +32,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [features, setFeatures] = useState<MotionFeature[]>([])
   const [isOnline, setIsOnline] = useState(true)
   const [currentTheme, setCurrentTheme] = useState<ThemeProps>({
-    name: 'default',
+    name: 'dark',
   })
 
   const router = useRouter()
@@ -68,7 +68,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       const parsedTheme = theme && JSON.parse(theme)
 
       if (!theme) {
-        setCurrentTheme(themeList[0])
+        setCurrentTheme(themeList[1])
       } else {
         body.classList.value = `theme-${parsedTheme.name}`
 
@@ -106,7 +106,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       theme={{
         currentTheme,
         setCurrentTheme: theme => setCurrentTheme(theme),
-      }}>
+      }}
+    >
       {router.pathname === '/' ? (
         <MotionConfig features={features}>
           <Component {...pageProps} theme={currentTheme} />

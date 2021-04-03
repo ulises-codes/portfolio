@@ -19,8 +19,8 @@
         manifest.href = `/webmanifest/${theme.name}.webmanifest`
         themeMeta.setAttribute('content', theme.background_color)
       } else {
-        root.classList.value = 'theme-default'
-        manifest.href = '/webmanifest/default.webmanifest'
+        root.classList.value = 'theme-dark'
+        manifest.href = '/webmanifest/dark.webmanifest'
         themeMeta.setAttribute('color', '#f1dd6d')
       }
     },
