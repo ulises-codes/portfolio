@@ -1,0 +1,54 @@
+.root {
+  background-color: var(--surface);
+  overflow: hidden;
+  width: 325px;
+  color: var(--text-on-surface);
+
+  a {
+    display: block;
+    padding: 8px;
+  }
+}
+
+.inner {
+  border: 6px solid var(--background);
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 4px 0;
+    border-bottom: 6px solid var(--background);
+    font-size: 1rem;
+
+    span {
+      color: var(--background);
+      font-size: 1rem;
+      display: flex;
+      height: max-content;
+    }
+  }
+
+  h2 {
+    font-size: inherit;
+    text-align: center;
+    margin: 2px 0;
+  }
+
+  h3 {
+    font-size: 0.8rem;
+    margin: 4px 0;
+    text-align: center;
+  }
+
+  .bottom {
+    padding: 0 4px;
+
+    p {
+      font-size: 0.65rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}

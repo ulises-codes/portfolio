@@ -8,7 +8,7 @@ import type {
   OffscreenGameProps,
 } from '@ulises-codes/bite-me/dist/types'
 
-import LanguageCells from 'components/HomePage/Languages'
+import LatestPost from 'components/HomePage/LatestPost'
 
 export default function HomeTop() {
   const isBored = useContext(BoredContext)
@@ -77,7 +77,7 @@ export default function HomeTop() {
               />
             </div>
           ) : (
-            <LanguageCells />
+            <LatestPost />
           )}
         </div>
       </div>

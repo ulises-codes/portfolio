@@ -1,0 +1,42 @@
+.root,
+.titleWrapper,
+.languages,
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.titleWrapper {
+  justify-content: flex-start;
+
+  .spacer {
+    flex-grow: 1;
+  }
+}
+
+.languages,
+.highlights {
+  align-items: center;
+}
+
+.languages {
+  img {
+    margin: 0 4px;
+  }
+}
+
+.highlights,
+.thumbnailWrapper {
+  margin: auto;
+}
+
+.thumbnailWrapper {
+  max-width: max-content;
+}
+
+.highlights {
+  & ul {
+    justify-content: center;
+  }
+}

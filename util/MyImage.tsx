@@ -1,6 +1,6 @@
 import Image, { ImageProps } from 'next/image'
 
-export type MyImageProps = Readonly<ImageProps> & {
+export type MyImageProps = Partial<ImageProps> & {
   layout?: 'fixed' | 'intrinsic' | 'responsive'
 }
 

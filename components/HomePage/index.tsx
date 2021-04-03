@@ -7,6 +7,7 @@ import SEO from 'util/SEO'
 import type { MutableRefObject } from 'react'
 
 const HomeTop = dynamic(() => import('components/HomePage/HomeTop'))
+const Featured = dynamic(() => import('components/HomePage/FeaturedProject'))
 const Bio = dynamic(() => import('components/HomePage/Bio'))
 const Skills = dynamic(() => import('components/HomePage/Skills'))
 const Portfolio = dynamic(() => import('components/HomePage/Portfolio'))
@@ -17,12 +18,14 @@ export default function HomePage() {
   const bioRef = useRef() as MutableRefObject<HTMLDivElement>
   const skillsRef = useRef() as MutableRefObject<HTMLDivElement>
   const portfolioRef = useRef() as MutableRefObject<HTMLDivElement>
+  const featuredRef = useRef() as MutableRefObject<HTMLDivElement>
 
   useEffect(() => {
     const refs: { [key: string]: MutableRefObject<HTMLDivElement> } = {
       Bio: bioRef,
       Skills: skillsRef,
       Portfolio: portfolioRef,
+      Featured: featuredRef,
     }
 
     const observer = new IntersectionObserver(
@@ -54,6 +57,9 @@ export default function HomePage() {
       <SEO />
       <div className="page-root">
         <HomeTop />
+        <section id="Featured" style={{ minHeight: '300px' }} ref={featuredRef}>
+          {visibleSections.includes('Featured') && <Featured />}
+        </section>
         <section id="Bio" style={{ minHeight: '300px' }} ref={bioRef}>
           {visibleSections.includes('Bio') && <Bio />}
         </section>
@@ -63,7 +69,8 @@ export default function HomePage() {
         <section
           id="Portfolio"
           style={{ minHeight: '300px' }}
-          ref={portfolioRef}>
+          ref={portfolioRef}
+        >
           {visibleSections.includes('Portfolio') && <Portfolio />}
         </section>
       </div>

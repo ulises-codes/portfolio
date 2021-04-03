@@ -1,10 +1,8 @@
-
 import { useAnimation } from 'framer-motion'
 
 import { MotionDiv } from 'util/MyMotion'
 
 import { ProjectProps } from './projectList'
-import languageMap from 'components/HomePage/Languages/languageMap'
 
 import styles from './styles.module.css'
 import MyImage from 'util/MyImage'
@@ -40,30 +38,31 @@ export default function Thumbnail({
     <MotionDiv
       className={styles['thumbnail-root--div']}
       animate={controls}
-      whileHover="hover">
+      whileHover="hover"
+    >
       <MotionDiv
         className={styles['thumbnail-details--div']}
         initial="hidden"
-        variants={detailsVariants}>
+        variants={detailsVariants}
+      >
         <a
           className="link"
           href={`https://${url}`}
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           {name}
         </a>
         <div className={styles['thumbnail-details-languages--div']}>
-          {languageMap
-            .filter(({ name }) => languages.includes(name))
-            .map(language => (
-              <img
-                key={`${name}-language-badge-${language.name}`}
-                className="language-logo-badge--img"
-                src={`/images/language-logos/${language.filename}.svg`}
-                height="24"
-                width="24"
-              />
-            ))}
+          {languages.map(language => (
+            <img
+              key={`${name}-language-badge-${language}`}
+              className="language-logo-badge--img"
+              src={`/images/language-logos/${language.toLocaleLowerCase()}.svg`}
+              height="24"
+              width="24"
+            />
+          ))}
         </div>
         {description && (
           <span className={styles['thumbnail-description--span']}>
@@ -75,7 +74,8 @@ export default function Thumbnail({
         className={styles['thumbnail-image-wrapper--div']}
         initial="initial"
         transition={{ type: 'tween' }}
-        variants={imgVariants}>
+        variants={imgVariants}
+      >
         <MyImage
           src={`ulises.codes/project-thumbnails/${imgSrc}`}
           width="275"

@@ -427,6 +427,42 @@ p {
   letter-spacing: 1.1px;
 }
 
+.ul {
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, max-content));
+  text-align: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+}
+
+.li {
+  font-size: 0.9em;
+  list-style-type: none;
+  height: max-content;
+  width: 100%;
+  border-radius: 16px;
+  padding: 8px 14px;
+  white-space: pre;
+}
+
+.li:nth-child(4n + 1) {
+  border: 2px solid variables.$purple;
+}
+
+.li:nth-child(4n + 2) {
+  border: 2px solid variables.$yellow;
+}
+
+.li:nth-child(4n + 3) {
+  border: 2px solid variables.$light-blue;
+}
+
+.li:nth-child(4n + 4) {
+  border: 2px solid variables.$berry-red;
+}
+
 .page-root {
   max-width: var(--page-width);
   padding: 0 var(--padding);

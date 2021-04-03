@@ -6,3 +6,4 @@ export type Languages =
   | 'HTML'
   | 'CSS'
   | 'Node'
+  | 'Sass'

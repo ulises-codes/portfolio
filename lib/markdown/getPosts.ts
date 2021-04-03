@@ -7,8 +7,18 @@ import type { BlogPostMeta } from '../../interfaces/blog'
 
 const postsDirectory = join(process.cwd(), 'blog')
 
+function getMDXFiles() {
+  return fs
+    .readdirSync(postsDirectory)
+    .filter(filename => /.mdx$/.test(filename))
+}
+
+function getRealSlug(slug: string) {
+  return slug.replace(/\.mdx$/, '')
+}
+
 export function getPostBySlug(slug: string) {
-  const realSlug = slug.replace(/\.mdx$/, '')
+  const realSlug = getRealSlug(slug)
 
   const fullPath = join(postsDirectory, `${realSlug}.mdx`)
 
@@ -26,27 +36,39 @@ export function getPostBySlug(slug: string) {
 }
 
 export const getAllPostSlugs = () => {
-  const fileNames = fs
-    .readdirSync(postsDirectory)
-    .filter(filename => /.mdx$/.test(filename))
+  const fileNames = getMDXFiles()
 
   return fileNames.map(filename => {
     return {
       params: {
-        slug: filename.replace('.mdx', ''),
+        slug: getRealSlug(filename),
       },
     }
   })
 }
 
 export function getAllPosts() {
-  const dataArr = fs
-    .readdirSync(postsDirectory)
-    .filter(filename => /.mdx$/.test(filename))
-    .map(fileName => ({
-      meta: matter.read(join(postsDirectory, fileName)).data as BlogPostMeta,
-      slug: fileName.replace('.mdx', ''),
-    }))
+  const dataArr = getMDXFiles().map(fileName => ({
+    meta: matter.read(join(postsDirectory, fileName)).data as BlogPostMeta,
+    slug: getRealSlug(fileName),
+  }))
 
   return dataArr
+}
+
+export function getLatestPost() {
+  const allPosts = getAllPosts()
+
+  const post = allPosts.reduce((a, b) => {
+    if (new Date(a.meta.publishDate) > new Date(b.meta.publishDate)) {
+      return a
+    }
+
+    return b
+  })
+
+  return {
+    meta: post.meta,
+    slug: getRealSlug(post.slug),
+  }
 }

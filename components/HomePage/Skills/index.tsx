@@ -14,11 +14,9 @@ const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
 )
 
 const mapSkills = (arr: string[]) => (
-  <ul className={styles['skills-list--ul']}>
+  <ul className="ul">
     {arr.map(skill => (
-      <li className={styles['list-item']} key={skill}>
-        {skill}
-      </li>
+      <li className="li">{skill}</li>
     ))}
   </ul>
 )
@@ -29,12 +27,13 @@ export default function Skills() {
   return (
     <div>
       <h3 className="subtitle">Skills</h3>
-      <div className={styles['skill-btns-wrapper--div']}>
+      <div className={styles.skillBtnsWrapper}>
         {SECTIONS.map(({ title }, i) => (
-          <div key={`skill-btn-${title}`} className={styles['skill-btn--div']}>
+          <div key={`skill-btn-${title}`} className={styles.skillBtnDiv}>
             <button
               className={currentView === i ? 'active-tab' : 'button'}
-              onClick={() => setCurrentView(i)}>
+              onClick={() => setCurrentView(i)}
+            >
               {title}
             </button>
             <AnimatePresence initial={false} key="skills-ellipse">
@@ -53,7 +52,8 @@ export default function Skills() {
                   key={`skill-section-wrapper-${title}`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}>
+                  exit={{ opacity: 0 }}
+                >
                   {mapSkills(tags)}
                 </MotionDiv>
               )

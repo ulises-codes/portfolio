@@ -30,15 +30,17 @@ export default function HomeSection() {
 
   return (
     <div className={styles['bio-section--div']}>
-      <h3 className="subtitle">Some Info</h3>
+      <h3 className="subtitle">Some Info About Me</h3>
       <div className={styles['bio-btns-wrapper--div']}>
         {BIO_SECTIONS.map((section, i) => (
           <div
             key={`bio-btn-${section.title}`}
-            className={styles['bio-btn-wrapper--div']}>
+            className={styles['bio-btn-wrapper--div']}
+          >
             <button
               className={currentView === i ? 'active-tab' : 'button'}
-              onClick={() => setCurrentView(i)}>
+              onClick={() => setCurrentView(i)}
+            >
               {section.title}
             </button>
             <AnimatePresence initial={false} key="bio-ellipse">
@@ -57,7 +59,8 @@ export default function HomeSection() {
                   className={styles['bio-section--div']}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}>
+                  exit={{ opacity: 0 }}
+                >
                   <section.component />
                 </MotionDiv>
               )
