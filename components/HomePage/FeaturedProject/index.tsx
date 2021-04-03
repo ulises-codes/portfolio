@@ -16,7 +16,7 @@ export default function FeaturedProject() {
         <div className={styles.languages}>
           {featuredProject.languages.map(l => (
             <img
-              src={`/images/language-logos/${l}.svg`}
+              src={`/images/language-logos/${l.toLowerCase()}.svg`}
               height="30"
               width="30"
             />
