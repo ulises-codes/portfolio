@@ -8,7 +8,12 @@ export default function FeaturedProject() {
       <h3 className="subtitle">Featured Project</h3>
       <div className={styles.titleWrapper}>
         <h4>
-          <a className="link" href={featuredProject.url}>
+          <a
+            className="link"
+            href={featuredProject.url}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             {featuredProject.name}
           </a>
         </h4>
