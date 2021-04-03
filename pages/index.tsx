@@ -41,5 +41,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       latestPost,
     },
+    revalidate: 1,
   }
 }
