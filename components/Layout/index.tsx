@@ -37,7 +37,7 @@ export default function Layout({
 
     body.classList.value = `theme-${theme.name}`
     manifest.href = `/webmanifest/${theme.name}.webmanifest`
-    themeMeta.setAttribute('content', theme.background_color ?? '#f1dd6d')
+    themeMeta.setAttribute('content', theme.background_color ?? '#232625')
 
     const el = document.getElementById('__next')
     if (el && el.dataset.cssPaint) {
