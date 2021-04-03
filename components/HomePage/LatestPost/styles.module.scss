@@ -1,7 +1,7 @@
 .root {
   background-color: var(--surface);
   overflow: hidden;
-  width: 325px;
+  width: 350px;
   color: var(--text-on-surface);
 
   a {
@@ -45,7 +45,7 @@
     padding: 0 4px;
 
     p {
-      font-size: 0.65rem;
+      font-size: 0.75rem;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;

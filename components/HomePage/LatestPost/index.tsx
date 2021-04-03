@@ -31,7 +31,7 @@ export default function LatestPost() {
             <MyImage
               src={latestPost?.meta.headerImageSrc}
               alt={latestPost?.meta.headerImageAlt}
-              width={300}
+              width={350}
               height={175}
             />
             <div className={styles.bottom}>

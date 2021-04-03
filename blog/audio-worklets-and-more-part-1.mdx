@@ -1,0 +1,203 @@
+---
+title: 'Audio Worklets and More – Part 1'
+author: 'Ulises Himely'
+publishDate: '04/03/2021'
+editedDate: ''
+excerpt: "I built a low-latency, four oscillator synthesizer which I called u-znth, using nothing but frontend web tech. Specifically, the stack is comprised of React, Web Audio API, Audio Worklets, Web Workers, WebMIDI, and SharedArrayBuffer. In this series I'll cover some of the challenges I encountered, lessons learned, and what I would do differently."
+headerImageSrc: 'v1617327422/u-znth/screenshot.png'
+headerImageAlt: 'Screenshot of uznth.live'
+headerImageCaption: 'Screenshot of uznth.live'
+---
+
+## What I'll Cover in this Post
+
+TL;DR: This post will be a high-level introduction to the project, [u-znth](https://uznth.live).
+
+[Check out the repo](https://github.com/ulises-codes/u-znth)
+
+In Part 1 of this series I will talk about the scope of the project, and the tools that I leveraged to accomplish my goals. I won't cover any UI stuff; I used React and Sass for that but there was nothing mind-blowing in the UI itself.
+
+## A Little Background About Me
+
+In addition to being a web developer, I am also a musician. Like most musicians, I've dabbled with Digital Audio Workstations (DAWs)–basically just music recording software–which means I've had tons of exposure to MIDI. I've also been lucky enough to use some great synthesizers in a live setting; there's nothing quite like making instruments from scratch just by combining and toying with sound waves.
+
+You don't need to know anything about MIDI to understand this project, but in case you don't, MIDI is just a protocol that allows devices called MIDI Controllers to communicate with each other and with computers.
+
+They say not to mix work and pleasure but I couldn't resist, and decided to see whether web tech was sophisticated enough to enable us to build an interactive synthesizer.
+
+## The Mission
+
+My mission with this project was to build a synthesizer comprised of two or more oscillators (an oscillator is the underlying processor that generates sound waves). Specifically, I wanted the project to:
+
+### Emulate a Synth as Best I Could
+
+- Use the Web Audio API, as it does a great job of representing the routing of sound in a mixer.
+- Have independent oscillators, each with its own attack, decay, release, volume, wave shape, vibrato, detune, and octave properties.
+
+### Be Performant
+
+- Operate on more than one thread to ensure that the UI remained responsive.
+- Run with as low-latency as possible.
+- Be able to handle up to 24 voices–the number of notes it can play at once, also known as 'polyphony'–across four oscillators.
+
+### Be Interactive
+
+- Be playable with a MIDI controller.
+
+Being a developer is all about making decisions; once I've decided on the project scope, now I have to decide on how to solve for each item listed above.
+
+## Laying Down the Foundation
+
+When I embark on a project like this, I always have a hidden agenda: I want to learn something I did not previously know. I am not an expert in sound generation technology, but I wanted this synth to feel like the ones I've used in the past.
+
+### The Web Audio API
+
+The [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) is a gift to developers who need to do more with audio than just include an audio track in any given project. I've come to see this API as the web's representation of a mixing board, complete with built-in effects such as compression, reverb, filters, and even gain management. Most impressive is that the API treats inputs, outputs, and effects as nodes that you can chain and route any way you want, like tracks on a mixer.
+
+In React, the code would look something like this:4
+
+```js
+// components/synth/index.tsx
+
+// A ref to an <audio> element which will be our audio's output destination
+const audioRef = useRef() as MutableRefObject<HTMLAudioElement>
+
+const ctx = useRef(new AudioContext())
+
+// Master gain and compressor, applied to everything prior to output
+const master = useRef({
+  compressor: ctx.current.createDynamicsCompressor(),
+  gain: ctx.current.createGain(),
+})
+
+useEffect(() => {
+    const source = ctx.current.createMediaStreamDestination()
+
+    const masterCompressor = master.current.compressor
+    const masterGain = master.current.gain
+
+    masterCompressor.connect(masterGain)
+    masterGain.connect(ctx.current.destination)
+
+    audioRef.current.srcObject = source.stream
+
+  return () => {
+    // Terminate Audio Context when the component unmounts
+    ctx.current.close()
+  }
+}, [])
+```
+
+But wait, there's more! You may have noticed that you can even create an [oscillator node](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode), as well. Problem solved... or is it? The Web Audio API runs on the main thread; I wanted the oscillators to run on a separate thread (more on that later), so I opted not to use the oscillator node, and instead created my own. Maybe I'm a masochist (I haven't ruled that out, yet), but I wanted this project to be on the bleeding edge of web technology.
+
+### Independent Oscillators
+
+So how do we create an oscillator from scratch using the Web Audio API? It turns out the architecture here is the easy part. The solution: an [Audio Worklet](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet). The <span className="inline-code">Audio Context</span> object allows us to connect an Audio Worklet, a special type of [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) that runs on the [audio processing thread](https://developers.google.com/web/updates/2017/12/audio-worklet#concepts).
+
+The <span className="inline-code">AudioWorkletProcessor</span> class is essentially an extension of the <span className="inline-code">Audio Node</span> class that powers the nodes we discussed earlier. That's useful to us because when we instantiate the worklet it will act as another node in our chain, so we can effortlessly apply effects like compression.
+
+If you aren't familiar with workers, the first thing to note is that you'll need to author any worker or worklet in a separate file.
+
+```js
+// workers/audio-worklet.ts
+
+class Oscillator extends AudioWorkletProcessor {
+    ...
+}
+```
+
+Instantiating the <span className="inline-code">Audio Worklet</span> in the main file is a two-step process. First, we register the worklet via <span className="inline-code">AudioContext.audioWorklet.addModule()</span>. Then, we can create nodes and attach them to the given context.
+
+```js
+// components/synth/index.tsx
+
+useEffect(() => {
+    async function init() {
+        try {
+            await ctx.current.audioWorklet.addModule('/workers/audio-worklet.js', {
+                credentials: 'same-origin'
+            })
+
+            const source = ctx.current.createMediaStreamDestination()
+
+            const masterCompressor = master.current.compressor
+            const masterGain = master.current.gain
+
+            masterCompressor.connect(masterGain)
+            masterGain.connect(ctx.current.destination)
+
+            audioRef.current.srcObject = source.stream
+        } catch (err) {
+            ...
+        }
+    }
+
+    init()
+
+    ...
+}, [])
+
+```
+
+## Making Music
+
+Let's take a look at generating tones that can be represented using musical notes. This is a key component of our app! Since we are eventually going to integrate with MIDI, we'll use this function:
+
+```js
+// lib/helper/midiToFreq.ts
+// https://medium.com/swinginc/playing-with-midi-in-javascript-b6999f2913c3
+export default function midiToFreq(key: number) {
+  const a = Math.pow(2, (key - 69) / 12)
+
+  return a * 440
+}
+```
+
+To enable users to play notes on click, I simply tagged each <span className="inline-code"><div\></span> element with a data-midi-note attribute, starting with 60 (C4), incremented by 1 for each additional note.
+
+The function <span className="inline-code">midiToFreq</span> returns the frequency of the sine wave that produces the note we want to hear. Our application needs to perform this calculation every single time a note is played. Normally, that's no big deal for a computer, but when it comes to playing an instrument, those computations need to happen seamlessly, lest we find ourselves experiencing more latency than necessary.
+
+### Latency and Performance Considerations
+
+Latency is the amount of delay between when a note is played and when you hear it. When it comes to digital instruments, there is always going to be some kind of latency, because the computer always has to do _something_ before it can play a sound. The lower the latency, however, the harder it is for the human brain to perceive it.
+
+One very simple way to reduce latency is to use the Web Worker API. By outsourcing the conversion logic to a separate thread, our code can run in parallel. The main thread can continue to listen for input and update the UI accordingly, while the audio processing thread focuses on generating the sounds themselves.
+
+If you'ved used Web Workers in the past, you might be a bit skeptical, given that <span className="inline-code">Worker.postMessage()</span>, used to communicate information between threads, copies data back and forth between those threads, and that probably feels very inefficient.
+
+If we have an array that holds each MIDI note that is being played, that array would have to be copied to our Worker, mapped to a frequency for each MIDI note, copied back to the main thread, and then copied to our Audio Worklet. That sounds like a nightmare, but there is a solution that's recently come home to the web: [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer).
+
+### SharedArrayBuffer
+
+A SharedArrayBuffer (SAB) holds data that is stored in memory and can be accessed by each thread. When data is updated in the SAB, it can be read and updated by the other threads instantaneously.
+
+**Note**: your website must be cross-origin isolated before you can use SAB. Here's how you would do that in Next JS:
+
+```js
+// next.config.js
+
+module.exports = {
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+        ],
+      },
+      {
+        source: '/',
+        headers: [
+          { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+        ],
+      },
+    ]
+  },
+}
+```
+
+### To Be Continued...
+
+That about covers the basics of the project. In the next post, I'll cover how I leveraged SharedArrayBuffer to improve communication between the threads.
