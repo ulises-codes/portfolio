@@ -69,7 +69,7 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body className="theme-default">
+        <body className="theme-dark">
           <Main />
           <NextScript />
         </body>
