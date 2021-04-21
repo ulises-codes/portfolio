@@ -42,3 +42,6 @@ sw.js.map
 *.tgz
 
 sitemap.xml
+
+# Auto-generated manifest files
+public/webmanifest/

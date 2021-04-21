@@ -2,7 +2,7 @@ import themeList from './themeList'
 import * as fs from 'fs'
 import { join } from 'path'
 
-import * as main from '../main.manifest.json'
+import main from '../main.manifest.json'
 
 const rootDir = join(__dirname, '../')
 
