@@ -43,5 +43,6 @@ sw.js.map
 
 sitemap.xml
 
-# Auto-generated manifest files
+# Auto-generated files
 public/webmanifest/
+public/sitemap.xml

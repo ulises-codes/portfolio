@@ -27,7 +27,7 @@ import fs from 'fs'
     .map(
       slug => `
     <url>
-        <loc>https://ulises.codes${slug}</loc>
+        <loc>https://ulises.codes${slug.replace(/\/$/, '')}</loc>
     </url>`
     )
     .join('')}
