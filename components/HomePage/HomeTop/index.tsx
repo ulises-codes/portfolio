@@ -63,8 +63,8 @@ export default function HomeTop() {
                 dingSrc="/snakeAssets/ding.mp3"
                 gameOverSrc="/snakeAssets/game-over.mp3"
                 text={{
-                  color: '#2a2a2a',
-                  subtitleColor: '#fafafa',
+                  color: '#fafafa',
+                  subtitleColor: '#eaeaea',
                   titleColor: '#F1DD6D',
                 }}
                 snakeStyle={{
