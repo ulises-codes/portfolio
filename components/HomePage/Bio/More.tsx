@@ -27,8 +27,8 @@ export default function More() {
         developer.
       </p>
       <p>
-        Today I am a freelance Web Developer, specializing in React, Typescript,
-        GraphQL, and other technologies.
+        Today I am a Web Developer, specializing in JavaScript, Python, React,
+        Typescript, GraphQL, and other technologies.
       </p>
     </>
   )
