@@ -434,7 +434,7 @@ img {
 .ul {
   min-height: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(max-content, 133px));
   text-align: center;
   gap: 12px;
   width: 100%;
