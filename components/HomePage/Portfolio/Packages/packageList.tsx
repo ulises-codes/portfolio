@@ -7,6 +7,12 @@ export type PackageProps = {
 
 const packageList: PackageProps[] = [
   {
+    description: 'A unit conversion CLI tool written in Python.',
+    title: 'Convertify',
+    languages: ['Python'],
+    repo: 'convertify',
+  },
+  {
     description:
       'A (slightly) customizable Snake game in the form of a React component.',
     title: 'Bite Me: A Snake Game',
