@@ -11,7 +11,7 @@ import styles from './styles.module.css'
 
 import { AnimatePresence } from 'framer-motion'
 
-const projects = ['Packages', 'Codepens', 'Projects']
+const projects = ['Packages', 'Codepens', 'Websites']
 
 const TabContent = [Packages, Codepens, Projects]
 
@@ -26,7 +26,8 @@ export default function Portfolio() {
           <div key={name} className={styles['portfolio-tabs-btn--div']}>
             <button
               className={currentTab === i ? 'active-tab' : 'button'}
-              onClick={() => setCurrentTab(i)}>
+              onClick={() => setCurrentTab(i)}
+            >
               {name}
             </button>
             <AnimatePresence initial={false} key="portfolio-ellipse">
@@ -39,7 +40,8 @@ export default function Portfolio() {
         <AnimatePresence
           key="portfolio-presence"
           initial={false}
-          exitBeforeEnter>
+          exitBeforeEnter
+        >
           {TabContent.map((Tab, i) =>
             currentTab === i ? (
               <MotionDiv
@@ -52,7 +54,8 @@ export default function Portfolio() {
                 exit={{
                   opacity: 0,
                   filter: 'grayscale(100%)',
-                }}>
+                }}
+              >
                 <Tab />
               </MotionDiv>
             ) : null
