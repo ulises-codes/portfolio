@@ -10,30 +10,29 @@ export type ProjectProps = {
 
 const projectList: ProjectProps[] = [
   {
-    name: 'allergy.guru',
-    url: 'allergy.guru',
-    imgSrc: 'allergy-guru_bksv0w.png',
-    languages: ['JS', 'React', 'HTML', 'CSS'],
+    name: 'Convertify',
+    url: 'convertify.fun',
+    imgSrc: 'convertify.png',
+    languages: ['Svelte'],
   },
   {
-    name: 'Women Arise',
-    description: '(Project in progress)',
-    url: 'women-arise-site.ulises.vercel.app',
-    imgSrc: 'women-arise_lk4evx',
+    name: 'allergy.guru',
+    url: 'allergy.guru',
+    imgSrc: 'allergy-guru.png',
     languages: ['JS', 'React', 'HTML', 'CSS'],
   },
   {
     name: 'Jonatan Velazquez',
     url: 'jonatanvelazquez.com',
-    imgSrc: 'jonatan-velazquez_u24alo',
+    imgSrc: 'jonatan-velazquez.png',
     languages: ['JS', 'React', 'GraphQL', 'HTML', 'CSS'],
   },
   {
     name: 'Funky Merch',
     description: 'A demo ecommerce site',
     url: 'funkymerch.xyz',
-    imgSrc: 'funky-merch_ekuagn.png',
-    languages: ['JS', 'TS', 'React', 'GraphQL', 'HTML', 'CSS'],
+    imgSrc: 'funky-merch.png',
+    languages: ['TS', 'React', 'GraphQL', 'HTML', 'CSS'],
   },
 ]
 

@@ -1,16 +1,18 @@
 const CORE_SKILLS = [
   'JavaScript',
   'Typescript',
-  'React',
   'Node',
   'Python',
+  'PHP',
   'HTML',
   'CSS',
-  'BASH',
-  'Git',
+  'Svelte',
+  'React',
 ]
 
 const TECH_SKILLS = [
+  'Git',
+  'BASH',
   'Express',
   'GraphQL',
   'Firebase',
@@ -20,7 +22,6 @@ const TECH_SKILLS = [
   'Framer Motion',
   'Webpack',
   'PWAs',
-  'Modern Web APIs',
   'Adobe Photoshop',
   'Adobe Illustrator',
   'CSS Paint Worklets',

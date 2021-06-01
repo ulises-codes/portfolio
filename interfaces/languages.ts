@@ -7,3 +7,5 @@ export type Languages =
   | 'CSS'
   | 'Node'
   | 'Sass'
+  | 'Svelte'
+  | 'Python'
