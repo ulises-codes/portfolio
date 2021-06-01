@@ -16,7 +16,13 @@ const projectList: ProjectProps[] = [
     languages: ['Svelte'],
   },
   {
-    name: 'allergy.guru',
+    name: 'Copy Me!',
+    url: 'copyme.fun',
+    imgSrc: 'copy-me.png',
+    languages: ['Svelte'],
+  },
+  {
+    name: 'Allergy Guru',
     url: 'allergy.guru',
     imgSrc: 'allergy-guru.png',
     languages: ['JS', 'React', 'HTML', 'CSS'],
