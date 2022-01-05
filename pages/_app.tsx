@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV === 'development') {
-  import('preact/debug')
-}
-
 if (typeof window !== 'undefined') {
   import('css-paint-polyfill')
 }
@@ -14,9 +10,8 @@ import dynamic from 'next/dynamic'
 
 import { useRouter } from 'next/router'
 
-import { MotionFeature } from 'framer-motion'
+import { LazyMotion } from 'framer-motion'
 import type { AppProps } from 'next/app'
-import type { MotionConfigProps } from 'framer-motion/types/motion/context/MotionConfigContext'
 
 import 'components/styles/global.scss'
 
@@ -24,12 +19,7 @@ import themeList from 'lib/themeList'
 
 const Layout = dynamic(() => import('components/Layout'))
 
-const MotionConfig = dynamic<MotionConfigProps>(() =>
-  import('framer-motion').then(mod => mod.MotionConfig)
-)
-
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const [features, setFeatures] = useState<MotionFeature[]>([])
   const [isOnline, setIsOnline] = useState(true)
   const [currentTheme, setCurrentTheme] = useState<ThemeProps>({
     name: 'dark',
@@ -94,11 +84,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         })
       }
     }
-    if (router.pathname === '/') {
-      import('util/motion-features').then(async mod =>
-        setFeatures(await mod.default())
-      )
-    }
   }, [isOnline, router.route])
 
   return (
@@ -109,9 +94,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       }}
     >
       {router.pathname === '/' ? (
-        <MotionConfig features={features}>
+        <LazyMotion
+          features={() =>
+            import('../util/motion-features').then(mod => mod.default)
+          }
+        >
           <Component {...pageProps} theme={currentTheme} />
-        </MotionConfig>
+        </LazyMotion>
       ) : (
         <Component {...pageProps} theme={currentTheme} />
       )}

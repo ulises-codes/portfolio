@@ -1,7 +1,3 @@
-export default async function motionFeatures() {
-  const { AnimationFeature, ExitFeature, GesturesFeature } = await import(
-    'framer-motion'
-  )
+import { domAnimation } from 'framer-motion'
 
-  return [AnimationFeature, ExitFeature, GesturesFeature]
-}
+export default domAnimation

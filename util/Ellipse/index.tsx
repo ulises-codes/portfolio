@@ -1,10 +1,10 @@
-import { MotionPath } from 'util/MyMotion'
+import { m as motion } from 'framer-motion'
 import styles from './styles.module.css'
 
 export default function Ellipse() {
   return (
     <svg className={styles.btnOutline} viewBox="0 -9 1272 796.9">
-      <MotionPath
+      <motion.path
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         exit={{ pathLength: 0 }}

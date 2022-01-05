@@ -25,7 +25,7 @@ export default function TLDR() {
           rel="noopener noreferrer"
         >
           <Image
-            src="/images/certifications/aws-certified-cloud-practitioner.png"
+            src="/ulises.codes/certifications/aws-ccp.png"
             height="60"
             width="60"
           />

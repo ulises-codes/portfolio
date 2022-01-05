@@ -1,31 +1,24 @@
-const CORE_SKILLS = [
+const FRONTEND = [
   'JavaScript',
   'Typescript',
-  'Node',
-  'Python',
-  'PHP',
+  'Next.js',
+  'React',
   'HTML',
   'CSS',
   'Svelte',
-  'React',
 ]
 
-const TECH_SKILLS = [
-  'Git',
-  'BASH',
+const BACKEND = [
+  'Node',
+  'Python',
+  'Nest JS',
   'Express',
   'GraphQL',
-  'Firebase',
-  'Headless CMS',
-  'Next JS',
-  'GatsbyJS',
-  'Framer Motion',
-  'Webpack',
-  'PWAs',
-  'Adobe Photoshop',
-  'Adobe Illustrator',
-  'CSS Paint Worklets',
+  'Microservices',
+  'MongoDB',
 ]
+
+const TECH_SKILLS = ['Git', 'BASH', 'JAMstack', 'Webpack', 'Docker']
 
 const PROFESSIONAL_SKILLS = [
   'Communication',
@@ -36,14 +29,14 @@ const PROFESSIONAL_SKILLS = [
 
 const PERSONAL_SKILLS = [
   'Passionate Musician',
-  'Fluent in English and Spanish',
+  'Also fluent in Spanish',
   'Definitely not a Cylon',
-  'History Nerd',
 ]
 
 export const SECTIONS = [
-  { title: 'Core', tags: CORE_SKILLS },
-  { title: 'Tech', tags: TECH_SKILLS },
+  { title: 'Frontend', tags: FRONTEND },
+  { title: 'Backend', tags: BACKEND },
+  { title: 'Tech Skills', tags: TECH_SKILLS },
   { title: 'Business', tags: PROFESSIONAL_SKILLS },
   { title: 'Personal', tags: PERSONAL_SKILLS },
 ]

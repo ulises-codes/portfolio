@@ -3,6 +3,7 @@
 /// <reference path="./theme.d.ts" />
 
 import type { BlogPostInfo } from './blog'
+import type { Languages } from 'interfaces/languages'
 
 export declare global {
   interface Window {
@@ -23,4 +24,12 @@ export declare global {
 export interface PageProps {
   theme: ThemeProps
   latestPost: BlogPostInfo
+}
+
+export type ProjectProps = {
+  name: string
+  description?: string
+  imgSrc: string
+  languages: Languages[]
+  url: string
 }
