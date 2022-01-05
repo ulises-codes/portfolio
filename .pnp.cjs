@@ -47,7 +47,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["globby", "npm:11.0.4"],
             ["gray-matter", "npm:4.0.3"],
             ["next", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:12.0.4"],
-            ["next-compose-plugins", "npm:2.2.1"],
             ["next-mdx-remote", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:2.1.4"],
             ["next-pwa", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:5.4.4"],
             ["react", "npm:17.0.2"],
@@ -7470,15 +7469,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["next-compose-plugins", [
-        ["npm:2.2.1", {
-          "packageLocation": "./.yarn/cache/next-compose-plugins-npm-2.2.1-a9c8f4fdca-771762fda2.zip/node_modules/next-compose-plugins/",
-          "packageDependencies": [
-            ["next-compose-plugins", "npm:2.2.1"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["next-mdx-remote", [
         ["npm:2.1.4", {
           "packageLocation": "./.yarn/cache/next-mdx-remote-npm-2.1.4-1e86378aa1-c874c12e60.zip/node_modules/next-mdx-remote/",
@@ -9529,7 +9519,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["globby", "npm:11.0.4"],
             ["gray-matter", "npm:4.0.3"],
             ["next", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:12.0.4"],
-            ["next-compose-plugins", "npm:2.2.1"],
             ["next-mdx-remote", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:2.1.4"],
             ["next-pwa", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:5.4.4"],
             ["react", "npm:17.0.2"],
