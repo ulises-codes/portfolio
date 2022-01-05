@@ -38,7 +38,6 @@ yarn-error.log*
 *workbox*
 sw.js.map
 
-
 *.tgz
 
 sitemap.xml
@@ -46,3 +45,11 @@ sitemap.xml
 # Auto-generated files
 public/webmanifest/
 public/sitemap.xml
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
