@@ -13,6 +13,12 @@ const packageList: PackageProps[] = [
     repo: 'convertify',
   },
   {
+    description: 'An image type conversion CLI tool written in Python',
+    title: 'Image Convert',
+    languages: ['Python'],
+    repo: 'image-convert',
+  },
+  {
     description:
       'A (slightly) customizable Snake game in the form of a React component.',
     title: 'Bite Me: A Snake Game',

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { MotionDiv } from 'util/MyMotion'
+import { m as motion } from 'framer-motion'
 import Packages from './Packages'
 import Codepens from './Codepens'
-import Projects from './Projects'
+import Websites from './Projects'
 
 import Ellipse from 'util/Ellipse'
 
@@ -13,7 +13,7 @@ import { AnimatePresence } from 'framer-motion'
 
 const projects = ['Packages', 'Codepens', 'Websites']
 
-const TabContent = [Packages, Codepens, Projects]
+const TabContent = [Packages, Codepens, Websites]
 
 export default function Portfolio() {
   const [currentTab, setCurrentTab] = useState(0)
@@ -44,7 +44,7 @@ export default function Portfolio() {
         >
           {TabContent.map((Tab, i) =>
             currentTab === i ? (
-              <MotionDiv
+              <motion.div
                 key={projects[i]}
                 initial={{
                   opacity: 0,
@@ -57,7 +57,7 @@ export default function Portfolio() {
                 }}
               >
                 <Tab />
-              </MotionDiv>
+              </motion.div>
             ) : null
           )}
         </AnimatePresence>

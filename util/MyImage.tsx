@@ -19,7 +19,7 @@ export default function MyImage({
       height={height}
       objectFit={objectFit}
       layout={layout}
-      src={`https://res.cloudinary.com/da3fgujdy/${src}`}
+      src={`${src}`}
     />
   )
 }

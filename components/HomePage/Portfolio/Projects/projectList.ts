@@ -1,45 +1,43 @@
-import { Languages } from 'interfaces/languages'
+import { ProjectProps } from 'interfaces'
 
-export type ProjectProps = {
-  name: string
-  description?: string
-  imgSrc: string
-  languages: Languages[]
-  url: string
-}
-
-const projectList: ProjectProps[] = [
+const websitesList: ProjectProps[] = [
+  {
+    name: 'Iglesia Arca de Dios',
+    url: 'arcadedios.com',
+    imgSrc: 'arcadedios.com.webp',
+    languages: ['React', 'TS', 'HTML', 'CSS'],
+  },
   {
     name: 'Convertify',
     url: 'convertify.fun',
-    imgSrc: 'convertify.png',
+    imgSrc: 'convertify.webp',
     languages: ['Svelte'],
   },
   {
     name: 'Copy Me!',
     url: 'copyme.fun',
-    imgSrc: 'copy-me.png',
+    imgSrc: 'copy-me.webp',
     languages: ['Svelte'],
   },
   {
     name: 'Allergy Guru',
     url: 'allergy.guru',
-    imgSrc: 'allergy-guru.png',
+    imgSrc: 'allergy-guru.webp',
     languages: ['JS', 'React', 'HTML', 'CSS'],
   },
   {
     name: 'Jonatan Velazquez',
     url: 'jonatanvelazquez.com',
-    imgSrc: 'jonatan-velazquez.png',
+    imgSrc: 'jonatan-velazquez.webp',
     languages: ['JS', 'React', 'GraphQL', 'HTML', 'CSS'],
   },
   {
     name: 'Funky Merch',
     description: 'A demo ecommerce site',
     url: 'funkymerch.xyz',
-    imgSrc: 'funky-merch.png',
+    imgSrc: 'funky-merch.webp',
     languages: ['TS', 'React', 'GraphQL', 'HTML', 'CSS'],
   },
 ]
 
-export default projectList
+export default websitesList

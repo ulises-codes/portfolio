@@ -21,6 +21,7 @@ export default function FeaturedProject() {
         <div className={styles.languages}>
           {featuredProject.languages.map(l => (
             <img
+              key={`featured-project-language-${l}`}
               src={`/images/language-logos/${l.toLowerCase()}.svg`}
               height="30"
               width="30"
@@ -41,7 +42,9 @@ export default function FeaturedProject() {
       <div className={styles.highlights}>
         <ul className="ul">
           {featuredProject.highlights.map(h => (
-            <li className="li">{h}</li>
+            <li className="li" key={`featured-project-highlights-${h}`}>
+              {h}
+            </li>
           ))}
         </ul>
       </div>

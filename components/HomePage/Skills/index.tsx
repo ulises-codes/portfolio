@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { MotionDiv } from 'util/MyMotion'
+import { m as motion } from 'framer-motion'
 import Ellipse from 'util/Ellipse'
 import dynamic from 'next/dynamic'
 
@@ -16,7 +16,9 @@ const AnimatePresence = dynamic<AnimatePresenceProps>(() =>
 const mapSkills = (arr: string[]) => (
   <ul className="ul">
     {arr.map(skill => (
-      <li className="li">{skill}</li>
+      <li className="li" key={`skill-list-${skill}`}>
+        {skill}
+      </li>
     ))}
   </ul>
 )
@@ -47,7 +49,7 @@ export default function Skills() {
           {SECTIONS.map(
             ({ tags, title }, i) =>
               currentView === i && (
-                <MotionDiv
+                <motion.div
                   layoutId="skills-section"
                   key={`skill-section-wrapper-${title}`}
                   initial={{ opacity: 0 }}
@@ -55,7 +57,7 @@ export default function Skills() {
                   exit={{ opacity: 0 }}
                 >
                   {mapSkills(tags)}
-                </MotionDiv>
+                </motion.div>
               )
           )}
         </AnimatePresence>

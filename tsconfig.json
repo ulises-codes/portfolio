@@ -27,7 +27,8 @@
       "codepens/*": ["markdown/codepens/*"],
       "packages/*": ["markdown/packages/*"],
       "projects/*": ["markdown/projects/*"]
-    }
+    },
+    "incremental": true
   },
   "exclude": ["node_modules", ".next"],
   "include": ["**/*.ts", "**/*.tsx", "**/*.js"]

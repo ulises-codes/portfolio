@@ -1,5 +1,9 @@
 {
-  "cSpell.words": ["jonatan", "jonatanvelazquez", "tldr"],
+  "cSpell.words": [
+    "jonatan",
+    "jonatanvelazquez",
+    "tldr"
+  ],
   "cSpell.ignoreWords": [
     "bksv",
     "btns",
@@ -12,5 +16,11 @@
     "rehype",
     "svgr",
     "webpack"
-  ]
+  ],
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }
