@@ -15,9 +15,9 @@ export default function Thumbnail({
       <a href={`https://${url}`} target="_blank" rel="noopener noreferrer">
         <span>{name}</span>
         <MyImage
-          src={`/ulises.codes/project-thumbnails/${imgSrc}`}
+          src={`/ulises.codes/project-thumbnails/${imgSrc}.png`}
           width="275"
-          height="154.6875"
+          height="175"
           objectFit="cover"
           placeholder="blur"
           blurDataURL={

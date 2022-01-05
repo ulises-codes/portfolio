@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { m as motion } from 'framer-motion'
 import Packages from './Packages'
 import Codepens from './Codepens'
-import Websites from './Projects'
+import Projects from './Projects'
 
 import Ellipse from 'util/Ellipse'
 
@@ -11,9 +11,9 @@ import styles from './styles.module.css'
 
 import { AnimatePresence } from 'framer-motion'
 
-const projects = ['Packages', 'Codepens', 'Websites']
+const projects = ['Packages', 'Codepens', 'Projects']
 
-const TabContent = [Packages, Codepens, Websites]
+const TabContent = [Packages, Codepens, Projects]
 
 export default function Portfolio() {
   const [currentTab, setCurrentTab] = useState(0)

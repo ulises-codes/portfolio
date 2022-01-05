@@ -1,12 +1,12 @@
-import websitesList from './projectList'
+import projectList from './projectList'
 import Thumbnail from './Thumbnail'
 
 import styles from './styles.module.scss'
 
-export default function Websites() {
+export default function Projects() {
   return (
     <div className={styles['projects-wrapper--div']}>
-      {websitesList.map(project => (
+      {projectList.map(project => (
         <Thumbnail {...project} key={project.name} />
       ))}
     </div>

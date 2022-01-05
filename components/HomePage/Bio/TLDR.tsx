@@ -25,7 +25,7 @@ export default function TLDR() {
           rel="noopener noreferrer"
         >
           <Image
-            src="/ulises.codes/certifications/aws-ccp.webp"
+            src="/ulises.codes/certifications/aws-ccp.png"
             height="60"
             width="60"
           />
