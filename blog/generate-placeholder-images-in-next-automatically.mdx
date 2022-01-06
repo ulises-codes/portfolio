@@ -1,0 +1,80 @@
+---
+title: 'Generate Placeholder Images in Next.js...Automatically!'
+author: 'Ulises Himely'
+publishDate: '01/05/2022'
+editedDate: ''
+excerpt: "Let's keep things as DRY as possible, because no one has time to manually generate a placeholder image for each asset in your Next.js project."
+headerImageSrc: 'c_fit,e_blur:800,f_auto,w_1920/ulises.codes/portfolio-screenshot.png'
+headerImageAlt: 'Blurred Screenshot of ulises.codes'
+headerImageCaption: 'Blurred Screenshot of ulises.codes'
+---
+
+## What I'll Cover in this Post
+
+TL;DR: A very small function to automatically create a Base64 blurred placeholder image, which can then be passed on to the Next/Image component.
+
+My approach handles external images, such as images from Cloudinary.
+
+Assuming you've already set up Cloudinary as your [image loader](https://nextjs.org/docs/api-reference/next/image#loader-configuration), then this is all you need:
+
+```ts
+import Image from 'next/image'
+import type { GetStaticProps } from 'next'
+
+const imgToBase64 = async (url: string): Promise<string> => {
+  const img = await fetch(url)
+
+  const buffer = await img.arrayBuffer()
+
+  const prefix = 'data:text/plain;base64,'
+
+  // btoa is only available client-side, so check if that's an option first
+  if (typeof window !== 'undefined') {
+    return prefix + btoa(String.fromCharCode(...new Uint8Array(buffer)))
+  }
+
+  return prefix + Buffer.from(buffer).toString('base64')
+}
+
+export default function SomePageComponent({ placeholderImg }: { placeholderImg: string }) {
+
+  return (
+      <Image
+        src={url}
+        width={...}
+        height={...}
+        placeholder="blur"
+        blurDataURL={placeholderImg}
+      />
+  )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  // The image's path in Cloudinary or the full url if it's coming from somewhere else
+  const imgPath = "some_img_url"
+
+  // I'm using Cloudinary here to blur the image
+   const placeholderImg = await imgToBase64(
+    `${process.env.CLOUDINARY_PREFIX}f_auto,e_blur:100,w_10/${url}`
+  )
+
+  return {
+    props: { placeholderImg }
+  }
+}
+```
+
+## The Explanation, If You're Still Here
+
+Let's break this down into a few steps:
+
+Within getStaticProps, we need to:
+
+1. Fetch a low-quality blurred version of the image to use as a placeholder.
+2. Convert that image to a base64 string.
+3. Pass the base64 string to your page via props so that the placeholder image is available at build time.
+4. Rinse and repeat as needed.
+
+## Some Gotchas
+
+I've noticed that when using `priority={true}` on the Image component, that the image itself is loaded by the browser before the placeholder itself. I think that's the intended behavior; still, be aware that you probably won't see the placeholder when using the priority property.
