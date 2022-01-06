@@ -89,12 +89,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Script
-        src="https://www.google-analytics.com/analytics.js"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
         strategy="lazyOnload"
       />
       <Script
         id="google-analytics"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];
 
@@ -104,7 +104,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
             gtag('js', new Date());
 
-            gtag('config', 'G-M6ZF536ND5');`,
+            gtag('config', "${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}");`,
         }}
       />
       <Layout
