@@ -4,6 +4,7 @@ import type { GetStaticProps } from 'next'
 import type { BlogPostProps } from 'interfaces/blog'
 import type { PageProps } from 'interfaces'
 import Head from 'next/head'
+import { imgToBase64 } from 'lib/helper/imgToBase64'
 
 const BlogPost = dynamic(() => import('components/BlogPost'))
 
@@ -12,7 +13,9 @@ export default function Post({
   meta,
   slug,
   theme,
-}: BlogPostProps & PageProps & { dedupedTitle: string }) {
+  placeholderImg,
+}: BlogPostProps &
+  PageProps & { dedupedTitle: string; placeholderImg: string }) {
   return (
     <>
       <Head key="blog-post-tags">
@@ -27,7 +30,12 @@ export default function Post({
         />
       </Head>
       <div className="page-root">
-        <BlogPost source={source} meta={meta} slug={slug} />
+        <BlogPost
+          source={source}
+          meta={meta}
+          slug={slug}
+          placeholderImg={placeholderImg}
+        />
       </div>
     </>
   )
@@ -45,8 +53,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const source = await markdownToHtml(post.content)
 
+  const placeholderImg = await imgToBase64(
+    `${process.env.CLOUDINARY_PREFIX}f_auto,e_blur:100,w_10/${post.meta.headerImageSrc}`
+  )
+
   return {
-    props: { source, meta: post.meta, slug, dedupedTitle: post.dedupedTitle },
+    props: {
+      source,
+      meta: post.meta,
+      slug,
+      dedupedTitle: post.dedupedTitle,
+      placeholderImg,
+    },
   }
 }
 

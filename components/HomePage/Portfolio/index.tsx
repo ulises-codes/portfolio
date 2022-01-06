@@ -46,15 +46,9 @@ export default function Portfolio() {
             currentTab === i ? (
               <motion.div
                 key={projects[i]}
-                initial={{
-                  opacity: 0,
-                  filter: 'grayscale(100%)',
-                }}
-                animate={{ opacity: 1, filter: 'grayscale(0)' }}
-                exit={{
-                  opacity: 0,
-                  filter: 'grayscale(100%)',
-                }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
               >
                 <Tab />
               </motion.div>

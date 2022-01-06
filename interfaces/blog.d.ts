@@ -18,4 +18,5 @@ interface BlogPostInfo {
 
 interface BlogPostProps extends BlogPostInfo {
   source: MdxRemote.Source
+  placeholderImg: string
 }

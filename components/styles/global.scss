@@ -127,7 +127,7 @@ html {
   $background: #232625,
   $surface: var(--secondary),
   $text-on-surface: var(--white),
-  $code-string: var(--primary)
+  $code-string: #f1dd6d
 ) {
   @include default-styles;
 }

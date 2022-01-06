@@ -1,4 +1,5 @@
 import type { BlogPostInfo } from 'interfaces/blog'
+import { imgToBase64 } from 'lib/helper/imgToBase64'
 
 import Link from 'next/link'
 import MyImage from 'util/MyImage'
@@ -30,7 +31,11 @@ export default function PostCard({ slug, meta }: BlogPostInfo) {
           width={650}
           height={267.19}
           alt={meta.headerImageAlt}
-          quality={50}
+          blurDataURL={
+            imgToBase64(
+              `${process.env.NEXT_PUBLIC_CLOUDINARY_PREFIX}e_blur:800,f_auto,w_200/${meta.headerImageSrc}`
+            ) as unknown as string
+          }
         />
         <hr className={styles.hr} />
         <div className={styles.excerpt}>{meta.excerpt}</div>

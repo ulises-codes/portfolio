@@ -14,7 +14,12 @@ import BlogPostSEO from 'util/SEO/BlogPostSEO'
 import { AVATAR as avatar } from 'util/SEO'
 import AnchorLink from 'util/AnchorLink'
 
-export default function BlogPost({ source, meta, slug }: BlogPostProps) {
+export default function BlogPost({
+  source,
+  meta,
+  slug,
+  placeholderImg,
+}: BlogPostProps) {
   const content = hydrate(source, {
     components: {
       img: (props: MyImageProps) => (
@@ -84,11 +89,12 @@ export default function BlogPost({ source, meta, slug }: BlogPostProps) {
         <figure className={styles.headerImageFigure}>
           <MyImage
             src={meta.headerImageSrc}
-            height={480}
+            height={540}
             width={960}
             alt={meta.headerImageAlt}
             priority={true}
-            quality={50}
+            placeholder="blur"
+            blurDataURL={placeholderImg}
           />
           <figcaption>{meta.headerImageCaption}</figcaption>
         </figure>

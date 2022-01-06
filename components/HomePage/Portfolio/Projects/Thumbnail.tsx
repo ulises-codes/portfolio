@@ -15,14 +15,14 @@ export default function Thumbnail({
       <a href={`https://${url}`} target="_blank" rel="noopener noreferrer">
         <span>{name}</span>
         <MyImage
-          src={`/ulises.codes/project-thumbnails/${imgSrc}.png`}
+          src={`f_auto/ulises.codes/project-thumbnails/${imgSrc}`}
           width="275"
           height="175"
           objectFit="cover"
           placeholder="blur"
           blurDataURL={
             imgToBase64(
-              `https://res.cloudinary.com/da3fgujdy/image/upload/c_scale,e_blur:102,w_300/ulises.codes/project-thumbnails/${imgSrc}`
+              `${process.env.NEXT_PUBLIC_CLOUDINARY_PREFIX}/image/upload/c_scale,e_blur:102,w_300/ulises.codes/project-thumbnails/${imgSrc}`
             ) as unknown as string
           }
         />
