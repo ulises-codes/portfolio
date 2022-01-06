@@ -2,16 +2,16 @@
   "name": "ulises.codes",
   "version": "4.0.0",
   "scripts": {
-    "analyze": "ANALYZE='true' npm run build",
+    "analyze": "ANALYZE='true' yarn build",
     "dev": "next",
     "dev:net": "next -p 10.0.0.87:3000",
-    "build": "next build",
+    "build": "yarn prepublish && next build",
     "export": "next build && next export",
     "start": "next start -p 3001",
     "sitemap": "tsc ./lib/generateSitemap.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/generateSitemap.js && rm ./lib/generateSitemap.js ./lib/markdown/getPosts.js",
     "manifest": "tsc ./lib/mergeWebmanifest.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/mergeWebmanifest.js && rm ./lib/mergeWebmanifest.js ./lib/themeList.js",
-    "prepublish": "npm run sitemap && npm run manifest",
-    "publish": "npm run prepublish && git push",
+    "prepublish": "yarn sitemap && yarn manifest",
+    "publish": "yarn prepublish && git push",
     "type-check": "tsc"
   },
   "dependencies": {
