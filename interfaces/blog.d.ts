@@ -14,6 +14,7 @@ interface BlogPostMeta {
 interface BlogPostInfo {
   meta: BlogPostMeta
   slug: string
+  postPlaceholderImg: string
 }
 
 interface BlogPostProps extends BlogPostInfo {

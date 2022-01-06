@@ -4,6 +4,7 @@ import Head from 'next/head'
 import type { GetStaticProps } from 'next'
 import { createContext } from 'react'
 import { BlogPostInfo } from 'interfaces/blog'
+import { imgToBase64 } from 'lib/helper/imgToBase64'
 
 const HomePageSections = dynamic(() => import('components/HomePage'))
 
@@ -11,7 +12,11 @@ export const LatestPostContext = createContext<BlogPostInfo | undefined>(
   undefined
 )
 
-export default function IndexPage({ latestPost, theme }: PageProps) {
+export default function IndexPage({
+  latestPost,
+  theme,
+  postPlaceholderImg,
+}: PageProps) {
   return (
     <>
       <Head key="home-page-tags">
@@ -25,7 +30,7 @@ export default function IndexPage({ latestPost, theme }: PageProps) {
           crossOrigin="anonymous"
         />
       </Head>
-      <LatestPostContext.Provider value={latestPost}>
+      <LatestPostContext.Provider value={{ ...latestPost, postPlaceholderImg }}>
         <HomePageSections />
       </LatestPostContext.Provider>
     </>
@@ -37,9 +42,14 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const latestPost = getLatestPost()
 
+  const postPlaceholderImg = await imgToBase64(
+    `${process.env.CLOUDINARY_PREFIX}f_auto,e_blur:100,w_10/${latestPost.meta.headerImageSrc}`
+  )
+
   return {
     props: {
       latestPost,
+      postPlaceholderImg,
     },
     revalidate: 1,
   }

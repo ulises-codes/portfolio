@@ -24,6 +24,7 @@ export declare global {
 export interface PageProps {
   theme: ThemeProps
   latestPost: BlogPostInfo
+  postPlaceholderImg: string
 }
 
 export type ProjectProps = {

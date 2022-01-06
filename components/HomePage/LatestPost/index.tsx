@@ -33,6 +33,8 @@ export default function LatestPost() {
               alt={latestPost?.meta.headerImageAlt}
               width={350}
               height={175}
+              placeholder="blur"
+              blurDataURL={latestPost?.postPlaceholderImg}
             />
             <div className={styles.bottom}>
               <p>{latestPost?.meta.excerpt}</p>
