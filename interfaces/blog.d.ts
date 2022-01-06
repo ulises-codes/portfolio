@@ -17,7 +17,7 @@ interface BlogPostInfo {
   postPlaceholderImg: string
 }
 
-interface BlogPostProps extends BlogPostInfo {
+interface BlogPostProps extends Omit<BlogPostInfo, 'postPlaceholderImg'> {
   source: MdxRemote.Source
   placeholderImg: string
 }
