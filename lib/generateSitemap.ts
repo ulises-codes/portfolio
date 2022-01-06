@@ -22,17 +22,15 @@ import fs from 'fs'
 
   const paths = routes.concat(posts)
 
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths
     .map(
-      slug => `
-    <url>
-        <loc>https://ulises.codes${slug.replace(/\/$/, '')}</loc>
-    </url>`
+      slug =>
+        `\n\t<url>\n\t\t<loc>https://ulises.codes${slug.replace(
+          /\/$/,
+          ''
+        )}</loc>\n\t</url>`
     )
-    .join('')}
-</urlset>
-`
+    .join('')}\n</urlset>`
 
   fs.writeFileSync('public/sitemap.xml', sitemap)
 })()

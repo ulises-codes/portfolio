@@ -1,0 +1,161 @@
+---
+title: 'Creating a Sitemap in Next.js...Automatically!'
+author: 'Ulises Himely'
+publishDate: '01/06/2022'
+editedDate: ''
+excerpt: "How do you keep track of all your web pages? Do you manually add each new page to Google Search Console? Here's a better–and automated–solution."
+headerImageSrc: 'ulises.codes/blog/creating-a-sitemap-in-next-js-automatically/map'
+headerImageAlt: 'Young boy wearing a rain jacket holds up and looks at a map'
+headerImageCaption: 'Credit: Annie Spratt on Unsplash.'
+---
+
+## TL;DR
+
+```ts
+import { getAllPostSlugs } from './markdown/getPosts'
+import globby from 'globby'
+import fs from 'fs'
+;(async function generateSitemap() {
+  const posts = getAllPostSlugs().map(({ params }) => `/blog/${params.slug}/`)
+
+  const pages = await globby([
+    'pages/**/*.tsx',
+    '!pages/_*.tsx',
+    '!pages/**/[slug].tsx',
+    '!pages/api',
+  ])
+
+  const routes = pages.map(page => {
+    const path = page
+      .replace('.tsx', '')
+      .replace('pages', '')
+      .replace('/index', '/')
+
+    return path
+  })
+
+  const paths = routes.concat(posts)
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths
+    .map(
+      slug =>
+        `\n\t<url>\n\t\t<loc>https://ulises.codes${slug.replace(
+          /\/$/,
+          ''
+        )}</loc>\n\t</url>`
+    )
+    .join('')}\n</urlset>`
+
+  fs.writeFileSync('public/sitemap.xml', sitemap)
+})()
+```
+
+## Why do I need a sitemap?
+
+I have found [sitemaps](https://developers.google.com/search/docs/advanced/sitemaps/overview) to be:
+
+1. A way to keep track of all the web pages in my project in a singular document. As I add new blog posts and pages to any given site, I want to have a single source of truth (other than my fleeting ADHD memory).
+2. Extremely useful for SEO. By sharing my sitemap with Google Search Console, new pages will be discovered and crawled more quickly. (I'm sure you can do the same with Bing, if that's your cup of tea).
+
+Sounds great, right? I started out with a manual sitemap but quickly found it to be tedious (around my second or third page lol). So I came up with this handy solution.
+
+## First, determine which directories you need to look in
+
+My project's pages mostly reside within Next.js' **pages** directory. I also have a directory with blog posts written in markdown.
+
+Install the package **globby**, which allows us to pass in [glob patterns](<https://en.wikipedia.org/wiki/Glob_(programming)>) for any given directory and get back a list of files in those directories.
+
+This is going to be a self-invoking asynchronous function that will run at build-time.
+
+Note: getAllPostSlugs is a function that I call in getStaticPaths to get all my blog post slugs, and I'm reusing it here. You only need something like this if you are statically generating pages based on content that lives outside of your **pages** directory.
+
+```ts
+import { getAllPostSlugs } from './markdown/getPosts'
+import globby from 'globby'
+import fs from 'fs'
+
+;(async function generateSitemap() {
+  const posts = getAllPostSlugs().map(({ params }) => `/blog/${params.slug}/`)
+
+  // Exclude custom _app.tsx and _document.tsx pages (if applicable) like so: !pages/_*.tsx
+  const pages = await globby([
+    'pages/**/*.tsx',
+    '!pages/_*.tsx',
+    '!pages/**/[slug].tsx',
+    '!pages/api',
+  ])
+
+  // Remove file extensions, we just want the file name
+  const routes = pages.map(page => {
+    const path = page
+      .replace('.tsx', '')
+      .replace('pages', '')
+      .replace('/index', '/')
+
+    return path
+  })
+
+  const paths = routes.concat(posts)
+
+  ...
+})()
+```
+
+## Create your sitemap file
+
+Time to create our sitemap and write it to the filesystem. Sitemaps are written in the [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction) format, which is very similar, yet distinct from, HTML.
+
+We're going to use the built-in [filesystem](https://nodejs.org/api/fs.html) module to write out the sitemap file to the project's **public** directory. That way, your sitemap will be accessible at "your-domain.com/sitemap.xml".
+
+```ts
+import { getAllPostSlugs } from './markdown/getPosts'
+import globby from 'globby'
+import fs from 'fs'
+
+;(async function generateSitemap() {
+    ...
+
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths
+    .map(
+      slug =>
+        `\n\t<url>\n\t\t<loc>https://ulises.codes${slug.replace(
+          /\/$/,
+          ''
+        )}</loc>\n\t</url>`
+    )
+    .join('')}\n</urlset>`
+
+
+  fs.writeFileSync('public/sitemap.xml', sitemap)
+})()
+```
+
+## Run it
+
+You'll need the [Typescript CLI](https://www.typescriptlang.org/docs/handbook/compiler-options.html) `tsc` to run this file.
+
+Remember that node can't natively run Typescript files; we first need to compile the TS file to JavaScript. In my project, I've saved the file as lib/generateSitemap.ts.
+
+Run this script, which will compile generateSitemap.ts to JavaScript, and then run the JS file via Node (and write sitemap.xml to the **public** directory). Finally, the script deletes the generated generateSitemap.js, while leaving the original TS file intact.
+
+```sh
+tsc ./lib/generateSitemap.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/generateSitemap.js && rm ./lib/generateSitemap.js
+```
+
+## One last thing
+
+If you want this script to run at build time, then add the script above to your package.json, and modify your build script to run `sitemap` first:
+
+```json
+{
+    ...
+    "scripts": {
+        ...
+        "sitemap": "tsc ./lib/generateSitemap.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/generateSitemap.js && rm ./lib/generateSitemap.js",
+        "build": "yarn sitemap && next build"
+    }
+}
+
+```
+
+And that's all there is to that!
