@@ -31,6 +31,7 @@ export default function PostCard({ slug, meta }: BlogPostInfo) {
           width={650}
           height={267.19}
           alt={meta.headerImageAlt}
+          placeholder="blur"
           blurDataURL={
             imgToBase64(
               `${process.env.NEXT_PUBLIC_CLOUDINARY_PREFIX}e_blur:800,f_auto,w_200/${meta.headerImageSrc}`
