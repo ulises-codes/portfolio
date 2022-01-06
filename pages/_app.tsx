@@ -7,7 +7,7 @@ import 'lib/register'
 import { useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
-
+import Script from 'next/script'
 import { useRouter } from 'next/router'
 
 import { LazyMotion } from 'framer-motion'
@@ -87,23 +87,44 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, [isOnline, router.route])
 
   return (
-    <Layout
-      theme={{
-        currentTheme,
-        setCurrentTheme: theme => setCurrentTheme(theme),
-      }}
-    >
-      {router.pathname === '/' ? (
-        <LazyMotion
-          features={() =>
-            import('../util/motion-features').then(mod => mod.default)
-          }
-        >
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+        strategy="lazyOnload"
+      />
+      <Script
+        id="google-analytics"
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+
+          function gtag(){
+              dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', "${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}");`,
+        }}
+      />
+      <Layout
+        theme={{
+          currentTheme,
+          setCurrentTheme: theme => setCurrentTheme(theme),
+        }}
+      >
+        {router.pathname === '/' ? (
+          <LazyMotion
+            features={() =>
+              import('../util/motion-features').then(mod => mod.default)
+            }
+          >
+            <Component {...pageProps} theme={currentTheme} />
+          </LazyMotion>
+        ) : (
           <Component {...pageProps} theme={currentTheme} />
-        </LazyMotion>
-      ) : (
-        <Component {...pageProps} theme={currentTheme} />
-      )}
-    </Layout>
+        )}
+      </Layout>
+    </>
   )
 }
