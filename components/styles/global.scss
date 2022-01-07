@@ -355,7 +355,6 @@ h4 {
 .button,
 .active-tab {
   font-family: var(--subtitle-font);
-  width: max-content;
 }
 
 .subtitle {
@@ -364,7 +363,6 @@ h4 {
   --extra-underlineWidth: 1;
   --extra-underlineSpread: 8;
   font-size: 1.4rem;
-  width: max-content;
   background: paint(extra-underline);
   padding-block-end: var(--padding);
 }
@@ -554,5 +552,9 @@ img {
 @media (max-width: 662px) {
   :root {
     --header-height: 56px;
+  }
+
+  .title {
+    font-size: 1.3rem;
   }
 }

@@ -27,6 +27,9 @@ export default function BlogPost({
           <MyImage {...props} className={styles.blogImage} />
         </div>
       ),
+      h1: (props: HTMLAttributes<HTMLHeadingElement>) => (
+        <h1 className="title" {...props} />
+      ),
       h2: AnchorLink,
       a: (props: HTMLAttributes<HTMLAnchorElement>) => (
         <a
