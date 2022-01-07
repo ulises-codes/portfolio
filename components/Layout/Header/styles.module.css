@@ -1,5 +1,5 @@
 .header {
-  box-shadow: 0 0 16px 5px var(--black);
+  box-shadow: var(--header-shadow);
   height: var(--header-height);
   width: 100%;
   margin-bottom: var(--margin);

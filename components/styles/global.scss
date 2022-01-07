@@ -3,6 +3,14 @@
 @use 'styles/helper';
 
 @font-face {
+  font-family: 'Zen Kurenaido';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/zen-kurenaido.woff2') format('woff2');
+}
+
+@font-face {
   font-family: 'Bungee Shade';
   font-style: normal;
   font-weight: 400;
@@ -114,8 +122,6 @@ html {
 
 @include helper.create-theme(
   $theme-name: default,
-  $background: #24748f,
-  $surface: var(--white),
   $text-on-surface: var(--black),
   $code-string: #2bacb3
 ) {
@@ -124,10 +130,17 @@ html {
 
 @include helper.create-theme(
   $theme-name: dark,
-  $background: #232625,
+  $background: #2a2a2a,
   $surface: var(--secondary),
   $text-on-surface: var(--white),
-  $code-string: #f1dd6d
+  $code-string: #f1dd6d,
+  $surface-shadow: #{5px 5px 10px #202020,
+  -5px -5px 10px #343434},
+  $surface-border: none,
+  $text-primary: #ffffff,
+  $header-shadow: 31px 31px 62px #202020,
+  $icon-fill: var(--white),
+  $curved-lineColor: var(--white)
 ) {
   @include default-styles;
 }
@@ -164,7 +177,9 @@ html {
   $curved-lineWidth: 3,
   $curved-lineHeight: 25,
   $outline: var(--black),
-  $hr-color: var(--black)
+  $hr-color: var(--black),
+  $surface-shadow: none,
+  $header-shadow: none
 ) {
   scrollbar-width: thin;
   scrollbar-color: transparent var(--surface);
@@ -219,7 +234,9 @@ html {
   $curved-lineSpread: 3,
   $curved-lineWidth: 3,
   $curved-lineHeight: 20,
-  $outline: none
+  $outline: none,
+  $surface-shadow: none,
+  $header-shadow: none
 ) {
   --icon-stroke-width: 1px;
   --subtitle-stroke: #{1px var(--secondary)};
@@ -294,7 +311,7 @@ body {
   margin: 0;
   background-color: var(--background);
   color: var(--text-primary);
-  font-family: var(--subtitle-font), sans-serif;
+  font-family: var(--body-font), sans-serif;
   position: relative;
   min-height: 100vh;
   scrollbar-width: thin;
@@ -497,7 +514,10 @@ img {
 }
 
 .surface {
-  background-color: var(--surface);
+  border-radius: 4px;
+  background: var(--surface);
+  box-shadow: var(--surface-shadow);
+  border: var(--surface-border);
 }
 
 .language-logo-badge--img {

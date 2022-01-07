@@ -65,6 +65,13 @@ export default function Layout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <link
+          href="/fonts/zen-kurenaido.woff2"
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </Head>
       <Meta />
       <BoredContext.Provider value={isBored}>

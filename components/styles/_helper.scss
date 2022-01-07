@@ -8,13 +8,15 @@
   --outline: #{$outline};
 }
 
-@mixin surface-colors(
+@mixin surface(
   $background,
   $background-texture,
   $surface,
   $hex-stroke-color,
   $game-background,
-  $hr-color
+  $hr-color,
+  $surface-shadow,
+  $surface-border
 ) {
   --background: #{$background};
   --background-texture: #{$background-texture};
@@ -22,6 +24,8 @@
   --hex-stroke-color: #{$hex-stroke-color};
   --game-background: #{$game-background};
   --hr-color: #{$hr-color};
+  --surface-shadow: #{$surface-shadow};
+  --surface-border: #{$surface-border};
 }
 
 @mixin theme-text(
@@ -31,6 +35,7 @@
   $title-color,
   $title-background-color,
   $subtitle-font,
+  $body-font,
   $subtitle-color,
   $selection-background,
   $selection-text
@@ -41,6 +46,7 @@
   --title-color: #{$title-color};
   --title-background-color: #{$title-background-color};
   --subtitle-font: #{$subtitle-font};
+  --body-font: #{$body-font};
   --subtitle-color: #{$subtitle-color};
   --selection-background: #{$selection-background};
   --selection-text: #{$selection-text};
@@ -85,23 +91,24 @@
 
 @mixin create-theme(
   $theme-name,
-  $white: #fff8e2,
+  $white: #efeeee,
   $black: #171717,
   $primary: #f1dd6d,
   $secondary: #24748f,
   $outline: var(--primary),
-  $background,
+  $background: #ffffff,
   $background-texture: none,
-  $surface,
+  $surface: #ffffff,
   $hex-stroke-color: var(--white),
   $game-background: var(--background),
   $hr-color: var(--primary),
-  $text-primary: #fff8e2,
+  $text-primary: #00303d,
   $text-on-surface,
   $title-font: "'Bungee Shade', Arial, sans-serif",
   $title-color: var(--black),
   $title-background-color: var(--primary),
   $subtitle-font: "'Indie Flower', cursive, sans-serif",
+  $body-font: "'Zen Kurenaido', sans-serif",
   $subtitle-color: var(--text-primary),
   $selection-background: rgba(241, 221, 109, 0.99),
   $selection-text: var(--black),
@@ -112,23 +119,31 @@
   $checkerboard-color: #{'#BF43A1, #F26463, #F1DD6D, #24748F, #2BACB3'},
   $checkerboard-spacing: 7,
   $checkerboard-size: 16,
-  $curved-lineColor: var(--white),
+  $curved-lineColor: var(--black),
   $curved-lineSpread: 50,
   $curved-lineWidth: 2,
   $curved-lineHeight: 20,
-  $icon-fill: var(--white),
-  $icon-stroke: none
+  $icon-fill: var(--black),
+  $icon-stroke: none,
+  $surface-shadow: #{5px 5px 10px #c2c2c2,
+  -5px -5px 10px #ffffff},
+  $surface-border: 1px solid #ffffff,
+  $header-shadow: 5px 5px 10px #d9d9d9
 ) {
   .theme-#{$theme-name} {
+    --header-shadow: #{$header-shadow};
+
     @include theme-colors($white, $black, $primary, $secondary, $outline);
 
-    @include surface-colors(
+    @include surface(
       $background,
       $background-texture,
       $surface,
       $hex-stroke-color,
       $game-background,
-      $hr-color
+      $hr-color,
+      $surface-shadow,
+      $surface-border
     );
 
     @include theme-text(
@@ -138,6 +153,7 @@
       $title-color,
       $title-background-color,
       $subtitle-font,
+      $body-font,
       $subtitle-color,
       $selection-background,
       $selection-text

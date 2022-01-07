@@ -8,7 +8,7 @@ export default function LatestPost() {
   const latestPost = useContext(LatestPostContext)
 
   return (
-    <article className={styles.root}>
+    <article className={[styles.root, 'surface'].join(' ')}>
       <Link href={`/blog/${latestPost?.slug}`}>
         <a>
           <div className={styles.inner}>
