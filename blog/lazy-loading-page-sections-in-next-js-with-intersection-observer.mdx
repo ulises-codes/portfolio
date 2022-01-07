@@ -1,0 +1,224 @@
+---
+title: 'Lazy Loading Page Sections in Next.js With Intersection Observer'
+author: 'Ulises Himely'
+publishDate: '01/07/2022'
+editedDate: ''
+excerpt: "Ours is a global economy, but not all internet connections are created equal. There are many ways to improve your website's performance on older/slower devices and connections, such as minimizing network requests, image optimization, reducing font sizes, etc. This post will aim to add a little-known tool to your web performance toolkit."
+headerImageSrc: 'ulises.codes/blog/lazy-loading-page-sections-in-next-js-with-intersection-observer/sloth'
+headerImageAlt: 'A sloth hanging from a tree'
+headerImageCaption: 'Credit: Javier Mazzeo on Unsplash'
+---
+
+## TL;DR
+
+```js
+LazyLoading === 'good'
+```
+
+## In the Web, lazy is good
+
+We've all heard about the benefits lazy-loading images, assets, and packages in web projects. These all reduce the amount of work the browser has to do to render something a user can interact with at runtime. Still, I think something that is often forgotten is that if a user starts at the top of your page, there may be content that they never interact with further down the page. For example, a user may never look at the footer on your page. This isn't necessarily a bad thing! Maybe they navigated to the pricing section of your site instead of scrolling all the way down the homepage.
+
+In cases like the one I described, I believe it makes sense to lazy-load sections as the user scrolls down the page; we can make sure the content is loaded and ready right before the user scrolls to the applicable section, using the [IntersectionObserver API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
+
+## The code
+
+```ts
+import dynamic from 'next/dynamic'
+import { useEffect, useRef, useState, MutableRefObject } from 'react'
+
+const SectionA = dynamic(() => import('components/HomePage/SectionA'))
+const SectionB = dynamic(() => import('components/HomePage/SectionB'))
+const SectionC = dynamic(() => import('components/HomePage/SectionC'))
+const SectionD = dynamic(() => import('components/HomePage/SectionD'))
+const SectionE = dynamic(() => import('components/HomePage/SectionE'))
+
+type SectionRefs = {
+  [key: string]: MutableRefObject<HTMLDivElement>
+}
+
+export default function HomePage() {
+  const [visibleSections, setVisibleSections] = useState<string[]>([])
+
+  const sectionBRef = useRef() as MutableRefObject<HTMLDivElement>
+  const sectionCRef = useRef() as MutableRefObject<HTMLDivElement>
+  const sectionDRef = useRef() as MutableRefObject<HTMLDivElement>
+  const sectionERef = useRef() as MutableRefObject<HTMLDivElement>
+
+  useEffect(() => {
+    const refs: SectionRefs = {
+      sectionBRef,
+      sectionCRef,
+      sectionDRef,
+      sectionERef,
+    }
+
+    const observer = new IntersectionObserver(
+      (elements, ob) => {
+        for (let el of elements) {
+          if (el.isIntersecting && !visibleSections.includes(el.target.id)) {
+            setVisibleSections([...visibleSections, el.target.id])
+
+            ob.unobserve(el.target)
+          }
+        }
+      },
+      {
+        root: undefined,
+      }
+    )
+
+    for (let ref in refs) {
+      if (!visibleSections.includes(ref)) {
+        observer.observe(refs[ref].current)
+      }
+    }
+
+    return () => observer.disconnect()
+  }, [visibleSections])
+
+  return (
+    <div className="page-root">
+      <SectionA />
+      <section id="SectionB" style={{ minHeight: '300px' }} ref={SectionB}>
+        {visibleSections.includes('SectionB') && <SectionB />}
+      </section>
+      <section id="SectionC" style={{ minHeight: '300px' }} ref={SectionC}>
+        {visibleSections.includes('SectionC') && <SectionC />}
+      </section>
+      <section id="SectionD" style={{ minHeight: '300px' }} ref={SectionD}>
+        {visibleSections.includes('SectionD') && <SectionD />}
+      </section>
+      <section id="SectionE" style={{ minHeight: '300px' }} ref={SectionE}>
+        {visibleSections.includes('SectionE') && <SectionE />}
+      </section>
+    </div>
+  )
+}
+```
+
+## Getting Started
+
+Let's break that code down to see what's going on here.
+
+First, we use `next/dynamic` to dynamically import each section. This will automatically remove these items from the main chunk that is shipped to the browser, immediately reducing our initial bundle size.
+
+Within the HomePage component, we create an empty array `visibleSections` and hold it in state. As the user scrolls down the page, we'll push the name of the section that should be displayed to this array, which will trigger the component to re-render and display each section in this array (we map that out in the component's return statement).
+
+We also create a ref for each section that can be updated later on as the section becomes visible.
+
+```ts
+import dynamic from 'next/dynamic'
+import { useEffect, useRef, useState, MutableRefObject } from 'react'
+
+const SectionA = dynamic(() => import('components/HomePage/SectionA'))
+const SectionB = dynamic(() => import('components/HomePage/SectionB'))
+const SectionC = dynamic(() => import('components/HomePage/SectionC'))
+const SectionD = dynamic(() => import('components/HomePage/SectionD'))
+const SectionE = dynamic(() => import('components/HomePage/SectionE'))
+
+type SectionRefs = {
+  [key: string]: MutableRefObject<HTMLDivElement>
+}
+
+export default function HomePage() {
+  const [visibleSections, setVisibleSections] = useState<string[]>([])
+
+  const sectionBRef = useRef() as MutableRefObject<HTMLDivElement>
+  const sectionCRef = useRef() as MutableRefObject<HTMLDivElement>
+  const sectionDRef = useRef() as MutableRefObject<HTMLDivElement>
+  const sectionERef = useRef() as MutableRefObject<HTMLDivElement>
+
+  ...
+
+```
+
+## Use IntersectionObserver to lazy load sections
+
+Now we create a new `observer`, which just responds to a callback that is passed to `new IntersectionObserver`.
+
+In our case, we want the observer to fire whenever the viewport 'intersects' with the viewport, meaning it is visible. So, inside the callback, we say that for each element that has been passed to the observer, if it is intersecting, push that section's ID to our `visibleSections` array.
+
+Then, we iterate over the `refs` object, passing each to the observer; the observer will now watch each section and will fire when any of them intersect with the viewport.
+
+### Important:
+
+Make sure to pass the `visibleSections` variable to the `useEffect` hook as a dependency. Passing an empty array to `useEffect` will cause it to only run once, meaning it will continue to fire for sections that have already been loaded. Not passing anything to `useEffect` will cause it to fire anytime the component re-renders, but it won't have access to each updated version of `visibleSections`.
+
+And make sure to include a return statement inside of `useEffect` destroying the observer on each render.
+
+```ts
+...
+
+export default function HomePage() {
+  ...
+
+  useEffect(() => {
+    const refs: SectionRefs = {
+      sectionBRef,
+      sectionCRef,
+      sectionDRef,
+      sectionERef,
+    }
+
+    const observer = new IntersectionObserver(
+      (elements, ob) => {
+        for (let el of elements) {
+          if (el.isIntersecting && !visibleSections.includes(el.target.id)) {
+            setVisibleSections([...visibleSections, el.target.id])
+
+            ob.unobserve(el.target)
+          }
+        }
+      },
+      {
+        root: undefined,
+      }
+    )
+
+    for (let ref in refs) {
+      if (!visibleSections.includes(ref)) {
+        observer.observe(refs[ref].current)
+      }
+    }
+
+    return () => observer.disconnect()
+  }, [visibleSections])
+
+  ...
+}
+```
+
+## Rendering everything
+
+To avoid [Cumulative Layout Shift](https://web.dev/cls/) (CLS) as the new sections are loaded, we wrap them in a placeholder `div`, with an explicit minimum height. That's similar to what we do with images; it's just an empty placeholder, which we include to try and provide a better user experience.
+
+Each section is conditionally rendered based on whether its ID is included in the `visibleSections` array.
+
+```ts
+...
+
+export default function HomePage() {
+  ...
+
+  return (
+    <div className="page-root">
+      <SectionA />
+      <section id="SectionB" style={{ minHeight: '300px' }} ref={SectionB}>
+        {visibleSections.includes('SectionB') && <SectionB />}
+      </section>
+      <section id="SectionC" style={{ minHeight: '300px' }} ref={SectionC}>
+        {visibleSections.includes('SectionC') && <SectionC />}
+      </section>
+      <section id="SectionD" style={{ minHeight: '300px' }} ref={SectionD}>
+        {visibleSections.includes('SectionD') && <SectionD />}
+      </section>
+      <section id="SectionE" style={{ minHeight: '300px' }} ref={SectionE}>
+        {visibleSections.includes('SectionE') && <SectionE />}
+      </section>
+    </div>
+  )
+}
+```
+
+I hope this post helps you understand how you can use IntersectionObserver to lazy-load sections in your webpage.

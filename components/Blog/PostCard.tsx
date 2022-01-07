@@ -29,6 +29,7 @@ export default function PostCard({ slug, meta }: BlogPostInfo) {
           src={meta.headerImageSrc}
           width={650}
           height={267.19}
+          quality={50}
           alt={meta.headerImageAlt}
         />
         <hr className={styles.hr} />
