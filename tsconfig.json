@@ -30,6 +30,6 @@
     },
     "incremental": true
   },
-  "exclude": ["node_modules", ".next"],
+  "exclude": ["node_modules", ".next", "cli"],
   "include": ["**/*.ts", "**/*.tsx", "**/*.js"]
 }

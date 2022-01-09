@@ -55,6 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-external-links", "npm:8.0.0"],
             ["sass", "npm:1.45.2"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"],
+            ["ulises", "file:./cli#./cli::hash=f9b3f5&locator=ulises.codes%40workspace%3A."],
             ["webpack", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:5.65.0"]
           ],
           "linkType": "SOFT",
@@ -9502,6 +9503,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["ulises", [
+        ["file:./cli#./cli::hash=f9b3f5&locator=ulises.codes%40workspace%3A.", {
+          "packageLocation": "./.yarn/cache/ulises-file-9e96d19c42-0b4f743b24.zip/node_modules/ulises/",
+          "packageDependencies": [
+            ["ulises", "file:./cli#./cli::hash=f9b3f5&locator=ulises.codes%40workspace%3A."]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["ulises.codes", [
         ["workspace:.", {
           "packageLocation": "./",
@@ -9527,6 +9537,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-external-links", "npm:8.0.0"],
             ["sass", "npm:1.45.2"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"],
+            ["ulises", "file:./cli#./cli::hash=f9b3f5&locator=ulises.codes%40workspace%3A."],
             ["webpack", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:5.65.0"]
           ],
           "linkType": "SOFT",

@@ -39,16 +39,6 @@ export default function BlogPost({
           target="_blank"
         />
       ),
-      span: (props: HTMLAttributes<HTMLSpanElement>) => (
-        <span
-          {...props}
-          className={
-            props.className === 'inline-code'
-              ? styles.inlineCode
-              : props.className
-          }
-        />
-      ),
     },
   })
 

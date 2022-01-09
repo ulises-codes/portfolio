@@ -3,20 +3,28 @@
     font-family: var(--subtitle-font);
   }
 
+  code {
+    display: inline-block;
+    background-color: var(--code-background);
+    padding: 4px 8px;
+    color: var(--code-text-color);
+    line-height: 1;
+  }
+
   pre {
     padding: calc(var(--padding) / 2);
-    background-color: var(--code-background);
     font-size: 0.8rem;
-    max-width: 720px;
+    max-width: 100%;
     margin: auto;
     white-space: pre;
     overflow: hidden;
+    background-color: var(--code-background);
 
     code {
+      display: block;
+      line-height: revert;
       border: 8px solid var(--background);
       padding: var(--padding);
-      display: block;
-      color: var(--code-text-color);
       overflow: scroll;
     }
   }

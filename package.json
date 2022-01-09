@@ -6,6 +6,7 @@
     "dev": "next",
     "dev:net": "next -p 10.0.0.87:3000",
     "build": "yarn prepublish && next build",
+    "build-cli": "tsc ./cli/index.ts --esModuleInterop --skipLibCheck --moduleResolution node",
     "export": "next build && next export",
     "start": "next start -p 3001",
     "sitemap": "tsc ./lib/generateSitemap.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/generateSitemap.js && rm ./lib/generateSitemap.js ./lib/markdown/getPosts.js",
@@ -29,6 +30,7 @@
     "react-dom": "^17.0.2",
     "rehype-highlight": "^4.0.0",
     "remark-external-links": "^8.0.0",
+    "ulises": "./cli",
     "webpack": "^5.65.0"
   },
   "devDependencies": {
