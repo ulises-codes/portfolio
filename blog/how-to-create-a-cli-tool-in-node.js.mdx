@@ -1,0 +1,249 @@
+---
+title: 'How to Create a CLI Tool in Node.js'
+author: 'Ulises Himely'
+publishDate: '01/09/2022'
+excerpt: "As a developer, I've learned that tooling can be just as helpful as learning a programming language's syntax. Abstracting away tasks behind a CLI tool can save you time, reduce the risk of errors, and can just be a great opportunity to learn something new. This post will help you create a basic CLI tool that does more than just print text out to the console."
+headerImageSrc: 'ulises.codes/blog/how-to-create-a-cli-tool-in-node.js/screenshot-of-terminal'
+headerImageAlt: 'A photo of a MacBook Air screen running the terminal'
+headerImageCaption: 'Credit: Goran Ivos on Unsplash'
+---
+
+## TL;DR
+
+Clone the [repository](https://github.com/ulises-codes/how-to-create-a-cli-tool-in-node.js) to see the finished product.
+
+## Introduction
+
+Constant copying and pasting is a dangerous game, and can lead to headaches when trying to troubleshoot why your code isn't working. I should know, because I spent an hour trying to troubleshoot a markdown file yesterday, only to find out I had copied and pasted a string that opened with double quotes and ended with a single quote (read: face palm emoji).
+
+So, I decided enough was enough; it was time to write a CLI tool that takes in some input and generates the boilerplate for new blog posts, spitting it all out as a markdown file. I've written CLI tools before (in Python and Node), but this one was meant to be a little different. Instead of taking one line of commands and then executing them, this tool had to be more like a series of questions and answers.
+
+It took a bit of digging to figure out how to put it all together, and I hope this post saves you some time and adds a little value to your day.
+
+## What I'll cover in this post
+
+This post is going to teach you how to use Typescript and Node.js to write and run a simple yet powerful cli tool that will prompt a user for input, then write the user's responses to a file in the filesystem.
+
+I will skip deploying it to NPM as there are plenty of other resources out there to help you with this. We will only use native modules since the built-in capabilities are robust and easy to use.
+
+## Getting Started
+
+Let's create a new project by running `yarn {or npm} init -y ./cli`. Feel free to replace "./cli" with whatever you want the directory's name to be.
+
+Go ahead and `cd` into the directory, then open _package.json_. In _package.json_, set a name for this project: this is where you choose what the command will be named when you actually run it. Also set the bin field to the entry point for the cli.
+
+```json
+// package.json
+{
+  "name": "skynet",
+  "bin": "./index.js"
+}
+```
+
+If you're using yarn v3:
+
+1. Run `yarn set version berry`
+2. Install the vscode sdk by running `yarn dlx @yarnpkg/sdks vscode`
+3. Press cmd + shift + p, enter "typescript", then select "Select Typescript Version > Use workspace version".
+
+Then, run `yarn add (or npm i) -D typescript @types/node`.
+
+Next, create the file **index.ts** and open it up.
+
+## Write the thing
+
+Our goal is to create a markdown file which will serve as the starting point for a blog post. Our command will take two initial arguments, `create` and a directory where the file will be written. The user's response will the trigger the program to ask a series of questions that will be written to the file. In this example, our command will be `yarn skynet create ./blog`.
+
+### Step 1: Get the arguments
+
+Quick note: At the top of the file, make sure to add `#!/usr/bin/env node`. That way, if you run your tool with yarn (or npm), then yarn will call Node first prior to running the program.
+
+In Node.js, arguments passed via the command line will be pushed into `process.argv`. There are two other arguments included in [process.argv](https://nodejs.org/docs/latest/api/process.html#processargv), at indexes 0 and 1.
+
+The first element, `process.argv[0]`, the [execPath](https://nodejs.org/docs/latest/api/process.html#processexecpath), is the path to the Node binary on your system.
+
+The second element, `process.argv[1]`, is the path to the file that triggered the program. In this case, that would be the path to index.js.
+
+We don't need the first two arguments because we don't intend to use them, so let's cut those out:
+
+```ts
+// index.ts
+#!/usr/bin/env node
+
+const args = process.argv.slice(2)
+```
+
+Remember, our command is going to be `yarn skynet create ./blog`. So in `args`, the first argument will be **create** and the second will be **./blog**.
+
+In this case, **skynet** will only handle one command, `create`. In the future we may want to add a `delete` command. Therefore, we will do two things:
+
+1. Check which command was passed
+2. Write a handler function for each command
+
+This will keep our CLI tool modular and manageable.
+
+```ts
+// index.ts
+#!/usr/bin/env node
+import createBlogPost from './createBlogPost'
+
+const args = process.argv.slice(2)
+
+// Print a little welcome message
+console.log("Welcome to Skynet. Let's get started.")
+
+switch (args[0]) {
+  case 'create':
+    createBlogPost()
+
+    break
+}
+```
+
+### Step 2: Define createBlogPost
+
+I found it useful to extract the logic for this function into a separate module and import it into **index.ts**. Let's create a new file, **createBlogPost.ts** and add the following:
+
+```ts
+// createBlogPost.ts
+import * as Readline from 'readline'
+import * as fs from 'fs'
+
+interface NewPost {
+  title: string
+  author: string
+  publishDate?: string
+  synopsis: string
+}
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-us', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  })
+}
+
+export default function createBlogPost(outDir = './blog') {
+  const answers: NewPost = {
+    title: '',
+    author: 'John Connor',
+    publishDate: formatDate(new Date()),
+    synopsis: '',
+  }
+}
+```
+
+For each new post that we create, we'll define the title, author, publish date, and a small synopsis.
+
+Remember the second CLI argument, `./blog`? We want to pass that argument to `createBlogPost`, and we'll use it later when writing the markdown file to the system. This argument will be optional, however, so it's probably a good idea to add a default value to make sure the program knows where to write the file.
+
+Then, inside the function definition for createBlogPost, define an object `answers` that will have some default values which can be overridden by the user's input.
+
+### Step 3: Interrogate the user
+
+Here comes the good part: we get to write the actual program. We are going to use Node's [readline](https://nodejs.org/api/readline.html) module to read from and write to the console.
+
+First, initialize the module using `Readline.createInterface(process.stdin, process.stdout)`.
+
+Then, ask the user a question using `readline.question`, which takes two arguments: a string representing the question itself (the user will see this in the console), and a callback function denoting what should happen after the user responds.
+
+In this example, we will ask the user four questions. In the callback for the final question, call `readline.close()` to terminate the process.
+
+```ts
+// createBlogPost.ts
+...
+
+export default function createBlogPost(outDir = './blog') {
+    ...
+
+    const readline = Readline.createInterface(process.stdin, process.stdout)
+
+    readline.question('Title: ', title => {
+        answers.title = title
+
+        readline.question('Author: ', author => {
+            answers.author = author
+
+            readline.question('Publish Date: ', publishDate => {
+                // Check if date is valid, don't care if it's in the past
+                if (publishDate && new Date(publishDate)) {
+                    answers.publishDate = formatDate(new Date(publishDate))
+                }
+
+                readline.question('Synopsis: ', synopsis => {
+                    answers.synopsis = synopsis
+
+                    readline.close()
+                })
+            })
+
+            // Do this to display a default a value for 'Publish Date'
+            readline.write(answers.publishDate)
+        })
+
+        // Do this to display a default value for 'Author'
+        readline.write(answers.author)
+    })
+}
+```
+
+### Step 4: Spit it out to the filesystem
+
+Finally, we write the file to the system. Right before your call to `readline.close()`, we do the following:
+
+```ts
+// createBlogPost.ts
+...
+
+// Auto-generate a filename based on the blog post's title
+const filename = answers.title.toLowerCase().replace(/ /g, '-')
+
+// Since we're writing to an mdx file, this metadata will be included in a yaml-style
+// header, which is opened with '---'
+let fileContents = '---\n'
+
+for (const [key, value] of Object.entries(answers)) {
+    fileContents += `${key}: "${value}"\n`
+}
+
+// Close the header
+fileContents += '---'
+
+// Create the directory if it doesn't exist
+fs.mkdirSync(outDir, { recursive: true })
+
+// Write the file
+fs.writeFileSync(`${outDir}/${filename}.mdx`, fileContents)
+
+...
+```
+
+`
+
+## Compile Typescript to JavaScript
+
+If you followed along with Typescript, then you probably already know that these files need to be compiled to JavaScript before we can run anything via Node.
+
+Add the following script to your package.json:
+
+```json
+{
+    ...
+    "scripts": {
+        "build": "tsc ./index.ts --esModuleInterop --skipLibCheck --moduleResolution node"
+    }
+}
+```
+
+Then, run `yarn (or npm run) build`, which will generate a compiled index.js in your project root that can now be run via Node.
+
+Now you can finally run the command:
+
+```sh
+yarn skynet create ./blog
+```
+
+And voila! You should now be able to create new blog posts (or any other file) using a CLI tool, without copying and pasting boilerplate each time.
+
+It's nice to be a developer.
