@@ -23,9 +23,13 @@ export default function BlogPost({
   const content = hydrate(source, {
     components: {
       img: (props: MyImageProps) => (
-        <div className={styles.blogImageWrapper}>
-          <MyImage {...props} className={styles.blogImage} />
-        </div>
+        <span className={styles.blogImageWrapper}>
+          <MyImage
+            {...props}
+            className={styles.blogImage}
+            objectFit="contain"
+          />
+        </span>
       ),
       h1: (props: HTMLAttributes<HTMLHeadingElement>) => (
         <h1 className="title" {...props} />

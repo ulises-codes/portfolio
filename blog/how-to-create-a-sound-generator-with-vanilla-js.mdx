@@ -1,0 +1,414 @@
+---
+title: 'How to Create a Sound Generator with Vanilla JS'
+author: 'Ulises Himely'
+publishDate: '01/10/2022'
+excerpt: "Did you know that the web has a build-in synthesizer, which you can use to generate any musical tone? Maybe you're building a game, or perhaps you just want to experiment with sound. If so, this post will teach you how to leverage the AudioContext api to generate tones on the fly."
+headerImageSrc: 'ulises.codes/blog/how-to-create-a-sound-generator-with-vanilla-js/screenshot-of-muziktron'
+headerImageAlt: 'A screenshot of Muziktron'
+headerImageCaption: 'Screenshot of Muziktron'
+---
+
+## TL;DR
+
+[Here's the repository](https://github.com/ulises-codes/seven-simple-projects/tree/main/muziktron) if you just want to look at the code. Feel free to star it if you like it!
+
+And here's a CodePen so you can see (and hear) what the final product looks like.
+
+<iframe
+  height="300"
+  style={{ width: '100%' }}
+  scrolling="no"
+  title="Muziktron"
+  src="https://codepen.io/ulises-codes/embed/preview/abLaaQB?default-tab=result&editable=true&theme-id=dark"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen
+>
+  See the Pen{' '}
+  <a href="https://codepen.io/ulises-codes/pen/abLaaQB">Muziktron</a> by Ulises
+  Himely (<a href="https://codepen.io/ulises-codes">@ulises-codes</a>) on{' '}
+  <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+## A little background
+
+I'm a musician and I love to experiment with music. Last year I built an entire synthesizer that can be played via MIDI controller on Google Chrome, [u-znth](https://uznth.live).
+Any time my two passions collide, music and development, I'm like a kid in a candy store. So you can understand how thrilled I was when I discovered the [AudioContext](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext) api.
+
+The `AudioContext` api is like having an entire live sound setup, complete with sound effects and everything. I've leveraged it a few times to create tones, like in a Simon clone I created called [Copy Me](https://copyme.fun).
+
+![Screenshot of the game Copy Me](ulises.codes/project-thumbnails/copyme)
+
+Last year, I created a simple little sound generator I dubbed Muziktron, with the goal of writing a blog post tutorial. I never got around to it, but there's no time like the present, so here we go!
+
+## Bootstrap the project
+
+Our project will be written using HTML, CSS, and Vanilla JS. For the sake of transparency, note that I am using [Parcel](https://parceljs.org/) to quickly bundle the files and serve them via a local server. Parcel is fast and I love it for little projects like these, but it's not a requirement for the project to work. As you can see the raw HTML, CSS, and JS in the CodePen work just fine.
+
+If you follow this tutorial step-by-step, then your project directory will look something like this when we're done:
+
+![Screenshot of directory in VSCode](ulises.codes/blog/how-to-create-a-sound-generator-with-vanilla-js/project-tree)
+
+To get started, create a directory named **muziktron** and open it up. In your terminal, run `npm init -y muziktron` to initialize the project and create a **package.json** file.
+
+Next, install the only external dependency, Parcel, via `npm i -D parcel-bundler`.
+
+Then, add this script to **package.json**:
+
+```json
+// package.json
+{
+    ...
+
+    "scripts": {
+        "start": "parcel src/index.html --open 'Google Chrome'"
+    }
+}
+
+```
+
+Finally, create a directory called **src**, and then following three files (inside of src):
+
+1. index.html
+2. styles.css
+3. logic.js
+
+I intentionally named these files in a way that would help new developers understand how they each work together. In a typical project, each of these files would probably just be named index, as in index.js and index.css.
+
+## The HTML
+
+Our layout is pretty simple, basically an unordered list of eight elements, each one representing a note in a [major scale](https://en.wikipedia.org/wiki/Major_scale).
+
+_Side note:_ If you don't know what a major scale is, think back to Do-Re-Mi-Fa-Sol-La-Ti-Do from elementary school music class, or the song [Do-Re-Mi](https://www.youtube.com/watch?v=drnBMAEA3AM) from [The Sound of Music](https://en.wikipedia.org/wiki/The_Sound_of_Music). Phew, that's a lot of links.
+
+Open up **index.html**. If you're using VSCode, you can bootstrap an HTML file very quickly by typing !, then tab or enter. This will populate some boilerplate, allowing you to focus on the `<body>` of your document. Either way, here is the full HTML markup, since there really isn't much to it:
+
+```html
+<!-- src/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muziktron</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <ul class="notes--ul">
+      <li class="note--li">
+        <button class="note--btn" data-key="a" data-midi-note="69">A</button>
+      </li>
+      <li class="note--li">
+        <button class="note--btn" data-key="s" data-midi-note="71">B</button>
+      </li>
+      <li class="note--li">
+        <button class="note--btn" data-key="d" data-midi-note="73">C#</button>
+      </li>
+      <li class="note--li">
+        <button class="note--btn" data-key="f" data-midi-note="74">D</button>
+      </li>
+      <li class="note--li">
+        <button class="note--btn" data-key="g" data-midi-note="76">E</button>
+      </li>
+      <li class="note--li">
+        <button class="note--btn" data-key="h" data-midi-note="78">F#</button>
+      </li>
+      <li class="note--li">
+        <button class="note--btn" data-key="j" data-midi-note="80">G#</button>
+      </li>
+      <li class="note--li">
+        <button class="note--btn" data-key="k" data-midi-note="81">A</button>
+      </li>
+    </ul>
+    <script src="./logic.js"></script>
+  </body>
+</html>
+```
+
+Note that we are importing the stylesheet inside of `<head>`, and our JavaScript at the end of our `<body>`.
+
+Within each `<li>` element we have included a `<button>`. Each button has two data attributes, `data-key` and `data-midi-note`.
+
+We'll use JavaScript to read each button's `data-key` to know which key on the user's keyboard should trigger that particular note.
+
+Each `data-midi-note` corresponds to the musical note (or tone) that will be generated by our app.
+
+## The CSS
+
+There isn't much to note here, except that I used `:nth-child` so that notes would have the same color across octaves. If you'd like more of an explanation, feel free to hit me up on Twitter @uliseshimely.
+
+```css
+/* src/styles.css */
+html {
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #232323;
+}
+
+.notes--ul {
+  list-style: none;
+  padding: 8px;
+  display: flex;
+  background-color: #fafafa;
+  border-radius: 16px;
+  max-width: 80vw;
+}
+
+.note--li {
+  border: 1px solid #232323;
+  border-radius: 50%;
+  margin: 4px;
+  background-color: var(--color);
+}
+
+.note--btn {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  height: 75px;
+  width: 75px;
+  background-color: transparent;
+  border: none;
+  border-radius: inherit;
+}
+
+.active {
+  box-shadow: 0 0 6px 4px var(--color);
+}
+
+.note--li:nth-child(7n + 1) {
+  --color: rgba(255, 75, 100, 0.5);
+}
+
+.note--li:nth-child(7n + 2) {
+  --color: rgba(255, 150, 100, 0.5);
+}
+
+.note--li:nth-child(7n + 3) {
+  --color: rgba(255, 250, 100, 0.5);
+}
+
+.note--li:nth-child(7n + 4) {
+  --color: rgba(1, 200, 100, 0.5);
+}
+
+.note--li:nth-child(7n + 5) {
+  --color: rgba(1, 150, 255, 0.5);
+}
+
+.note--li:nth-child(7n + 6) {
+  --color: rgba(50, 100, 255, 0.5);
+}
+
+.note--li:nth-child(7n + 7) {
+  --color: rgba(200, 40, 255, 0.5);
+}
+```
+
+## The JavaScript
+
+Hey, you've made it to the fun part! Let's get going.
+
+### MIDI to sound frequency
+
+Remember that `data-midi-note` attribute? We're using the musical note's [MIDI](https://en.wikipedia.org/wiki/MIDI) equivalent because MIDI notes are sequential, and therefore easier to represent in code. Since a MIDI note is not a sound frequency, our application needs to know how to match the MIDI note to the frequency it should play. Let's create a file **src/helper.js** and define the following function:
+
+```js
+// src/helper.js
+// https://medium.com/swinginc/playing-with-midi-in-javascript-b6999f2913c3
+export function midiToFreq(midiNote) {
+  const a = Math.pow(2, (midiNote - 69) / 12)
+
+  return a * 440
+}
+```
+
+### Getting started
+
+Now we're ready to create our sound generator. Open **src/index.js**.
+
+First, we need to import `midiToFreq`. Then, let's grab a list of all the note buttons that we defined in HTML.
+
+We will also initialize `AudioCtx`, and define `frequency` and `oscillator`.
+
+Note: `frequency` will represent the musical note, while `oscillator` represents the sound generator itself.
+
+```js
+// src/index.js
+import { midiToFreq } from './helper'
+
+const notes = document.querySelectorAll('.note--btn')
+
+const audioCtx = new AudioContext()
+let frequency
+let oscillator
+```
+
+### Define the behavior
+
+The sound generator needs to play a tone when a user either clicks or taps (on a touchscreen) on a button, or when the user presses one of the following keyboard keys:
+
+`A S D F G H J K`
+
+Oh, and we want the sound to stop when the user releases the key, stops clicking/tapping on a note, or moves the mouse out of a note button's bounds.
+
+We are going to iterate over our list of note buttons, and add event listeners with the callback functions `startNote` or `endNote` (we will define these later).
+
+The keyboard events fire at the window-level, so we'll attach event listeners to the window and add `handleKeyDown` and `handleKeyUp` as the callback functions (we'll also define these later).
+
+```js
+// src/index.js
+...
+
+notes.forEach(note => {
+  note.addEventListener('touchstart', startNote)
+  note.addEventListener('touchend', stopNote)
+
+  note.addEventListener('mousedown', startNote)
+  note.addEventListener('mouseup', stopNote)
+
+  note.addEventListener('mouseout', stopNote)
+})
+
+window.addEventListener('keydown', handleKeyDown)
+window.addEventListener('keyup', handleKeyUp)
+```
+
+### The oscillator
+
+An [oscillator](https://en.wikipedia.org/wiki/Electronic_oscillator) is like a sound engine responsible for producing sound. We need to create a virtual oscillator whenever a note is pressed, and destroy that oscillator whenever a note is released.
+
+```js
+// src/index.js
+...
+
+function createOscillator(frequency) {
+    oscillator = audioCtx.createOscillator()
+
+    //   This is the type of sound wave we want to produce,
+    //  See https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type for options
+    oscillator.type = 'square'
+
+    // Start the note immediately
+    oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime)
+
+    // Send the audio to an output
+    oscillator.connect(audioCtx.destination)
+
+    oscillator.start()
+}
+
+function destroyOscillator() {
+    // Only need to stop if there's actually a note playing
+    if (oscillator) {
+        oscillator.stop()
+
+        oscillator = undefined
+    }
+}
+```
+
+### Handling playback
+
+Ok so we can create an oscillator but we need to tell it what to do.
+
+```js
+// src/index.js
+...
+
+function startNote(e) {
+    // Cancel mouse events to avoid clashes if the user is on a touchscreen
+    if (e.type === 'touchstart' || e.type === 'touchend') {
+        e.preventDefault()
+    }
+
+    // If a note is already playing, find the corresponding button and stop that note
+    if (oscillator && frequency) {
+        const activeButton = Array.from(notes).find(
+            note => midiToFreq(note.dataset.midiNote) === frequency
+        )
+
+        stopNote({ target: activeButton })
+    }
+
+    // Get the MIDI note for the tone we want to play
+    const { midiNote } = e.target.dataset
+
+    // Convert the MIDI note to a frequency
+    frequency = midiToFreq(midiNote)
+
+    // Create an oscillator and pass the frequency to the oscillator
+    createOscillator(frequency)
+
+    // Set CSS class to 'active' for visual feedback
+    e.target.classList.add('active')
+}
+
+function stopNote(e) {
+    destroyOscillator()
+
+    frequency = undefined
+
+    e.target.classList.remove('active')
+}
+```
+
+### Handling keyboard input
+
+Keyboard events are a little different, so we will define two functions to wrap around `startNote` and `stopNote`.
+
+```js
+// src/index.js
+...
+
+function handleKeyDown(e) {
+    // Find the button that corresponds to the keyboard key
+    const button = Array.from(notes).find(note => note.dataset.key === e.key)
+
+    if (button) {
+        // If that note is already playing, return
+        if (frequency === midiToFreq(button.dataset.midiNote)) {
+            return
+        }
+
+        // Otherwise, play the note
+        startNote({ target: button })
+    }
+}
+
+function handleKeyUp(e) {
+    // Find the button that corresponds to the keyboard key
+    const button = Array.from(notes).find(note => note.dataset.key === e.key)
+
+    // If the note is playing, stop that note
+    if (button && frequency === midiToFreq(button.dataset.midiNote)) {
+        stopNote({ target: button })
+    }
+}
+```
+
+## Run it
+
+In your terminal, run `npm run parcel` and the project will build; you should now be able go to http://localhost:1234 and see it live!
+
+Check out the `AudioContext` API to see how you can customize your sound generator even further.
+
+I hope you enjoyed this short tutorial. If you liked it, feel free to share it somewhere in the socials!
