@@ -6,9 +6,8 @@ export default function Codepen({ description, slug, title }: CodepenProps) {
 
   const surface = getComputedStyle(body).getPropertyValue('--surface')
   const textColor = getComputedStyle(body).getPropertyValue('--text-on-surface')
-  const activeColor = getComputedStyle(body).getPropertyValue(
-    '--active-tab-color'
-  )
+  const activeColor =
+    getComputedStyle(body).getPropertyValue('--active-tab-color')
 
   return (
     <div className={[styles.codepenWrapper, 'surface'].join(' ')}>
@@ -27,7 +26,9 @@ export default function Codepen({ description, slug, title }: CodepenProps) {
         data-tab-color={surface}
         data-tab-link-color={textColor}
         data-active-link-color={activeColor}
-        data-pen-title={title}>
+        data-pen-title={title}
+        data-zoom={0.5}
+      >
         <span>
           See the Pen
           <a href={`https://codepen.io/ulises-codes/pen/${slug}`}>
