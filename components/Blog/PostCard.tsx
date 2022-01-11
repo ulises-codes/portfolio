@@ -36,6 +36,13 @@ export default function PostCard({ slug, meta, placeholderImg }: BlogPostInfo) {
         />
         <hr className={styles.hr} />
         <div className={styles.excerpt}>{meta.excerpt}</div>
+        <ul className={styles.tagList}>
+          {meta.tags.map(tag => (
+            <li key={tag} className={styles.tag}>
+              {tag}
+            </li>
+          ))}
+        </ul>
       </div>
     </article>
   )

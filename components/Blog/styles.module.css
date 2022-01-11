@@ -16,7 +16,8 @@
 }
 
 .titleWrapper,
-.excerpt {
+.excerpt,
+.tagList {
   padding: var(--padding);
 }
 
@@ -31,4 +32,24 @@
   margin: 0;
   background-color: var(--background);
   height: 8px;
+}
+
+.tagList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+}
+
+.tag {
+  width: max-content;
+  font-size: smaller;
+  opacity: 0.8;
+  /* color: var(--selection-text); */
+}
+
+.tag:not(:last-child)::after {
+  content: ' •';
+  vertical-align: middle;
 }

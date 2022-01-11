@@ -9,6 +9,7 @@ interface BlogPostMeta {
   headerImageSrc: string
   headerImageAlt: string
   headerImageCaption: string
+  tags: string[]
 }
 
 interface BlogPostInfo {
