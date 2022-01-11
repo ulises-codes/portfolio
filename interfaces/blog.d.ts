@@ -14,7 +14,7 @@ interface BlogPostMeta {
 interface BlogPostInfo {
   meta: BlogPostMeta
   slug: string
-  postPlaceholderImg: string
+  placeholderImg: string
 }
 
 interface BlogPostProps extends Omit<BlogPostInfo, 'postPlaceholderImg'> {

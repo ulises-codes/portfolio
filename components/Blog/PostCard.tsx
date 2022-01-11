@@ -4,7 +4,7 @@ import Link from 'next/link'
 import MyImage from 'util/MyImage'
 import styles from './styles.module.css'
 
-export default function PostCard({ slug, meta }: BlogPostInfo) {
+export default function PostCard({ slug, meta, placeholderImg }: BlogPostInfo) {
   return (
     <article key={slug} className={[styles.post, 'surface'].join(' ')}>
       <div className={styles.inner}>
@@ -31,6 +31,8 @@ export default function PostCard({ slug, meta }: BlogPostInfo) {
           height={267.19}
           quality={50}
           alt={meta.headerImageAlt}
+          placeholder="blur"
+          blurDataURL={placeholderImg}
         />
         <hr className={styles.hr} />
         <div className={styles.excerpt}>{meta.excerpt}</div>

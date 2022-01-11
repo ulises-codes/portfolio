@@ -34,7 +34,7 @@ export default function LatestPost() {
               width={350}
               height={175}
               placeholder="blur"
-              blurDataURL={latestPost?.postPlaceholderImg}
+              blurDataURL={latestPost?.placeholderImg}
             />
             <div className={styles.bottom}>
               <p>{latestPost?.meta.excerpt}</p>

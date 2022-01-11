@@ -22,7 +22,7 @@ export function getPostBySlug(slug: string) {
 
   const fullPath = join(postsDirectory, `${realSlug}.mdx`)
 
-  const { data, content } = (matter.read(fullPath) as unknown) as {
+  const { data, content } = matter.read(fullPath) as unknown as {
     data: BlogPostMeta
     content: string
   }
@@ -51,6 +51,7 @@ export function getAllPosts() {
   const dataArr = getMDXFiles().map(fileName => ({
     meta: matter.read(join(postsDirectory, fileName)).data as BlogPostMeta,
     slug: getRealSlug(fileName),
+    placeholderImg: '',
   }))
 
   return dataArr

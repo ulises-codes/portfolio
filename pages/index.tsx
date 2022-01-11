@@ -30,7 +30,9 @@ export default function IndexPage({
           crossOrigin="anonymous"
         />
       </Head>
-      <LatestPostContext.Provider value={{ ...latestPost, postPlaceholderImg }}>
+      <LatestPostContext.Provider
+        value={{ ...latestPost, placeholderImg: postPlaceholderImg }}
+      >
         <HomePageSections />
       </LatestPostContext.Provider>
     </>
