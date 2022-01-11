@@ -17,7 +17,7 @@ const projectList: ProjectProps[] = [
     name: 'Convertify',
     url: 'convertify.fun',
     imgSrc: 'convertify.fun',
-    languages: ['Svelte'],
+    languages: ['Svelte', 'Python'],
   },
   {
     name: 'Copy Me!',
