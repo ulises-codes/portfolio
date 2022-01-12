@@ -1,0 +1,132 @@
+---
+title: 'Three Essential and Very Useful JavaScript Array Methods'
+author: 'Ulises Himely'
+publishDate: '01/12/2022'
+excerpt: "ES6 brought us tons of very useful array methods that can save you time, and are supposed to be optimized for performance, as well. Don't reinvent the wheel; read this article instead!"
+headerImageSrc: 'ulises.codes/blog/three-essential-and-very-useful-javascript-array-methods/laptop-picture'
+headerImageAlt: 'Code on a laptop screen, and the laptop is positioned in front of a window'
+headerImageCaption: 'Credit: Maxwell Nelson on Unsplash'
+tags:
+  - vanilla js
+  - arrays
+  - fundamentals
+---
+
+## The callback function
+
+Each one of these methods iterates over every element in an array, and calls a function supplied by you (the "callback" function). Each callback receives three arguments, the current element, the current index, and the array you are looping over. It looks like this:
+
+```js
+const callbackFunction = (currentElement, currentIndex, originalArr) => ...
+```
+
+## 1. forEach
+
+[Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) calls your callback function for each element in an array.
+
+```js
+const arr = [/* any number of elements */]
+
+arr.forEach((element, index) => /* do anything, such as console.log the element */ )
+```
+
+Here's a comparison of how it would work with a regular loop vs. `forEach`:
+
+```js
+const arr = [
+  /* any number of elements */
+]
+
+// A traditional loop
+for (let i = 0; i < arr.length; i++) {
+  console.log(`Array element at index ${i}: ${arr[i]}`)
+}
+
+// The forEach method
+arr.forEach((el, i) => console.log(`Array element at index ${i}: ${el}`))
+```
+
+You might be not be sold on `forEach` yet, but look at how quickly you can move now:
+
+```js
+const arr = [
+  /* any number of elements */
+]
+
+arr.forEach(el => arr.push(el * 2))
+
+arr.forEach(el => console.log(el))
+```
+
+Pretty cool, right?
+
+## 2. filter
+
+I find myself using this method regularly. [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) will return a new array and takes a callback function which returns a boolean, indicating a particular element should be included in the new array.
+
+```js
+const arr = [1, 2, 3, 4, 1, 2, 3, 4, 1]
+
+const newArr = arr.filter(el => el === 1)
+
+console.log(newArr) // [1,1,1]
+```
+
+In the example above, the callback function only returns true if the element that has been passed as an argument is equal to 1.
+
+You can even use this with an array of objects.
+
+```js
+const arr = [{ name: 'Bill' }, { name: 'Bob' }, { name: 'Buck' }]
+
+const newArr = arr.filter(person => person.name === 'Bob')
+
+console.log(newArr) // [{ name: 'Bob' }]
+
+const anotherArr = arr.filter(person => person.name.length === 4)
+
+console.log(anotherArr) // [{ name: 'Bill', name: 'Buck' }]
+```
+
+You can even chain this method, with itself or with other array methods.
+
+```js
+const arr = [{ name: 'Bill' }, { name: 'Bob' }, { name: 'Buck' }]
+
+const newArr = arr
+  .filter(person => person.name.length === 4)
+  .filter(person => person.name[3] === 'l')
+
+console.log(newArr) // [{ name: Bill }]
+```
+
+Yes, you can of course do this with just one call to `filter`, like so: `person.name.length === 4 && person.name[3] === 'l'`. I just wanted to show you what is possible, because you will likely want to chain methods together at some point in the future.
+
+## 3. map
+
+Possibly the one I use the most, [Array.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) allows you to arbitrarily modify each element in an array, then returns the new elements in a new array. It's extremely useful and stops you from mutating the original array, which can lead to unexpected behaviors or errors in your application.
+
+```js
+const arr = [{ name: 'Bill' }, { name: 'Bob' }, { name: 'Buck' }]
+
+const newArr = arr.map(person => person.name.split('').reverse().join(''))
+console.log(newArr) // [ 'lliB', 'boB', 'kcuB' ]
+
+const anotherArr = arr.map((person, i) => ({ name: person.name, index: i }))
+console.log(anotherArr) // [ { name: 'Bill', index: 0 }, { name: 'Bob', index: 1 }, { name: 'Buck', index: 2 } ]
+```
+
+And, as I mentioned before, you can chain methods together.
+
+```js
+const arr = [{ name: 'Bill' }, { name: 'Bob' }, { name: 'Buck' }]
+
+const newArr = arr
+  .filter(person => person.name.length === 4)
+  .map(person => `This person's name is ${person.name}`)
+console.log(newArr) // [ "This person's name is Bill", "This person's name is Buck" ]
+```
+
+## Conclusion
+
+These three array methods are powerful tools to add to your dev toolkit. If you liked this post, please share it on the socials! Feel free to follow me on [Twitter](https://twitter.com/UlisesHimely) or on [LinkedIn](https://linkedin.com/in/ulises-h).
