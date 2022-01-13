@@ -9,3 +9,4 @@ export type Languages =
   | 'Sass'
   | 'Svelte'
   | 'Python'
+  | 'Webpack'

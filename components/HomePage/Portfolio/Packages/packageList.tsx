@@ -1,6 +1,8 @@
+import { Languages } from 'interfaces/languages'
+
 export type PackageProps = {
   description: string
-  languages: string[]
+  languages: Languages[]
   title: string
   repo: string
 }
@@ -22,7 +24,7 @@ const packageList: PackageProps[] = [
     description:
       'A (slightly) customizable Snake game in the form of a React component.',
     title: 'Bite Me: A Snake Game',
-    languages: ['TS', 'React', 'JS'],
+    languages: ['TS', 'React', 'JS', 'Webpack'],
     repo: 'bite-me',
   },
   {

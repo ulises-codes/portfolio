@@ -22,6 +22,7 @@ export default function Package({
               width="24"
               height="24"
               loading="lazy"
+              title={name}
             />
           ))}
         </div>

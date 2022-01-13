@@ -1,5 +1,4 @@
 import type { CodepenProps } from './codepenList'
-import styles from './styles.module.scss'
 
 export default function Codepen({ description, slug, title }: CodepenProps) {
   const body = document.querySelector('body') as HTMLBodyElement
@@ -10,7 +9,7 @@ export default function Codepen({ description, slug, title }: CodepenProps) {
     getComputedStyle(body).getPropertyValue('--active-tab-color')
 
   return (
-    <div className={[styles.codepenWrapper, 'surface'].join(' ')}>
+    <div className="surface">
       <div
         className="codepen"
         data-height="375"
