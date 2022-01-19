@@ -42,7 +42,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ulises-codes/bite-me", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:7.0.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fbite-me%2F7.0.4%2F5f03ee8a4ffc3615ec54e446fca6ea1f6a989f414d888ea0fe42e4d3d557910e"],
             ["@ulises-codes/helper-functions", "npm:0.3.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fhelper-functions%2F0.3.0%2F7c4ed080758f7821db6f33a8965df7fe309e27aec2352ded7c86dd5f101d5dc6"],
             ["@ulises-codes/react-hooks", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:0.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Freact-hooks%2F0.1.0%2F1dcb6de558caef225be61f76ad61ed9887edd63437400ce2fd68aa1006f80d46"],
-            ["@ulises-codes/skynet", "npm:0.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.1%2F1e5b5d2056cd28ec27e8b774df5c660ce53b9a30c32b98662be31494dc6087ee"],
+            ["@ulises-codes/skynet", "npm:0.0.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.3%2Fba3003cad062a42979ac9b401600addb6cbd53232a082183793cb3263bbf727b"],
             ["cloudinary", "npm:1.28.1"],
             ["css-paint-polyfill", "npm:3.3.0"],
             ["framer-motion", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:4.1.7"],
@@ -3464,10 +3464,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@ulises-codes/skynet", [
-        ["npm:0.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.1%2F1e5b5d2056cd28ec27e8b774df5c660ce53b9a30c32b98662be31494dc6087ee", {
-          "packageLocation": "./.yarn/cache/@ulises-codes-skynet-npm-0.0.1-ed75396a1c-eb9df75947.zip/node_modules/@ulises-codes/skynet/",
+        ["npm:0.0.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.3%2Fba3003cad062a42979ac9b401600addb6cbd53232a082183793cb3263bbf727b", {
+          "packageLocation": "./.yarn/cache/@ulises-codes-skynet-npm-0.0.3-03c4a4092b-f67d8b45e8.zip/node_modules/@ulises-codes/skynet/",
           "packageDependencies": [
-            ["@ulises-codes/skynet", "npm:0.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.1%2F1e5b5d2056cd28ec27e8b774df5c660ce53b9a30c32b98662be31494dc6087ee"],
+            ["@ulises-codes/skynet", "npm:0.0.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.3%2Fba3003cad062a42979ac9b401600addb6cbd53232a082183793cb3263bbf727b"],
             ["cloudinary", "npm:1.28.1"],
             ["crypto-browserify", "npm:3.12.0"],
             ["https-browserify", "npm:1.0.0"],
@@ -9902,7 +9902,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ulises-codes/bite-me", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:7.0.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fbite-me%2F7.0.4%2F5f03ee8a4ffc3615ec54e446fca6ea1f6a989f414d888ea0fe42e4d3d557910e"],
             ["@ulises-codes/helper-functions", "npm:0.3.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fhelper-functions%2F0.3.0%2F7c4ed080758f7821db6f33a8965df7fe309e27aec2352ded7c86dd5f101d5dc6"],
             ["@ulises-codes/react-hooks", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:0.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Freact-hooks%2F0.1.0%2F1dcb6de558caef225be61f76ad61ed9887edd63437400ce2fd68aa1006f80d46"],
-            ["@ulises-codes/skynet", "npm:0.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.1%2F1e5b5d2056cd28ec27e8b774df5c660ce53b9a30c32b98662be31494dc6087ee"],
+            ["@ulises-codes/skynet", "npm:0.0.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.3%2Fba3003cad062a42979ac9b401600addb6cbd53232a082183793cb3263bbf727b"],
             ["cloudinary", "npm:1.28.1"],
             ["css-paint-polyfill", "npm:3.3.0"],
             ["framer-motion", "virtual:823c62cd6b58f8d878f953b703417bfe123fb1972822b3150f9a5ac7068b9260e0b711af57a0f2c602683cfdc03f59df2f9e5827ea8a7b0dc9f1c02dea9c7e6e#npm:4.1.7"],

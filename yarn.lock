@@ -2141,9 +2141,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ulises-codes/skynet@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@ulises-codes/skynet@npm:0.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.1%2F1e5b5d2056cd28ec27e8b774df5c660ce53b9a30c32b98662be31494dc6087ee"
+"@ulises-codes/skynet@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "@ulises-codes/skynet@npm:0.0.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ulises-codes%2Fskynet%2F0.0.3%2Fba3003cad062a42979ac9b401600addb6cbd53232a082183793cb3263bbf727b"
   dependencies:
     cloudinary: ^1.28.1
     crypto-browserify: ^3.12.0
@@ -2152,7 +2152,7 @@ __metadata:
     stream-http: ^3.2.0
   bin:
     skynet: dist/index.js
-  checksum: eb9df7594764d8d0bcbfef05562862d2ab4c21ed7f2b5ad032be74c9aa8c0625ea99d7c16241173570274063af9279a930f9e7de7727454b9e9e52aadce65ccc
+  checksum: f67d8b45e804cf0afe910a803e7e48be597de228922100f7186c4c7fb2fcab8212addfa11948390d67b548eeeaed9df8141d376d3b7c1cd54644ecc78aeebc76
   languageName: node
   linkType: hard
 
@@ -7690,7 +7690,7 @@ __metadata:
     "@ulises-codes/bite-me": ^7.0.3
     "@ulises-codes/helper-functions": ^0.3.0
     "@ulises-codes/react-hooks": ^0.1.0
-    "@ulises-codes/skynet": ^0.0.1
+    "@ulises-codes/skynet": ^0.0.3
     cloudinary: ^1.28.1
     css-paint-polyfill: ^3.2.0
     framer-motion: 4.1.7

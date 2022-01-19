@@ -1,0 +1,213 @@
+---
+title: 'Logical Operators in JavaScript'
+author: 'Ulises Himely'
+publishDate: '01/19/2022'
+excerpt: "JavaScript is a living language and continues to improve over time. If you're new to JavaScript, you might have seen code like const c = a || b or const c = a ?? '', but don't understand how it works. Have no fear! This post will help you understand JavaScript's various logical operators."
+tags:
+  - vanilla js
+  - fundamentals
+headerImageSrc: 'ulises.codes/blog/logical-operators-in-javascript/header-image'
+headerImageAlt: 'A picture of Ulises Himely making a silly face with logical operators overlayed on top'
+---
+
+## TL;DR
+
+I'm going to go over four logical operators in JavaScript.
+
+1. Ternary operator
+2. Logical AND (&&)
+3. Logical OR (||)
+4. Nullish Coalescing Operator (??)
+
+## What are logical operators?
+
+I like to think of logical operators as shorthand for if-else statements, except they can be used practically anywhere. Logical operators can shorten the amount of code you need to write, because they can be assigned directly to a variable, and because they eliminate the need for deeply-nested if-else statements. And, for good measure, they can also make your code very readable. Let's dig in.
+
+## 1. Ternary Operator
+
+The [Ternary Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) (also known as the Conditional Operator) is a relatively new feature of JavaScript. This operator allows you to write a complete if-else statement inline, and assign the resulting value to a variable (if you wish).
+
+Here's a quick example:
+
+```js
+const numberOfPeople = 7
+
+// Traditional way
+let restaurant
+
+if (numberOfPeople > 10) {
+  restaurant = 'KFC'
+} else {
+  restaurant = 'Chick Fil A'
+}
+
+// With Ternary Operator
+const restaurant = numberOfPeople > 10 ? 'KFC' : 'Chick Fil A'
+```
+
+### The Syntax
+
+The left side of the statement is a condition that evaluates to either `true` or `false`.
+
+- If the condition evaluates to `true`, then the operator will return the value that immediately follows the `?` symbol.
+- If the condition evaluates to `false`, then the operator will return the value that immediately follows the `:` symbol.
+
+You can read my example statement as "if the number of people is greater than 10, return 'KFC'; otherwise, return 'Chick Fil A'". I don't know why I chose that to be the example, because I'd choose Chick Fil A no matter what.
+
+### Returns the value, you say?
+
+That's right! Since the Ternary Operator implicitly returns its computed value, they can be used to compute a function's return value, and are a favorite when using arrow functions.
+
+```js
+const mealType = age => (age < 12 ? 'kids' : 'adult')
+
+mealType(12) // Returns 'adult'
+mealType(7) // Returns 'kids'
+```
+
+You can also explicitly return the statement in a traditional function, although you might be sacrificing readability if you do so:
+
+```js
+function mealType(age) {
+  return age < 12 ? 'kids' : 'adult'
+}
+```
+
+### Chaining Ternary Operators
+
+You can add another Ternary Operator after the `:` symbol to chain statements together:
+
+```js
+const weight = 26
+
+// Traditional way
+let dogSize
+
+if (weight < 24) {
+  dogSize = 'small'
+} else if (weight < 57) {
+  dogSize = 'medium'
+} else if (weight < 99) {
+  dogSize = 'large'
+} else {
+  dogSize = 'giant'
+}
+
+// With chained Ternary Operators
+const dogSize =
+  weight < 24
+    ? 'small'
+    : weight < 57
+    ? 'medium'
+    : weight < 99
+    ? 'large'
+    : 'giant'
+
+console.log(dogSize) // 'medium' since weight > 24 and weight < 57
+```
+
+Again, this may not be considered readable code in most circles, I'm just teaching you what's possible.
+
+## Logical AND (&&)
+
+You probably already know that the [Logical AND Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) evaluates to `true` when both conditions on either side of the operator are true.
+
+Here's a very primitive example:
+
+```js
+const a = 1
+const b = 9
+
+const areBothLessThanTen = a < 10 && b < 10
+
+console.log(areBothLessThanTen) // Prints 'true'
+```
+
+This operator is more sophisticated than that example, however.
+
+When evaluating from left to right:
+
+- If one of the conditions returns a [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) value, then the operator bails and returns that falsy value. This makes sense, given that it checks to make sure that all conditions evaluate to true.
+- If all the conditions are [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), then the operator returns the last value. This is very handy if you want to arbitrarily assign a value only if all other values are true.
+
+```js
+// Some function to generate a ticket number
+const generateTicketNumber = () => ...
+
+const hasSignedPermissionSlip = true
+const isAtLeastTwelve = true
+
+// Traditional way
+let ticketNumber
+
+if (hasSignedPermissionSlip && isAtLeastTwelve) {
+	ticketNumber = generateTicketNumber()
+}
+
+// Using the Logical AND Operator
+const ticketNumber = hasSignedPermissionSlip && isAtLeastTwelve && generateTicketNumber()
+```
+
+## Logical OR (||)
+
+The [Logical OR Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR) is an extremely helpful piece of syntactic sugar that checks if either condition is `true`. If at least one of the conditions is `true`, then the operator returns `true`; otherwise, it returns `false`.
+
+How is this useful? Let's say you need to assign a value to new variable `b`. You want to assign the value of variable `a` to `b`, but you don't know if `a` is actually going to have a truthy value (i.e., it might be undefined, null, an empty string, NaN, or 0). What you might choose to do is check if `a` exists, and if it doesn't, define a fallback value, like so:
+
+```js
+let a
+let b
+
+if (a) {
+  b = a
+} else {
+  b = 10
+}
+```
+
+That's great and dandy, but here's how you can do it using the Logical OR Operator:
+
+```js
+let a
+
+let b = a || 10
+```
+
+That's just beautiful. The Logical OR Operator will return the first value if it is truthy, it returns the first value; otherwise, it will return the second.
+
+## Nullish Coalescing (??)
+
+My favorite of the logical operators, the [Nullish Coalescing Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator) returns the left-hand side value if it is non-null; otherwise, it returns the second value.
+
+The Nullish Coalescing Operator is similar to the Logical OR operator in that you can define a fallback value, except the fallback value can be falsy. This is super cool, because prior to this operator, we had to use inline Ternary Operators instead.
+
+```js
+let a
+
+// The traditional way
+let b
+
+if (a) {
+  b = a
+} else {
+  b = 0
+}
+
+// With a Ternary Operator
+const b = a ? a : 0
+
+// With Nullish Coalescing
+const b = a ?? 0
+```
+
+It's also worth noting that, unlike `||` the left-hand side value can be falsy, it just can't be `null` or `undefined`.
+
+- `0 ?? 10 // returns 10`
+- `'' ?? 'awesome' // returns ''`
+- `NaN ?? 10000 // returns NaN`
+
+## Conclusion
+
+There is more than one way to skin a cat, if that's what you want to do, I guess. So I hope this post helps!
+
+If you did find this post helpful, please share it. Also, I'm currently looking for my next opportunity as a Web Developer, so if you or someone you know is hiring, please give me a shoutout [@uliseshimely](https://twitter.com/uliseshimely) on Twitter.
