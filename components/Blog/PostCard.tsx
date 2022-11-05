@@ -1,8 +1,8 @@
-import type { BlogPostInfo } from 'interfaces/blog'
+import type { BlogPostInfo } from 'interfaces/blog';
 
-import Link from 'next/link'
-import MyImage from 'util/MyImage'
-import styles from './styles.module.css'
+import Link from 'next/link';
+import MyImage from 'util/MyImage';
+import styles from './styles.module.css';
 
 export default function PostCard({ slug, meta, placeholderImg }: BlogPostInfo) {
   return (
@@ -10,11 +10,9 @@ export default function PostCard({ slug, meta, placeholderImg }: BlogPostInfo) {
       <div className={styles.inner}>
         <div className={styles.titleWrapper}>
           <Link href={`/blog/${slug}`}>
-            <a>
-              <h2 className={['on-surface', styles.title].join(' ')}>
-                {meta.title}
-              </h2>
-            </a>
+            <h2 className={['on-surface', styles.title].join(' ')}>
+              {meta.title}
+            </h2>
           </Link>
           <time dateTime={new Date(meta.publishDate).toDateString()}>
             {new Date(meta.publishDate).toLocaleDateString(undefined, {
@@ -26,12 +24,13 @@ export default function PostCard({ slug, meta, placeholderImg }: BlogPostInfo) {
         </div>
         <hr className={styles.hr} />
         <MyImage
+          className='contained-img'
           src={meta.headerImageSrc}
           width={650}
           height={267.19}
           quality={50}
           alt={meta.headerImageAlt}
-          placeholder="blur"
+          placeholder='blur'
           blurDataURL={placeholderImg}
         />
         <hr className={styles.hr} />
@@ -45,5 +44,5 @@ export default function PostCard({ slug, meta, placeholderImg }: BlogPostInfo) {
         </ul>
       </div>
     </article>
-  )
+  );
 }

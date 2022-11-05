@@ -448,6 +448,11 @@ img {
   user-select: none;
 }
 
+.contained-img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .ul {
   min-height: 50px;
   display: grid;

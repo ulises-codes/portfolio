@@ -20,25 +20,25 @@ export default function Header({ setIsBored, theme }: HeaderProps) {
   return (
     <header className={styles.header}>
       <nav>
-        <Link href="/">
-          <a className={styles.logoLink} aria-label="ulises-codes-logo">
-            <img
-              className={styles.logoSymbol}
-              src="/images/logo/symbol.svg"
-              height="32"
-              width="32"
-              role="presentation"
-              alt=""
-            />
-            <img
-              className={styles.fullLogo}
-              src="/images/logo/full-logo.svg"
-              height="46"
-              width="250"
-              role="presentation"
-              alt=""
-            />
-          </a>
+        <Link href="/" className={styles.logoLink} aria-label="ulises-codes-logo">
+
+          <img
+            className={styles.logoSymbol}
+            src="/images/logo/symbol.svg"
+            height="32"
+            width="32"
+            role="presentation"
+            alt=""
+          />
+          <img
+            className={styles.fullLogo}
+            src="/images/logo/full-logo.svg"
+            height="46"
+            width="250"
+            role="presentation"
+            alt=""
+          />
+
         </Link>
         <div className={styles.navLinks}>
           <div className={styles.bored}>
@@ -56,11 +56,11 @@ export default function Header({ setIsBored, theme }: HeaderProps) {
             )}
           </div>
           <ThemeMenu {...theme} />
-          <Link href="/blog">
-            <a className="button">Blog</a>
+          <Link href="/blog" className="button">
+            Blog
           </Link>
         </div>
       </nav>
     </header>
-  )
+  );
 }

@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@cloudinary/url-gen': ^1.8.6
   '@svgr/webpack': ^5.5.0
   '@types/node': ^12.19.9
   '@types/react': ^17.0.2
@@ -26,6 +27,7 @@ specifiers:
   webpack: ^5.65.0
 
 dependencies:
+  '@cloudinary/url-gen': 1.8.6
   '@svgr/webpack': 5.5.0
   '@ulises-codes/bite-me': 7.0.4_react-dom@18.2.0
   '@ulises-codes/helper-functions': 0.3.0
@@ -1394,6 +1396,18 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+    dev: false
+
+  /@cloudinary/transformation-builder-sdk/1.1.0:
+    resolution: {integrity: sha512-BqhTqIwPTyQ4hE0NjKXf/bF7VAjwe2ZHNuypdG6oQ6bDoiLTOSzdAZsg0jFndureQiVPavBKOzQTjHImp45z/g==}
+    dependencies:
+      '@cloudinary/url-gen': 1.8.6
+    dev: false
+
+  /@cloudinary/url-gen/1.8.6:
+    resolution: {integrity: sha512-BZUHOns1+ECmZTGlcWWZ1mM7Fu5TsSWqbknGCVtmhgX2g82kwZa3W3LhICMu/xyPjuQmz8ykjXHAkRw5kRZf+w==}
+    dependencies:
+      '@cloudinary/transformation-builder-sdk': 1.1.0
     dev: false
 
   /@emotion/is-prop-valid/0.8.8:

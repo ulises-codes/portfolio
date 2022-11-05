@@ -16,6 +16,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@cloudinary/url-gen": "^1.8.6",
     "@svgr/webpack": "^5.5.0",
     "@ulises-codes/bite-me": "^7.0.3",
     "@ulises-codes/helper-functions": "^0.3.0",
