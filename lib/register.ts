@@ -15,4 +15,4 @@ export default (async function registerWorklets() {
 
   await import('css-paint-polyfill')
   register()
-})()
+}());

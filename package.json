@@ -2,20 +2,21 @@
   "name": "ulises.codes",
   "version": "4.2.0",
   "scripts": {
-    "analyze": "ANALYZE='true' yarn build",
+    "analyze": "ANALYZE='true' pnpm build",
     "dev": "next",
     "dev:net": "next -p 10.0.0.87:3000",
-    "build": "yarn prepublish && next build",
+    "build": "pnpm prepublish && next build",
     "build-cli": "tsc ./cli/index.ts --esModuleInterop --skipLibCheck --moduleResolution node",
     "export": "next build && next export",
     "start": "next start -p 3001",
     "sitemap": "tsc ./lib/generateSitemap.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/generateSitemap.js && rm ./lib/generateSitemap.js ./lib/markdown/getPosts.js",
     "manifest": "tsc ./lib/mergeWebmanifest.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/mergeWebmanifest.js && rm ./lib/mergeWebmanifest.js ./lib/themeList.js",
-    "prepublish": "yarn sitemap && yarn manifest",
-    "publish": "yarn prepublish && git push",
+    "prepublish": "pnpm sitemap && pnpm manifest",
+    "publish": "pnpm prepublish && git push",
     "type-check": "tsc"
   },
   "dependencies": {
+    "@cloudinary/url-gen": "^1.8.6",
     "@svgr/webpack": "^5.5.0",
     "@ulises-codes/bite-me": "^7.0.3",
     "@ulises-codes/helper-functions": "^0.3.0",
@@ -23,11 +24,11 @@
     "css-paint-polyfill": "^3.2.0",
     "framer-motion": "4.1.7",
     "gray-matter": "^4.0.2",
-    "next": "12.0.4",
+    "next": "13.0.2",
     "next-mdx-remote": "^2.1.3",
     "next-pwa": "^5.0.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rehype-highlight": "^4.0.0",
     "remark-external-links": "^8.0.0",
     "webpack": "^5.65.0"
@@ -43,5 +44,5 @@
     "typescript": "^4.5.4"
   },
   "license": "MIT",
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "pnpm@3.1.1"
 }

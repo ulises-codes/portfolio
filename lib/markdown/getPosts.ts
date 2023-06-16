@@ -10,11 +10,11 @@ const postsDirectory = join(process.cwd(), 'blog')
 function getMDXFiles() {
   return fs
     .readdirSync(postsDirectory)
-    .filter(filename => /.mdx$/.test(filename))
+    .filter(filename => /.mdx$/.test(filename));
 }
 
 function getRealSlug(slug: string) {
-  return slug.replace(/\.mdx$/, '')
+  return slug.replace(/\.mdx$/, '');
 }
 
 export function getPostBySlug(slug: string) {

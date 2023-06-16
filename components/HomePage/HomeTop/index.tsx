@@ -1,41 +1,7 @@
-import { useContext, useEffect, useState } from 'react'
-
-import { BoredContext } from 'components/Layout'
-
-import styles from './styles.module.scss'
-import type {
-  GameProps,
-  OffscreenGameProps,
-} from '@ulises-codes/bite-me/dist/types'
-
-import LatestPost from 'components/HomePage/LatestPost'
+import styles from './styles.module.scss';
+import LatestPost from 'components/HomePage/LatestPost';
 
 export default function HomeTop() {
-  const isBored = useContext(BoredContext)
-
-  const [SnakeGame, setSnakeGame] = useState<
-    | ((props: GameProps) => JSX.Element)
-    | ((props: OffscreenGameProps) => JSX.Element)
-  >()
-
-  useEffect(() => {
-    async function importGame() {
-      if (isBored && !SnakeGame) {
-        if ('OffscreenCanvas' in window) {
-          const Game = (await import('@ulises-codes/bite-me/offscreen')).default
-
-          setSnakeGame(() => Game)
-        } else {
-          const Game = (await import('@ulises-codes/bite-me/snake')).default
-
-          setSnakeGame(() => Game)
-        }
-      }
-    }
-
-    importGame()
-  }, [isBored])
-
   return (
     <div>
       <div className={styles['home-page-top--div']}>
@@ -46,42 +12,14 @@ export default function HomeTop() {
               <br />
               <span>I am Ulises.</span>
             </h1>
-            <h2 className="subtitle">I'm a web developer.</h2>
+            <h2 className='subtitle'>I'm a developer.</h2>
           </hgroup>
         </div>
         <div className={styles['top-right--div']}>
-          {isBored && SnakeGame ? (
-            <div className={styles['snake-wrapper--div']}>
-              <SnakeGame
-                style={{
-                  backgroundColor: getComputedStyle(
-                    document.querySelector('body') as HTMLBodyElement
-                  ).getPropertyValue('--game-background'),
-                }}
-                food={{ src: '/snakeAssets/food.png' }}
-                audioSrc="/snakeAssets/echo.mp3"
-                dingSrc="/snakeAssets/ding.mp3"
-                gameOverSrc="/snakeAssets/game-over.mp3"
-                text={{
-                  color: '#fafafa',
-                  subtitleColor: '#eaeaea',
-                  titleColor: '#F1DD6D',
-                }}
-                snakeStyle={{
-                  color: ['#BF43A1', '#F26463', '#F1DD6D', '#2BACB3'],
-                }}
-                workerPaths={{
-                  snakeWorker: '/snakeAssets/snakeWorker.js',
-                  canvasWorker: '/snakeAssets/canvasWorker.js',
-                }}
-              />
-            </div>
-          ) : (
-            <LatestPost />
-          )}
+          <LatestPost />
         </div>
       </div>
-      <div className="checkerboard" />
+      <div className='checkerboard' />
     </div>
-  )
+  );
 }
