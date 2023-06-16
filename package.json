@@ -2,17 +2,17 @@
   "name": "ulises.codes",
   "version": "4.2.0",
   "scripts": {
-    "analyze": "ANALYZE='true' yarn build",
+    "analyze": "ANALYZE='true' pnpm build",
     "dev": "next",
     "dev:net": "next -p 10.0.0.87:3000",
-    "build": "yarn prepublish && next build",
+    "build": "pnpm prepublish && next build",
     "build-cli": "tsc ./cli/index.ts --esModuleInterop --skipLibCheck --moduleResolution node",
     "export": "next build && next export",
     "start": "next start -p 3001",
     "sitemap": "tsc ./lib/generateSitemap.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/generateSitemap.js && rm ./lib/generateSitemap.js ./lib/markdown/getPosts.js",
     "manifest": "tsc ./lib/mergeWebmanifest.ts --esModuleInterop --resolveJsonModule --skipLibCheck --moduleResolution node && node ./lib/mergeWebmanifest.js && rm ./lib/mergeWebmanifest.js ./lib/themeList.js",
-    "prepublish": "yarn sitemap && yarn manifest",
-    "publish": "yarn prepublish && git push",
+    "prepublish": "pnpm sitemap && pnpm manifest",
+    "publish": "pnpm prepublish && git push",
     "type-check": "tsc"
   },
   "dependencies": {
@@ -44,5 +44,5 @@
     "typescript": "^4.5.4"
   },
   "license": "MIT",
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "pnpm@3.1.1"
 }
