@@ -1,26 +1,27 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { m as motion } from 'framer-motion'
-import Packages from './Packages'
-import Codepens from './Codepens'
-import Projects from './Projects'
+import { m as motion } from 'framer-motion';
+import Packages from './Packages';
+import Codepens from './Codepens';
+import Projects from './Projects';
 
-import Ellipse from 'util/Ellipse'
+import Ellipse from 'util/Ellipse';
 
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion';
+import MobileProjects from './Mobile';
 
-const projects = ['Packages', 'Codepens', 'Projects']
+const projects = ['Mobile ', 'Packages', 'Codepens', 'Projects'];
 
-const TabContent = [Packages, Codepens, Projects]
+const TabContent = [MobileProjects, Packages, Codepens, Projects];
 
 export default function Portfolio() {
-  const [currentTab, setCurrentTab] = useState(0)
+  const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <div className={styles['portfolio-wrapper--div']}>
-      <h3 className="subtitle">Some Stuff I've Made</h3>
+      <h3 className='subtitle'>Some Stuff I've Made</h3>
       <div className={styles['portfolio-tabs-btns-wrapper--div']}>
         {projects.map((name, i) => (
           <div key={name} className={styles['portfolio-tabs-btn--div']}>
@@ -30,7 +31,7 @@ export default function Portfolio() {
             >
               {name}
             </button>
-            <AnimatePresence initial={false} key="portfolio-ellipse">
+            <AnimatePresence initial={false} key='portfolio-ellipse'>
               {currentTab === i && <Ellipse />}
             </AnimatePresence>
           </div>
@@ -38,7 +39,7 @@ export default function Portfolio() {
       </div>
       <div className={styles['portfolio-content-wrapper--div']}>
         <AnimatePresence
-          key="portfolio-presence"
+          key='portfolio-presence'
           initial={false}
           exitBeforeEnter
         >
@@ -52,10 +53,10 @@ export default function Portfolio() {
               >
                 <Tab />
               </motion.div>
-            ) : null
+            ) : null,
           )}
         </AnimatePresence>
       </div>
     </div>
-  )
+  );
 }

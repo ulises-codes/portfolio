@@ -10,3 +10,4 @@ export type Languages =
   | 'Svelte'
   | 'Python'
   | 'Webpack'
+  | 'Rust';

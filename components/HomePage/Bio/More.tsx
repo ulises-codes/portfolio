@@ -1,18 +1,18 @@
 export default function More() {
   const calculateYearsAsDev = () => {
-    const start = new Date(2018, 9, 1)
-    const now = new Date()
+    const start = new Date(2018, 9, 1);
+    const now = new Date();
 
-    const diffMilliseconds = now.getTime() - start.getTime()
+    const diffMilliseconds = now.getTime() - start.getTime();
 
     const reformatMilliSeconds = (milliseconds: number): number => {
       return Math.round(
-        milliseconds / Number((1000 * 60 * 60 * 24 * 365.25).toPrecision(10))
-      )
-    }
+        milliseconds / Number((1000 * 60 * 60 * 24 * 365.25).toPrecision(10)),
+      );
+    };
 
-    return reformatMilliSeconds(diffMilliseconds)
-  }
+    return reformatMilliSeconds(diffMilliseconds);
+  };
   return (
     <>
       <p>
@@ -28,8 +28,8 @@ export default function More() {
       </p>
       <p>
         Today I am a Web Developer, specializing in JavaScript, Python, React,
-        Typescript, GraphQL, and other technologies.
+        Typescript, GraphQL, Rust, and other technologies.
       </p>
     </>
-  )
+  );
 }
