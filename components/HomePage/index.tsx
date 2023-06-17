@@ -15,14 +15,12 @@ export default function HomePage() {
   const [visibleSections, setVisibleSections] = useState<string[]>([]);
 
   const bioRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const skillsRef = useRef() as MutableRefObject<HTMLDivElement>;
   const portfolioRef = useRef() as MutableRefObject<HTMLDivElement>;
   const featuredRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
     const refs: { [key: string]: MutableRefObject<HTMLDivElement> } = {
       Bio: bioRef,
-      Skills: skillsRef,
       Portfolio: portfolioRef,
       Featured: featuredRef,
     };

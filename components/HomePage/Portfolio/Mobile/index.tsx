@@ -23,7 +23,10 @@ const MobileProjects: FunctionComponent<MobileProjectsProps> = () => {
       </p>
       <div className={styles.mobileApps}>
         {mobileApps.map((app) => (
-          <article className={['surface', styles.mobileApp].join(' ')}>
+          <article
+            key={app.name}
+            className={['surface', styles.mobileApp].join(' ')}
+          >
             <Link href={app.link}>
               <span className={styles.title}>
                 <MyImage
