@@ -9,7 +9,6 @@ import type { MutableRefObject } from 'react';
 const HomeTop = dynamic(() => import('components/HomePage/HomeTop'));
 const Featured = dynamic(() => import('components/HomePage/FeaturedProject'));
 const Bio = dynamic(() => import('components/HomePage/Bio'));
-const Skills = dynamic(() => import('components/HomePage/Skills'));
 const Portfolio = dynamic(() => import('components/HomePage/Portfolio'));
 
 export default function HomePage() {
