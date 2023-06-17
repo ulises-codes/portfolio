@@ -12,8 +12,8 @@ export default function TLDR() {
         >
           Ulysses S. Grant
         </a>
-        , that guy on the $50 bill. I code in JavaScript, Python, React,
-        Typescript, HTML, and CSS.
+        , that guy on the $50 bill. I am a fullstack developer, with experience
+        building web and mobile apps.
       </p>
     </div>
   );

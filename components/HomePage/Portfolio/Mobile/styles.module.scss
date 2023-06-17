@@ -1,0 +1,22 @@
+.mobileApps {
+  display: grid;
+  grid-template: auto / repeat(auto-fill, minmax(250px, 1fr));
+  flex-wrap: nowrap;
+  gap: 32px;
+
+}
+
+.mobileApp {
+    padding: 8px;
+    
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  h4 {
+    white-space: pre;
+  }
+}

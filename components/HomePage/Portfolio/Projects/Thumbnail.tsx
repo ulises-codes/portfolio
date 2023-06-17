@@ -1,8 +1,6 @@
 import { ProjectProps } from 'interfaces';
-
 import styles from './styles.module.scss';
 import MyImage from 'util/MyImage';
-import { imgToBase64 } from 'lib/helper/imgToBase64';
 
 export default function Thumbnail({
   name,
@@ -10,6 +8,10 @@ export default function Thumbnail({
   imgSrc,
   url,
 }: ProjectProps) {
+  console.log(
+    `${process.env.NEXT_PUBLIC_CLOUDINARY_PREFIX}/image/upload/c_scale,e_blur:102,w_300/ulises.codes/project-thumbnails/${imgSrc}`,
+  );
+
   return (
     <div className={styles['thumbnail-root--div']}>
       <a href={`https://${url}`} target='_blank' rel='noopener noreferrer'>
@@ -20,13 +22,7 @@ export default function Thumbnail({
           src={`f_auto/ulises.codes/project-thumbnails/${imgSrc}`}
           width='275'
           height='175'
-          objectFit='cover'
-          placeholder='blur'
-          blurDataURL={
-            imgToBase64(
-              `${process.env.NEXT_PUBLIC_CLOUDINARY_PREFIX}/image/upload/c_scale,e_blur:102,w_300/ulises.codes/project-thumbnails/${imgSrc}`,
-            ) as unknown as string
-          }
+          style={{ objectFit: 'contain' }}
         />
       </a>
       <div className={styles['thumbnail-details-languages--div']}>
