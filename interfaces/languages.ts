@@ -10,4 +10,5 @@ export type Languages =
   | 'Svelte'
   | 'Python'
   | 'Webpack'
-  | 'Rust';
+  | 'Rust'
+  | 'Chrome';
