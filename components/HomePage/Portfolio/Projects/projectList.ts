@@ -2,6 +2,12 @@ import { ProjectProps } from 'interfaces';
 
 const projectList: ProjectProps[] = [
   {
+    name: 'Unflash Me',
+    url: 'chrome.google.com/webstore/detail/unflash-me/kemafhkbopnkmgfcdegjblbopekclobi',
+    imgSrc: 'unflash-me',
+    languages: ['TS', 'Chrome'],
+  },
+  {
     name: 'u-znth',
     url: 'uznth.live',
     imgSrc: 'uznth',
@@ -17,7 +23,7 @@ const projectList: ProjectProps[] = [
     name: 'Convertify',
     url: 'convertify.fun',
     imgSrc: 'convertify.fun',
-    languages: ['Svelte', 'Rust'],
+    languages: ['Svelte', 'Rust', 'TS'],
   },
   {
     name: 'Copy Me!',
