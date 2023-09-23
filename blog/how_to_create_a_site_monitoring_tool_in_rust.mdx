@@ -1,0 +1,379 @@
+---
+title: 'How to Create a Site Monitoring Tool in Rust'
+author: 'Ulises Himely'
+publishDate: '09/23/2023'
+editedDate: ''
+excerpt: 'In this post, I''m going to teach you how to write a very simple site monitoring tool in Rust. We''ll build a CLI tool in Rust that will read a sitemap, iterate over it, ping each URL in the sitemap, and post a message to Slack with results.'
+headerImageSrc: 'v1695512943/ulises.codes/blog/how_to_create_a_site_monitoring_tool_in_rust/rust_cli_tool_hero_unyyyn.avif'
+headerImageAlt: ''
+headerImageCaption: 'Credit: marie_enk on Unsplash'
+tags:
+    - rust
+    - performance
+---
+
+## TL;DR
+Just want to look at the code and skip my life's story? Just go straight to the [GitHub repo](https://github.com/ulises-codes/tutorial-rust-site-monitoring-cli). From there, you can also download a binary and run the CLI on your own machine.
+
+## Why Rust?
+Over the last year, I've been diving into [Rust](https://rustlang.org), an amazing programming language that you've probably already heard of. One of the first things I did in Rust was build a CLI tool, and quickly came to appreciate the developer experience of building a CLI in Rust vs Typescript/Node.js.
+
+Two of the main reasons why I think building a CLI in Rust is the superior experience are:
+
+### 1. No toolchain configuration needed
+Rust is type-safe out of the box. No need to install a separate toolchain and build pipeline. 
+
+To deploy a CLI using Typescript and Node.js, you first need to set up your toolchain. Do you use the Typescript CLI, **tsc**? If so, you'll need to write up a tsconfig.json with the desired configuration. Maybe you want to use Webpack instead? Or another bundler or build tool? Get ready to assemble the pieces.
+
+Rust is strictly-typed (unlike Typescript, by the way) out of the box. We use the same tool, [cargo](https://doc.rust-lang.org/cargo/), to manage packages and build the code. No mental gymnastics needed to determine how to build your project. 
+
+### 2. Juggling Node.js versions
+What version of Node.js are you using? If you are in a shared codebase, is everyone using NVM to make sure they're using the same version of Node.js? What about the user's machine? Will they have the right version of Node.js installed or will they need to use a different one just for your CLI?
+
+Not the case with Rust. Once you've built the project, it compiles to a binary, and can be immediately run on your desired target. 
+
+## What Does it Do?
+We're going to write a CLI tool that will take in a few arguments:
+- `--sitemap-url` – At least one URL to a sitemap
+- `--notification-url` – An endpoint where all results will be POSTed to
+- `--critical-url` – An endpoint where failures will be POSTed to
+- `--ignore` – URL(s) to ignore
+
+Our CLI will:
+- Pull each sitemap
+- Ping each URL in each sitemap via GET request
+- Send results via POST request to your `--notification-url`
+- Send errors via POST request to your `--critical-url`
+
+In my case, I set up a Slack workflow and two unique Slack channels to accept notifications. I'll show you how to do that in this post. 
+
+## Getting Started
+Note: I won't cover [installing the Rust toolchain](https://www.rust-lang.org/tools/install) in this post. 
+
+### Create a new Rust project
+```sh
+cargo new site-monitoring-tool
+cd !$
+```
+
+### Install project dependencies
+Add the following dependencies to Cargo.toml:
+```toml
+[dependencies]
+chrono = "0.4.31"
+clap = { version = "4.4.4", features = ["derive"] }
+log = "0.4.20"
+pretty_env_logger = "0.5.0"
+reqwest = { version = "0.11.20", features = ["json"] }
+roxmltree = "0.18.0"
+serde = { version = "1.0.188", features = ["derive"] }
+serde_json = "1.0.107"
+tokio = { version = "1.32.0", features = ["macros", "rt-multi-thread"] }
+```
+
+### Set up lib 
+We want to Add the following to Cargo.toml:
+```toml
+[lib]
+name = "lib"
+path = "src/lib.rs"
+```
+
+## Create CLI Arguments
+The crate [clap](https://docs.rs/clap/latest/clap/) serves as the defacto library for creating CLIs in Rust. 
+
+Create a file `src/lib.rs`. There, we'll create a struct (think of this like a class definition if you're coming from JS), that will describe the arguments this CLI will accept.
+
+```rs
+/// Our CLI args
+#[derive(Parser, Debug)]
+pub struct Args {
+    /// URL for a sitemap containing a list of paths to ping
+    #[arg(short, long)]
+    pub sitemap: Vec<String>,
+
+    /// URL where all results will be sent via POST request
+    #[arg(short = 'w', long)]
+    pub notification_url: String,
+
+    /// URL where errors will be sent via POST request
+    #[arg(short = 'c', long)]
+    pub critical_url: String,
+
+    /// URL(s) to ignore
+    #[arg(short, long)]
+    pub ignore: Option<Vec<String>>,
+}
+```
+
+Then, in `src/main.rs`:
+```rs
+fn main() {
+    // Initialize pretty env logger
+    pretty_env_logger::init();
+
+    let args = Args::parse();
+}
+```
+
+The keyword `pub` in front of both `struct` and the various properties allows `Args` to be used outside of `lib.rs`.
+
+Those funny looking `///` comments are [doc comments](https://doc.rust-lang.org/rust-by-example/meta/doc.html). When building a CLI, doc comments also go a step further: they are used to describe the CLI's arguments when you run `--help` from the command line. 
+
+Let's try it out! From the command line, run: 
+```sh
+cargo run -- --help
+```
+
+Your output should look something like this: 
+
+<img src="v1695506236/ulises.codes/blog/how_to_create_a_site_monitoring_tool_in_rust/first_run_help_output_yzjsg5.png" alt='Terminal displays a list of possible arguments that can be passed to the CLI' style={{ objectFit: 'contain', height: 'max-content' }} />
+
+You have technically built a CLI tool! Ok, it doesn't do anything yet, but we'll get to that. 
+
+## Get Sitemaps
+Let's get to the meat of this thing. We need to get the sitemaps, parse them, and iterate over their URLs. 
+
+First, we need to define an enum `SiteCheckStatus` that describes the result of getting the sitemap. We use `SiteCheckStatus` to know whether there was something wrong with any of the sitemaps passed in to the CLI. 
+
+We'll also define a struct `SiteCheckResult`, which describes the overall result of checking the sitemaps and their URLs. These will be posted directly to the desired notification and error channels. 
+
+Add the following code to `lib.rs`.
+
+```rs
+/// Identifies whether a sitemap was successfully retrieved and parsed
+#[derive(Serialize, Debug, Clone)]
+pub enum SiteCheckStatus {
+    Success,
+    /// Used when we are unable to fetch the given sitemap
+    UnreachableSitemap,
+    /// Used when the sitemap cannot be parsed
+    InvalidSitemap,
+}
+
+/// Result of all listed sites within a sitemap
+#[derive(Serialize, Debug, Clone)]
+pub struct SiteCheckResult {
+    status: SiteCheckStatus,
+    sitemap_url: String,
+    /// Number of pages that were tested
+    page_total: Option<usize>,
+    /// Total number of pages that could not be reached
+    unreachable_total: Option<usize>,
+    /// Comma-separated list of unreachable pages
+    pub unreachable_pages: Option<String>,
+}
+```
+
+Now, we define the handler itself. Create a function `sitemap_handler` in `lib.rs`.
+
+```rs
+/// Gets a sitemap and pings each URL
+pub async fn handle_sitemap(
+    sitemap_url: &str,
+    urls_to_ignore: Option<&Vec<String>>,
+) -> SiteCheckResult {
+    todo!();
+}
+```
+
+This function gets called for each `sitemap_url` passed in via the CLI. The same goes for `urls_to_ignore`. 
+
+So thinking through the steps we need to take in the first half of `handle_sitemap`, we need to:
+1. Define a placeholder array `all_urls` for both the URLs that will be extracted from the sitemap, and another one, `unreachable_pages`, to hold a list of URLs that returned an error.
+2. Get the sitemap via a simple `GET` request
+3. Parse the sitemap as XML (we do this with `roxmltree`)
+4. Extract a list of URLs from the parsed sitemap and push into `all_urls`
+
+```rs
+pub async fn handle_sitemap(
+    sitemap_url: &str,
+    urls_to_ignore: Option<&Vec<String>>,
+) -> SiteCheckResult {
+    let mut all_urls: Vec<String> = Vec::new();
+    let mut unreachable_pages: Vec<String> = Vec::new();
+
+    info!("Getting sitemap for {}", &sitemap_url);
+    let sitemap_res = reqwest::get(sitemap_url).await;
+
+    if sitemap_res.is_err() {
+        return SiteCheckResult {
+            status: SiteCheckStatus::UnreachableSitemap,
+            sitemap_url: sitemap_url.to_owned(),
+            page_total: None,
+            unreachable_pages: None,
+            unreachable_total: None,
+        };
+    }
+
+    let sitemap_content = sitemap_res.unwrap().text().await;
+
+    if sitemap_content.is_err() {
+        return SiteCheckResult {
+            status: SiteCheckStatus::InvalidSitemap,
+            sitemap_url: sitemap_url.to_owned(),
+            page_total: None,
+            unreachable_pages: None,
+            unreachable_total: None,
+        };
+    }
+
+    let sitemap_content = sitemap_content.unwrap();
+
+    let sitemap = roxmltree::Document::parse(&sitemap_content);
+
+    if sitemap.is_err() {
+        return SiteCheckResult {
+            status: SiteCheckStatus::InvalidSitemap,
+            sitemap_url: sitemap_url.to_owned(),
+            page_total: None,
+            unreachable_pages: None,
+            unreachable_total: None,
+        };
+    }
+
+    sitemap
+        .unwrap()
+        .descendants()
+        .filter(|n| n.tag_name().name() == "loc" && n.children().next().is_some())
+        .for_each(|n| all_urls.push(n.children().next().unwrap().text().unwrap().to_owned()));
+}
+```
+
+In the second half of `handle_sitemap`, we simply iterate over each url in `all_urls`, ping via GET request, and check if the response is a 200. If the response is something other than 200, we consider that page unreachable, and push the URL into `unreachable_urls`.
+
+Finally, we return a `SiteCheckResult`, detailing which sitemap was tested, the total pages pinged, and a list of unreachable pages (if applicable).
+
+```rs
+{
+    ...
+
+    info!("Pinging {0} urls for sitemap {sitemap_url}", all_urls.len());
+    for (i, url) in all_urls.iter().enumerate() {
+        if let Some(ignored_urls) = urls_to_ignore {
+            if ignored_urls.contains(url) {
+                debug!("Ignoring url {url}");
+                continue;
+            }
+        }
+
+        debug!("{i} {sitemap_url} Pinging site {url}");
+        let res = reqwest::get(url).await;
+
+        if res.is_err() {
+            error!("Page {url} is unreachable");
+            unreachable_pages.push(url.to_owned());
+            continue;
+        }
+
+        let res = res.unwrap();
+
+        if res.status() == reqwest::StatusCode::OK {
+            debug!("Response was successful");
+        } else {
+            error!("Response was {}", res.status());
+            unreachable_pages.push(url.to_owned());
+        }
+    }
+
+    SiteCheckResult {
+        status: SiteCheckStatus::Success,
+        sitemap_url: sitemap_url.to_owned(),
+        page_total: Some(all_urls.len()),
+        unreachable_total: Some(unreachable_pages.len()),
+        unreachable_pages: if unreachable_pages.is_empty() {
+            None
+        } else {
+            Some(unreachable_pages.join(", "))
+        },
+    }
+}
+```
+
+## Post Results
+We need a way to post results back to our desired notification channel so we can take action if unreachable pages are found. At the end of `lib.rs`, add the following function:
+
+```rs
+/// Notify an endpoint via POST request
+///
+/// See [SiteCheckResult] to see the JSON body that will be sent
+///
+/// ## Arguments
+/// * site_check_result - [SiteCheckResult]
+/// * url - An endpoint to post to
+pub async fn post_results(site_check_result: SiteCheckResult, url: &str) {
+    debug!("{:?}", site_check_result);
+
+    let client = reqwest::Client::new();
+
+    info!("Posting result for {}", &site_check_result.sitemap_url);
+    info!("Result is: {:?}", &site_check_result);
+    let res = client
+        .post(url)
+        .json(&site_check_result)
+        .send()
+        .await
+        .expect("Error posting result");
+
+    if res.status() != StatusCode::OK {
+        error!("Error posting result");
+
+        error!("{:?}", res.error_for_status());
+    }
+}
+```
+
+All we're doing here is HTTP POSTing each `SiteCheckResult` as JSON to the notification and error URLs that were passed in earlier! In my case, I am using Slack to receive the result and post to two channels, one for critical alerts, and another for logging.
+
+### Create your Slack workflow
+In Slack, create a Workflow, and choose **From a webhook** as the trigger. These are the variables to pass in, all strings:
+
+<img src="v1695512229/ulises.codes/blog/how_to_create_a_site_monitoring_tool_in_rust/slack_workflow_vars_spwyug.png" style={{objectFit: 'contain', height: 'max-content'}} width={350}/>
+
+Then, in the next step, select "Send a message to {your desired Slack channel}". Here is how you should configure that message:
+
+<img src="v1695512468/ulises.codes/blog/how_to_create_a_site_monitoring_tool_in_rust/slack_message_screenshot_r39lwy.png" style={{objectFit: 'contain', height: 'max-content'}} width={350}/>
+
+
+## Putting it all Together
+
+Let's go back to `main.rs`. We're going to concurrently call `handle_sitemap` for each sitemap passed in via the CLI. This is what your `main.rs` will look like in the end: 
+
+```rs
+use clap::Parser;
+use lib::{handle_sitemap, post_results, Args};
+use std::sync::Arc;
+use tokio::task::JoinSet;
+
+#[tokio::main]
+async fn main() {
+    pretty_env_logger::init();
+
+    let args = Args::parse();
+    let mut handles = JoinSet::new();
+
+    let urls_to_ignore = Arc::new(args.ignore);
+
+    for sitemap_url in args.sitemap {
+        let ignored_urls = Arc::clone(&urls_to_ignore);
+
+        handles.spawn(async move {
+            let urls = Arc::clone(&ignored_urls);
+
+            handle_sitemap(&sitemap_url, urls.as_ref().as_ref()).await
+        });
+    }
+
+    while let Some(res) = handles.join_next().await {
+        if let Ok(site_check_result) = res {
+            post_results(site_check_result.clone(), &args.notification_url).await;
+
+            if site_check_result.clone().unreachable_pages.is_some() {
+                post_results(site_check_result, &args.critical_url).await;
+            }
+        }
+    }
+}
+```
+
+And we have arrived at the end. I hope this post has been helpful. If you want to see more content like this, follow me on [LinkedIn](https://linkedin.com/in/ulises-h).
