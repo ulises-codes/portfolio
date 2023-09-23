@@ -8,10 +8,6 @@ export default function Thumbnail({
   imgSrc,
   url,
 }: ProjectProps) {
-  console.log(
-    `${process.env.NEXT_PUBLIC_CLOUDINARY_PREFIX}/image/upload/c_scale,e_blur:102,w_300/ulises.codes/project-thumbnails/${imgSrc}`,
-  );
-
   return (
     <div className={styles['thumbnail-root--div']}>
       <a href={`https://${url}`} target='_blank' rel='noopener noreferrer'>
